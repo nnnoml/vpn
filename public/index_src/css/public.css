@@ -1,0 +1,66 @@
+.page_admin{
+    margin-top: 10px;
+}
+.page_admin a, .page_admin input, .page_admin span {
+    height: 26px;
+    line-height: 26px
+}
+
+.page_admin button, .page_admin input, .page_admin a {
+    border: 1px solid #ccc;
+    background-color: #fff
+}
+
+.page_admin {
+    font-size: 0;
+    clear: both;
+    color: #666
+}
+
+.page_admin * {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 12px
+}
+
+.page_admin a {
+    text-decoration: none;
+    color: #666
+}
+
+.page_admin a, .page_admin span {
+    margin: 0 3px 6px;
+    padding: 0 10px
+}
+
+.page_admin input {
+    width: 40px;
+    margin: 0 5px;
+    padding: 0 5px
+}
+
+.page_admin button {
+    height: 28px;
+    line-height: 28px;
+    margin-left: 5px;
+    padding: 0 10px;
+    color: #666
+}
+
+.page_admin span {
+    height: 28px;
+    line-height: 28px;
+    color: #999
+}
+
+.page_admin .active {
+    font-weight: 700;
+    color: #666
+}
+
+
+
+
+.disabled_btn{
+    color: #ccc;
+}
