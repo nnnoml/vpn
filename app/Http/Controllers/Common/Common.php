@@ -139,4 +139,79 @@ trait Common{
         echo "</pre>";
     }
 
+    /**
+     * 格式化时间
+     * @param $s 传入秒
+     * @return int|string
+     */
+    function formatSecond($s){
+        switch($s){
+            case($s<60): $loop_arr = array(1 => '秒');break;
+            case($s>=60 && $s<3600):$loop_arr = array( 60 => '分', 1 => '秒');break;
+            case($s>=3600 && $s<86400):$loop_arr = array(3600 => '小时', 60 => '分', 1 => '秒');break;
+            case($s>=86400 && $s<604800):$loop_arr = array(86400 => '天',3600 => '小时', 60 => '分', 1 => '秒');break;
+            case($s>=604800 && $s<2592000):$loop_arr = array(604800 => '周',86400 => '天',3600 => '小时', 60 => '分', 1 => '秒');break;
+            default:$loop_arr = array(2592000=>'月',604800 => '周',86400 => '天', 3600 => '小时', 60 => '分', 1 => '秒');
+        }
+        $output = '';
+        foreach ($loop_arr as $key => $value) {
+            if ($s >= $key) $output .= floor($s/$key) . $value;
+            $s %= $key;
+        }
+        if($output==''){
+            $output=0;
+        }
+        return $output;
+    }
+
+
+    /**
+     * 字段开关操作 公共方法
+     * @param $db model实例
+     * @param $column 操作字段
+     * @param $where 更新条件  数组 eg:['class_id'=>1]
+     * @return int
+     */
+    function handle_switch($db,$column,array $where){
+        $status = $db::where($where)->value($column);
+        $new_status = $status == 0 ? 1:0;
+        $res = $db::where($where)->update([$column=>$new_status,'updated_at'=>date('Y-m-d H:i:s')]);
+        if($res){
+            return $new_status;
+        }
+        else{
+            return -1;
+        }
+    }
+
+    /**
+     * 导出CSV文件
+     * @param array $data        要导出的数据(对象数组)
+     * @param array $header_data 首行数据
+     * @param array $cols        字段列表
+     * @param string $file_name  文件名称
+     * @return string
+     */
+    function export_csv($data = [], $header_data = [], $cols = [], $file_name = ''){
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename=' . $file_name);
+
+        if (!empty($header_data)) {
+            echo iconv('utf-8','gbk//TRANSLIT','"'.implode('","',$header_data).'"'."\n");
+        }
+
+        $columns = count($cols);
+
+        foreach ($data as $key => $value) {
+            $output = array();
+            if($columns > 0){
+                for($i=0;$i<$columns;$i++){
+                    $key = $cols[$i];
+                    $output[] = $value->$key;
+                }
+            }
+            echo iconv('utf-8','gbk//TRANSLIT','"'.implode('","', $output).'"'."\n");
+        }
+    }
+
 }

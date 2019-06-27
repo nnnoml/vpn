@@ -27,6 +27,13 @@
                         <dd><a @if($nav2 == 'help_detail')  class="layui-this" @endif href="/{{config('sys_conf.admin')}}/HelpDetail">帮助列表</a></dd>
                     </dl>
                 </li>
+                <li class="layui-nav-item @if($nav == 'product') layui-nav-itemed @endif">
+                    <a href="javascript:;">产品管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a @if($nav2 == 'product')  class="layui-this" @endif href="/{{config('sys_conf.admin')}}/Product">产品信息</a></dd>
+                        <dd><a @if($nav2 == 'product_h_type')  class="layui-this" @endif href="/{{config('sys_conf.admin')}}/ProductHType">产品类型列表</a></dd>
+                    </dl>
+                </li>
                 <li class="layui-nav-item"><a href="">云市场</a></li>
                 <li class="layui-nav-item"><a href="">发布商品</a></li>
                 <li class="layui-nav-item"><a href="javascript:;">基础配置</a></li>

@@ -29,8 +29,11 @@ Route::group(['prefix' => 'admin'], function () {
         Route::resource('ArticleClass', "\App\Http\Controllers\Admin\Article\ArticleClassController");//文章分类
         Route::resource('ArticleDetail', "\App\Http\Controllers\Admin\Article\ArticleDetailController");//文章内容
 
-        Route::resource('HelpClass', "\App\Http\Controllers\Admin\Help\HelpClassController");//文章分类
-        Route::resource('HelpDetail', "\App\Http\Controllers\Admin\Help\HelpDetailController");//文章内容
+        Route::resource('HelpClass', "\App\Http\Controllers\Admin\Help\HelpClassController");//帮助分类
+        Route::resource('HelpDetail', "\App\Http\Controllers\Admin\Help\HelpDetailController");//帮助内容
+
+        Route::resource('Product', "\App\Http\Controllers\Admin\Product\ProductController");//产品列表
+        Route::resource('ProductHType', "\App\Http\Controllers\Admin\Product\ProductHTypeController");//产品附表
 
         Route::group(['prefix' => 'api'], function () {
             Route::post('upload/{type?}', "\App\Http\Controllers\Common\UploaderController@img");
