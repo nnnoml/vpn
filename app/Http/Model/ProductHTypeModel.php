@@ -8,7 +8,6 @@ class ProductHTypeModel extends Model
 {
     protected $table = 'product_h_type';
 
-
     public static function getList(){
         $res = self::get();
         return $res;
@@ -38,5 +37,9 @@ class ProductHTypeModel extends Model
     public static function getIndexList(){
         $res = self::where('on_show',1)->where('is_del',0)->get();
         return $res;
+    }
+
+    public static function getProductHTypeList($ids){
+        return self::whereIn('h_type_id',explode(',',$ids))->get()->toArray();
     }
 }

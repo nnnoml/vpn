@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Index\SetMenu;
 
 use App\Http\Model\ProductModel;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Config;
 
 class VpnController extends Controller
 {
@@ -18,7 +16,7 @@ class VpnController extends Controller
     }
 
     public function Index(){
-        $list = ProductModel::getIndexList();
+        $list = ProductModel::getIndexList(1);
         return view('Index.SetMenu.vpn_index',array_merge($this->ret_data,compact('list')));
     }
 }

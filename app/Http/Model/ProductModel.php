@@ -36,8 +36,8 @@ class ProductModel extends Model
         return $res;
     }
 
-    public static function getIndexList(){
-        $res = self::where('on_show',1)->where('is_del',0)->get();
+    public static function getIndexList($type){
+        $res = self::where('on_show',1)->where('type',$type)->where('is_del',0)->get()->toArray();
         return $res;
     }
 }

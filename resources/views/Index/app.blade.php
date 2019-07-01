@@ -16,6 +16,7 @@
     <script type="text/javascript" src="{{asset('index_src/js')}}/common.js"></script>
     <script type="text/javascript" src="{{asset('plug')}}/layer/layer.js"></script>
     <script type="text/javascript" src="{{asset('index_src/js')}}/public2.js"></script>
+    <script type="text/javascript" src="{{asset('index_src/js')}}/index.js"></script>
 
 </head>
 <body>

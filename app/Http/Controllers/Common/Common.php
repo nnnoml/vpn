@@ -142,16 +142,29 @@ trait Common{
     /**
      * 格式化时间
      * @param $s 传入秒
+     * @param $type 格式化类型，smhdw
      * @return int|string
      */
-    function formatSecond($s){
-        switch($s){
-            case($s<60): $loop_arr = array(1 => '秒');break;
-            case($s>=60 && $s<3600):$loop_arr = array( 60 => '分', 1 => '秒');break;
-            case($s>=3600 && $s<86400):$loop_arr = array(3600 => '小时', 60 => '分', 1 => '秒');break;
-            case($s>=86400 && $s<604800):$loop_arr = array(86400 => '天',3600 => '小时', 60 => '分', 1 => '秒');break;
-            case($s>=604800 && $s<2592000):$loop_arr = array(604800 => '周',86400 => '天',3600 => '小时', 60 => '分', 1 => '秒');break;
-            default:$loop_arr = array(2592000=>'月',604800 => '周',86400 => '天', 3600 => '小时', 60 => '分', 1 => '秒');
+    function formatSecond($s,$type=''){
+        if($type){
+            switch($type){
+                case($type=='s'): $loop_arr = array(1 => '秒');break;
+                case($type=='m'):$loop_arr = array( 60 => '分', 1 => '秒');break;
+                case($type=='h'):$loop_arr = array(3600 => '小时', 60 => '分钟', 1 => '秒');break;
+                case($type=='d'):$loop_arr = array(86400 => '天',3600 => '小时', 60 => '分', 1 => '秒');break;
+                case($type=='w'):$loop_arr = array(604800 => '周',86400 => '天',3600 => '小时', 60 => '分', 1 => '秒');break;
+                default:$loop_arr = array(2592000=>'月',604800 => '周',86400 => '天', 3600 => '小时', 60 => '分', 1 => '秒');
+            }
+        }
+        else{
+            switch($s){
+                case($s<60): $loop_arr = array(1 => '秒');break;
+                case($s>=60 && $s<3600):$loop_arr = array( 60 => '分', 1 => '秒');break;
+                case($s>=3600 && $s<86400):$loop_arr = array(3600 => '小时', 60 => '分', 1 => '秒');break;
+                case($s>=86400 && $s<604800):$loop_arr = array(86400 => '天',3600 => '小时', 60 => '分', 1 => '秒');break;
+                case($s>=604800 && $s<2592000):$loop_arr = array(604800 => '周',86400 => '天',3600 => '小时', 60 => '分', 1 => '秒');break;
+                default:$loop_arr = array(2592000=>'月',604800 => '周',86400 => '天', 3600 => '小时', 60 => '分', 1 => '秒');
+            }
         }
         $output = '';
         foreach ($loop_arr as $key => $value) {

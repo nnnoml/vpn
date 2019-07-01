@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Index\SetMenu;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Common\Common;
+use App\Http\Model\ProductHTypeModel;
+use App\Http\Model\ProductModel;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Config;
 
 class HttpController extends Controller
 {
+    use Common;
     private $ret_data;
 
     public function __construct()
@@ -17,6 +19,14 @@ class HttpController extends Controller
     }
 
     public function Index(){
-        return view('Index.SetMenu.http_index',array_merge($this->ret_data));
+        $list = ProductModel::getIndexList(2);
+        foreach ($list as $key => $vo) {
+            $list[$key]['h_type_list'] = ProductHTypeModel::getProductHTypeList($vo['h_type_id']);
+            foreach ($list[$key]['h_type_list'] as $k2 => $v2) {
+                $list[$key]['h_type_list'][$k2]['start_second_format'] = $this->formatSecond($v2['start_second'],'h');
+                $list[$key]['h_type_list'][$k2]['end_second_format'] = $this->formatSecond($v2['end_second'],'h');
+            }
+        }
+        return view('Index.SetMenu.http_index',array_merge($this->ret_data,compact('list')));
     }
 }

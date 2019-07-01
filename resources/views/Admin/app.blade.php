@@ -14,7 +14,7 @@
 
     <link rel="stylesheet" href="{{asset('plug/layui/css')}}/layui.css"  media="all">
 
-    <script src="//gss0.bdstatic.com/5foIcy0a2gI2n2jgoY3K/static/fisp_static/news/js/jquery-1.8.3.min_a6ffa58.js" type="text/javascript"></script>
+    <script src="{{asset('admin_src/js')}}/jquery.min.js" type="text/javascript"></script>
     <script src="{{asset('plug/layui')}}/layui.js" charset="utf-8"></script>
     <script src="{{asset('admin_src/js')}}/admin.js" charset="utf-8"></script>
 </head>
