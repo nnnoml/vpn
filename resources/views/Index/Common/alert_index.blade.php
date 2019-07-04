@@ -18,22 +18,22 @@
                     </div>
                     <div class="form-line" style="margin-top: 10px"><i class="iconfont">&#xe619;</i><input placeholder="请输入用户名或手机号码" name="username" onkeydown="login_keydown()"></div>
                     <div class="form-line"><i class="iconfont">&#xe62a;</i><input type="password" placeholder="请输入密码" name="password" onkeydown="login_keydown()"></div>
-                    <div class="form-line with-code" style="display: none"><i class="iconfont">&#xe605;</i>
-                        <input  placeholder="请输入图形验证码" name="verify" onkeydown="login_keydown()">
-                        <img class="modal_verify_reg" onclick="this.src='http://webapi.apehorse.com/core/api/verify/verify_id/50000.html'+'?time='+Math.random();" src="http://webapi.apehorse.com/core/api/verify/verify_id/50000.html">
+                    {{--<div class="form-line with-code" style="display: block"><i class="iconfont">&#xe605;</i>--}}
+                        {{--<input  placeholder="请输入图形验证码" name="verify" onkeydown="login_keydown()">--}}
+                        {{--<img src="{{captcha_src('math')}}" style="cursor: pointer" onclick="this.src='{{captcha_src('math')}}'+Math.random()">--}}
+                    {{--</div>--}}
+
+                    <div class="fl-option">
+                        <label><input type="checkbox" name="remember" id="remember" value="1" checked="checked"><span></span>自动登录</label>
+                        <a class="forget_modal">忘记密码?</a>
                     </div>
-                    <input type="hidden" name="type" value="web">
-                    <input type="hidden" name="modal_verify_login_id_three" value="50000">
                 </form>
-                <div class="fl-option">
-                    <label><input type="checkbox"  id="remember" checked="checked"><span></span>自动登录</label>
-                    <a class="forget_modal">忘记密码?</a>
-                </div>
                 <a class="submit modal_login_do">登录</a>
                 <p class="tip">还没有账号? <a class="reg_modal">立即注册</a></p>
             </div>
         </div>
     </div>
+
     {{--忘记密码弹窗--}}
     <div  class="modal-login forget_password footer_modal_forget">
         <div class="modal-main">
@@ -45,19 +45,13 @@
                 <div class="form-line"><i class="iconfont">&#xe6a9;</i><input placeholder="手机号" name="phone" onkeydown="forget_keydown()"></div>
                 <div class="form-line with-code"><i class="iconfont">&#xe605;</i>
                     <input placeholder="图形验证码" name="verify" onkeydown="forget_keydown()">
-                    <img class="modal_verify_reg" onclick="this.src='http://webapi.apehorse.com/core/api/verify/verify_id/20000.html'+'?time='+Math.random();" src="http://webapi.apehorse.com/core/api/verify/verify_id/20000.html">
+                    <img src="{{captcha_src('flat')}}" style="cursor: pointer" onclick="this.src='{{captcha_src('flat')}}'+Math.random()">
                 </div>
                 <div class="form-line with-code"><i class="iconfont">&#xe69b;</i>
                     <input placeholder="请输入短信验证码" name="phone_verify" onkeydown="forget_keydown()"><a class="vacode get_vacode">获取验证码</a>
                 </div>
                 <div class="form-line"><i class="iconfont">&#xe692;</i><input type="password" name="password" placeholder="请输入密码" onkeydown="forget_keydown()"></div>
                 <div class="form-line"><i class="iconfont">&#xe602;</i><input type="password" name="re_password" placeholder="请输入确认密码" onkeydown="forget_keydown()"></div>
-                <input type="hidden" name="modal_verify_login_id" value="20000">
-                <!--<div class="fl-option">-->
-                <!--<label><input type="checkbox"><span></span>自动登录</label>-->
-                <!--<a>忘记密码?</a>-->
-                <!--</div>-->
-
                 <a class="submit modal_forget_do">确认</a>
                 <p class="tip">又想起来了? <a class="login_modal">立即登录</a></p>
             </div>
@@ -74,11 +68,7 @@
               <p>请使用微信扫描二维码注册<br>“芝麻软件”</p>
             </div> -->
             <div class="mlogin-form">
-
-                <h4>
-                    注册免费试用
-                </h4>
-
+                <h4>注册免费试用</h4>
                 <span class="st">注册后联系客服获取免费资格</span>
                 <form id="modal_footer_reg_form">
                     <div class="form-line"><i class="iconfont">&#xe686;</i><input  placeholder="请输入手机号" name="phone" onkeydown="reg_keydown()"></div>
@@ -88,7 +78,8 @@
                     </div>
                     <div id="show-trigger" class="form-line  with-code "><i class="iconfont">&#xe605;</i>
                         <input  placeholder="请输入图形验证码" name="verify" onkeydown="reg_keydown()">
-                        <img class="modal_verify_reg" onclick="this.src='http://webapi.apehorse.com/core/api/verify/verify_id/10000.html'+'?time='+Math.random();" src="http://webapi.apehorse.com/core/api/verify/verify_id/10000.html">
+                        <img src="{{captcha_src('flat')}}" style="cursor: pointer" onclick="this.src='{{captcha_src('flat')}}'+Math.random()">
+                        {{--<img class="modal_verify_reg" onclick="this.src='http://webapi.apehorse.com/core/api/verify/verify_id/10000.html'+'?time='+Math.random();" src="http://webapi.apehorse.com/core/api/verify/verify_id/10000.html">--}}
                     </div>
                     <div class="form-line with-code "><i class="iconfont">&#xe69b;</i>
                         <input placeholder="请输入短信验证码" name="phone_verify" onkeydown="reg_keydown()"><a class="vacode get_vacode">获取验证码</a>
@@ -108,7 +99,7 @@
                         <i class="iconfont">&#xe639;</i>
                         <span class="agree">我同意</span>
                     </label>
-                    <a class="agree_open" href="http://www.zhimaruanjian.com/pc_register.html" target="_blank">《芝麻软件用户注册协议》</a>
+                    <a class="agree_open" href="/aggrement.html" target="_blank">《芝麻软件用户注册协议》</a>
                 </div>
                 <p class="tip">已有账号? <a class="login_modal">立即登录</a></p>
             </div>

@@ -14,6 +14,8 @@
 /**
  * web路由 未登录
  */
+Route::group(['middleware' => 'checkTokenIndex'], function () {
+
 //首页
     Route::get('/',"\App\Http\Controllers\Index\Index\IndexController@Index");
     //文章
@@ -36,16 +38,27 @@
         Route::get('/{hc_id}/{id}', "\App\Http\Controllers\Index\Help\IndexController@Detail");//帮助内容
     });
 //获取API
-Route::get('/getIP',"\App\Http\Controllers\Index\GetIp\IndexController@Index");
-Route::post('/getIP',"\App\Http\Controllers\Index\GetIp\IndexController@formatUrl");
+    Route::get('/getIP',"\App\Http\Controllers\Index\GetIp\IndexController@Index");
+    Route::post('/getIP',"\App\Http\Controllers\Index\GetIp\IndexController@formatUrl");
 
-Route::any('/do',"\App\Http\Controllers\Index\Index\IndexController@do");
+    Route::any('/do',"\App\Http\Controllers\Index\Index\IndexController@do");
 
+
+//登陆api
+    Route::post('/user/login',"\App\Http\Controllers\Index\User\IndexController@loginDo");
+//注册api
+    Route::post('/user/reg',"\App\Http\Controllers\Index\User\IndexController@regDo");
+//忘记 修改密码api
+    Route::post('/user/changePWD',"\App\Http\Controllers\Index\User\IndexController@changePWD");
+
+//短信验证码api
+    Route::post('/user/sms',"\App\Http\Controllers\Index\User\IndexController@getSms");
+});
 /**
  * web路由 已登录 过中间件 用户中心
  */
-//
-//Route::get('/', function () {
-//    echo "212323.....";
-//    //return view('welcome');
-//});
+Route::group(['prefix' => 'user','middleware' => 'login.index'], function () {
+    //用户界面
+    Route::get('/',"\App\Http\Controllers\Index\User\IndexController@Index");
+    Route::get('/loginOut',"\App\Http\Controllers\Index\User\IndexController@loginOut");
+});

@@ -17,10 +17,24 @@ class Sys extends Migration
         Schema::create('sys_conf', function (Blueprint $table) {
             $table->timestamps();
         });
-        //省市县库
-        Schema::create('sys_area', function (Blueprint $table) {
+
+        //后台用户
+        Schema::create('sys_sms_log', function (Blueprint $table) {
+            $table->increments('id')->comment('id');
+            $table->string('tel',15)->default('')->comment('手机号');
+            $table->string('code',6)->default('')->comment('验证码');
+            $table->unsignedTinyInteger('status')->default(0)->comment('是否使用 0未使用  1已使用');
             $table->timestamps();
         });
+
+        //后台用户
+        Schema::create('sys_admin', function (Blueprint $table) {
+            $table->increments('id')->comment('id');
+            $table->string('account',255)->default('')->comment('账号');
+            $table->string('password',255)->default('')->comment('密码');
+            $table->timestamps();
+        });
+
     }
 
     /**
@@ -31,6 +45,7 @@ class Sys extends Migration
     public function down()
     {
         Schema::dropIfExists('sys_conf');
-        Schema::dropIfExists('sys_area');
+        Schema::dropIfExists('sys_admin');
+        Schema::dropIfExists('sys_sms_log');
     }
 }

@@ -328,11 +328,13 @@ $(function(){
         $('.footer_modal_reg').find(".modal_verify_reg").trigger('click');
         mreg.open();
         //get_qr_image();
+        //leee 19.7.4 刷新登陆验证码
+        $("#modal_footer_reg_form").find('img').trigger('click');
     })
     $(document).on('click','.login_modal',function () {
         $('#modal_footer_login_form .form-pro').removeClass('active');
         $('.footer_modal_login .with-code input').val(null);
-        $('.footer_modal_login .with-code').hide();
+//        $('.footer_modal_login .with-code').hide();
         mreg.close();
         mforget.close();
         mlogin.open();
@@ -353,6 +355,9 @@ $(function(){
         mlogin.close();
         $('.footer_modal_forget').find(".modal_verify_reg").trigger('click');
         mforget.open();
+
+        //leee 19.7.4 刷新忘记密码验证码
+        $(".footer_modal_forget").find('img').trigger('click');
     });
     //新增点击收货按钮弹框
     $(document).on('click','.s-adr-btn',function () {
@@ -419,19 +424,26 @@ function modal_get_phone_code(verify,obj_1) {
         layer.msg('手机号格式错误',{icon:2});
         return;
     }
+    var url = '/user/sms';
 
-    var url = $("#modal_get_phone_code").val();
+    ajaxDo(url,'post',{'tel':phone,verify: verify},function(data){
+        if(data['code'] == 1){
+             layer.msg("获取短信验证码成功!", {icon: 1});
+             obj_1.find(".modal_verify_reg").trigger('click');
+             modal_time_clock(obj_1);
+        }
+    })
     var reg = "reg";
-    common.ajax_jsonp(url, {reg: reg, phone: phone, verify: verify,verify_id:obj_1.find("input[name='modal_verify_login_id']").val()}, function (rt) {
-        common.post_tips(rt, function () {
-            layer.msg("获取短信验证码成功!", {icon: 1});
-            obj_1.find(".modal_verify_reg").trigger('click');
-            modal_time_clock(obj_1);
-        },function (obj) {
-            obj_1.find(".modal_verify_reg").trigger('click');
-            layer.msg(obj.msg,{icon:2});
-        });
-    }, true, [0.1, "#eee"]);
+//    common.ajax_jsonp(url, {reg: reg, phone: phone, verify: verify,verify_id:obj_1.find("input[name='modal_verify_login_id']").val()}, function (rt) {
+//        common.post_tips(rt, function () {
+//            layer.msg("获取短信验证码成功!", {icon: 1});
+//            obj_1.find(".modal_verify_reg").trigger('click');
+//            modal_time_clock(obj_1);
+//        },function (obj) {
+//            obj_1.find(".modal_verify_reg").trigger('click');
+//            layer.msg(obj.msg,{icon:2});
+//        });
+//    }, true, [0.1, "#eee"]);
 }
 
 function get_qr_image()
@@ -478,31 +490,25 @@ function modal_get_code(verify) {
         var num = $(".footer_modal_forget input[name='phone']").val();
 
         if (!regx.test(num)) {
-            layer.msg('请输入正确的手机号或邮箱', {icon: 2});
+            layer.msg('请输入正确的手机号', {icon: 2});
             return;
         }
-        var url = $("#modal_get_code").val();
-        var reg = "rst_pass";
-        common.ajax_jsonp(url, {
-            reg: reg,
-            num: num,
-            verify: verify,
-            username: $('.footer_modal_forget input[name="username"]').val(),
-            verify_id:20000
-        }, function (rt) {
-            common.post_tips(rt, function () {
-                layer.msg("获取验证码成功,请将验证码填入输入框", {icon: 1});
-                modal_time_clock($('.footer_modal_forget'))
-            },function (obj) {
+        var url = '/user/sms';
+        ajaxDo(url,'POST',{'phone':num,'verify':verify},function(data){
+            if(data['code'] == 1){
+                layer.msg("获取短信验证码成功", {icon: 1});
+                modal_time_clock($('.footer_modal_forget'));
+            }
+            else{
                 $('.footer_modal_forget').find(".modal_verify_reg").trigger('click');
-                layer.msg(obj.msg,{icon:2});
-            });
-        }, true, [0.1, "#eee"]);
+                layer.msg(data.msg,{icon:2});
+            }
+        })
 }
 function modal_time_clock(obj_2) {
-        var modal_expire_time=$('#modal_expire_time').val();
+        var modal_expire_time=60;
         obj_2.find(".vacode").addClass("disable").removeClass("get_vacode");
-        obj_2.find(".vacode").html($('#modal_expire_time').val() + "秒后重试");
+        obj_2.find(".vacode").html("60 秒后重试");
         modal_time_index = window.setInterval(function () {
             obj_2.find(".vacode").html(--modal_expire_time + "秒后重试");
 
@@ -516,9 +522,8 @@ function modal_time_clock(obj_2) {
 
 function modal_reg_submit() {
     //注册提交
-        var url = $("#modal_reg_do").val();
         if (!$("#st-conte1").is(":checked")) {
-            layer.msg("请阅读并同意《芝麻软件用户注册协议》", {icon: 2});
+            layer.msg("请阅读并同意《软件用户注册协议》", {icon: 2});
             return;
         }
         if ($(".footer_modal_reg input[name='username']").val() == "") {
@@ -529,51 +534,33 @@ function modal_reg_submit() {
             layer.msg("密码不能空",{icon:2});
             return;
         }
-        if ($(".footer_modal_reg input[name='repassword']").val() == "") {
-            layer.msg("重复密码不能空",{icon:2});
-            return;
-        }
         if ($(".footer_modal_reg input[name='verify']").val() == "") {
             layer.msg("验证码不能为空",{icon:2});
             return;
         }
         var param = {
-            phone : $(".footer_modal_reg input[name='phone']").val(),
+            username : $(".footer_modal_reg input[name='phone']").val(),
             password : $(".footer_modal_reg input[name='password']").val(),
             verify : $(".footer_modal_reg input[name='verify']").val(),
-            phone_verify : $(".footer_modal_reg input[name='phone_verify']").val(),
-            modal_verify_login_id : 10000,
-            sure_agreement : 1,
-            origin :document.domain
+            sms_code : $(".footer_modal_reg input[name='phone_verify']").val(),
         }
-        if(!$("input[name='promoter']").val()){
-            if ($("#promoter").val()!=""){
-                param.promoter = $("#promoter").val();
+        var url = '/user/reg';
+        ajaxDo(url,'POST',param,function(data){
+            if(data['code'] == 1){
+                location.href="/user/";
             }
-        }
-        if($public.cookie.get('ad_link')){
-            param.ad_link = $public.cookie.get('ad_link')
-        }
-        console.log(param);
-        common.ajax_jsonp(url, param, function (rt) {
-            common.post_tips(rt, function (obj) {
-                if(obj.ret_data.reg_new_activity==1){
-                    location.href="/ucenter/"
-                }else {
-                    location.href="/ucenter/"
-                }
-            }, function (obj) {
-                layer.msg(obj.msg, {icon: 2});
+            else{
+                layer.msg(data.msg, {icon: 2});
                 $('.footer_modal_reg').find(".modal_verify_reg").trigger('click');
-            });
-
-        }, true, [0.1, "#eee"]);
+            }
+        });
 }
 
 function modal_login_submit() {
     //登录提交
         var username = $(".footer_modal_login input[name='username']").val();
         var password = $(".footer_modal_login input[name='password']").val();
+        var verify = $(".footer_modal_login input[name='verify']").val();
         var url = $("#modal_login_do_url").val();
         if (username == "") {
             layer.msg('用户名不能为空', {icon: 2});
@@ -583,59 +570,39 @@ function modal_login_submit() {
             layer.msg('密码不能为空', {icon: 2});
             return;
         }
+        if (verify == "") {
+            layer.msg('验证码不能为空', {icon: 2});
+            return;
+        }
         var param = $("#modal_footer_login_form").serialize();
-        param=param+'&will_three='+$('#modal_will_three').val();
-        common.ajax_jsonp(url, param, function (rt) {
-            common.post_tips(rt, function (obj) {
-                if($('#base_footer_chat_open_shouhou').val()==1){
-                    window.location.href = '/ucenter/?chat_open=1';
-                }else {
-                    if($('#login_reload').length>0){
-                        location.reload();
-                    }else {
-                        window.location.href = "/ucenter/";
-                    }
-                }
-            },function (obj) {
-                if(obj.code=='-2'){
-                   $('#modal_footer_login_form .form-pro').addClass('active');
-                   $('#modal_will_three').val('on');
-                }else if(obj.code=='-3'){
-                    $('#modal_footer_login_form .form-pro').removeClass('active');
-                    if(!$('#modal_will_three').val()){
-                        layer.msg(obj.msg,{icon:2});
-                    }else {
-                        $('#modal_will_three').val(null);
-                    }
-                    $('.footer_modal_login .with-code').show();
-                    $('.footer_modal_login .modal_verify_reg').trigger('click');
-                }else {
-                    layer.msg(obj.msg,{icon:2});
-                    $('.footer_modal_login .modal_verify_reg').trigger('click');
-                    return false;
-                }
-            });
-        },true,[0.1,'#eee']);
+        ajaxDo('/user/login','post',param,function(data){
+            if(data.code == 1){
+                location.reload();
+            }
+            else{
+                layer.msg(data.msg,{icon:2});
+            }
+        })
 }
 
+//忘记密码 提交
 function modal_forget_submit() {
-        var username = $(".footer_modal_forget input[name='username']").val();
-        var bind = $(".footer_modal_forget input[name='phone']").val();
-        var verify = $(".footer_modal_forget input[name='phone_verify']").val();
+        var account = $(".footer_modal_forget input[name='phone']").val();
+        var verify = $(".footer_modal_forget input[name='verify']").val();
+        var sms_code = $(".footer_modal_forget input[name='phone_verify']").val();
         var password = $(".footer_modal_forget input[name='password']").val();
         var re_password = $(".footer_modal_forget input[name='re_password']").val();
 
-    var url = $("#modal_find_pwd_url").val();
-        if (username == "") {
-            layer.msg('用户名不能空',{icon:2});
-            return;
-        }
-        if (bind == "") {
+        if (account == "") {
            layer.msg('手机号不能空',{icon:2});
             return;
         }
         if (verify == "") {
-            layer.msg('手机验证码不能空',{icon:2});
+            layer.msg('验证码不能空',{icon:2});
+            return;
+        }
+        if (sms_code == "") {
+            layer.msg('短信验证码不能空',{icon:2});
             return;
         }
         if(!password){
@@ -650,11 +617,16 @@ function modal_forget_submit() {
             layer.msg('两次输入的密码不一致',{icon:2});
             return;
         }
-        common.ajax_jsonp(url, {username: username, bind: bind, verify: verify,password:password,re_password:re_password}, function (rt) {
-            common.post_tips(rt, function (obj) {
+
+        var url = '/user/changePWD';
+        ajaxDo(url,'POST',{account: account, verify: verify,sms_code:sms_code,password:password,re_password:re_password},function(data){
+            if(data['code'] == 1){
                 location.href='/'
-            });
-        },true,[0.1,"#eee"]);
+            }
+            else{
+                layer.msg(data.msg,{icon:2});
+            }
+        })
 }
 
 function setQQModal() {

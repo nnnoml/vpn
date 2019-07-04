@@ -15,14 +15,18 @@
         <li @if($nav == 'help') class="index_join nav-active" @else class="index_join" @endif><a href="/help/school" >使用帮助</a></li>
 
         <!--处理登录以后-->
+
+        @if(!$isLogin)
         <li class="register nav-combtn nav-combtn-active reg_modal reg_li_base">
             <a>注册</a><span class="uc-b-tip"><i class="iconfont"></i>注册免费试用</span>
         </li>
         <li class="log-in nav-combtn login_modal reg_li_base"><a>登录</a></li>
-        <li class=" nav-combtn nav-combtn-active has-icon user_li_base" style="display: none">
-            <a class="" href="/ucenter/">&nbsp;</a>
+        @else
+        <li class=" nav-combtn nav-combtn-active has-icon user_li_base">
+            <a class="" href="/user">&nbsp;</a>
         </li>
-        <li class="log-in nav-combtn user_li_base" style="display: none"><a href="javascript:;" class="logout-link">注销</a></li>
+        <li class="log-in nav-combtn user_li_base"><a href="/user/loginOut" class="logout-link">注销</a></li>
+        @endif
 
     </ul>
 </header>

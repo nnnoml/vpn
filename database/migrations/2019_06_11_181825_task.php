@@ -18,7 +18,8 @@ class Task extends Migration
             $table->string('task_url',255)->default('')->comment('任务通知路径');
             $table->string('task_params',255)->default('')->comment('任务参数');
             $table->integer('count')->default(0)->comment('任务执行次数');
-            $table->timestamp('created_at')->useCurrent();
+            $table->unsignedTinyInteger('is_del')->default(0)->comment('执行完毕删除');
+            $table->timestamps();
         });
     }
 

@@ -26,15 +26,16 @@ class JWT extends Controller
      *  'sub'=>'www.admin.com',  //面向的用户
      *  'jti'=>md5(uniqid('JWT').time())  //该Token唯一标识
      * ]
+     * @param keep_login 有效期倍数
      * @return bool|string
      */
-    public static function getToken(array $payload)
+    public static function getToken(array $payload,$keep_login=1)
     {
         if(is_array($payload))
         {
             $payload['iat'] = time();
-            $payload['exp'] = time()+self::$exp;
-            $payload['ref'] = time()+self::$ref;
+            $payload['exp'] = time()+self::$exp*$keep_login;
+            $payload['ref'] = time()+self::$ref*$keep_login;
             $payload['jti'] = md5(uniqid('JWT').time());
 
             $base64header=self::base64UrlEncode(json_encode(self::$header,JSON_UNESCAPED_UNICODE));
@@ -46,6 +47,19 @@ class JWT extends Controller
         }
     }
 
+    /**
+     * 获取token内的id
+     * @param $token
+     * @return int
+     */
+    public static function getTokenUID($token){
+        $tokens = explode('.', $token);
+        $base64payload=self::base64UrlDecode(json_encode($tokens[1],JSON_UNESCAPED_UNICODE));
+        if(isset(json_decode($base64payload)->u_id)) {
+            return json_decode($base64payload)->u_id;
+        }
+        return 0;
+    }
 
     /**
      * 验证token是否有效,默认验证exp,nbf,iat时间

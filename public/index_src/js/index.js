@@ -10,6 +10,9 @@ function ajaxDo(url,type,data,callback){
         type:type,
         success:function (data) {
             eval(callback(data));
+        },
+        error:function(){
+            alert('通信失败');
         }
     })
 }

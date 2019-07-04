@@ -103,6 +103,11 @@ trait Common{
         return $tree;
     }
 
+    /**
+     * rc4加密
+     * @param $data
+     * @return string
+     */
     function rc4($data){
         $pwd = config('sys_conf.rc4_key');
 
@@ -131,6 +136,18 @@ trait Common{
             $cipher .= chr(ord($data[$i]) ^ $k);
         }
         return bin2hex($cipher);
+    }
+
+    /**
+     * 生成appkey
+     * @param int $id
+     * @return string
+     */
+    function appKey($id=0){
+        //strtoupper转换成全大写的
+         $charid = strtoupper(md5(uniqid(mt_rand(), true)).$id);
+         $uuid = substr($charid, 0, 8).substr($charid, 8, 4).substr($charid,12, 4).substr($charid,16, 4).substr($charid,20,12);
+         return $uuid;
     }
 
     function d($list){

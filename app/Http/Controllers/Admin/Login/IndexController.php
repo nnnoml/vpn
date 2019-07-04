@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Login;
 
 use App\Http\Controllers\Common\Common;
 use App\Http\Controllers\Common\Plug\JWT;
-use App\Http\Model\UserModel;
+use App\Http\Model\SysModel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
@@ -38,14 +38,13 @@ class IndexController extends Controller
             return $this->returnJson(0, $v_res['msg']);
         }
         else{
-            $login_res = UserModel::checkLogin($account,$this->rc4($pwd));
+            $login_res = SysModel::checkLogin($account,sha1($pwd));
             if($login_res['code'] == 1){
-                $jwt_payload = array('u_id'=>$login_res['info']['u_id']);
+                $jwt_payload = array('id'=>$login_res['info']['id']);
                 $jwt_token = JWT::getToken($jwt_payload);
                 return response()->json([
                     'code'=>1,
-                    'account'=>$login_res['info']['account'],
-                    'nickname'=>$login_res['info']['nickname']
+                    'account'=>$login_res['info']['account']
                     ])->cookie('token',$jwt_token);
             }
             else{
