@@ -58,6 +58,25 @@ return [
             ],
         ],
 
+        'mysql_c' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST_C', '127.0.0.1'),
+            'port' => env('DB_PORT_C', '3306'),
+            'database' => env('DB_DATABASE_C', 'forge'),
+            'username' => env('DB_USERNAME_C', 'forge'),
+            'password' => env('DB_PASSWORD_C', ''),
+            'unix_socket' => env('DB_SOCKET_C', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+            'options'   => [
+                // 开启持久连接
+                \PDO::ATTR_PERSISTENT => true,
+            ],
+        ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', '127.0.0.1'),

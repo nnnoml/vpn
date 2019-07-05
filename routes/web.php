@@ -61,4 +61,5 @@ Route::group(['prefix' => 'user','middleware' => 'login.index'], function () {
     //用户界面
     Route::get('/',"\App\Http\Controllers\Index\User\IndexController@Index");
     Route::get('/loginOut',"\App\Http\Controllers\Index\User\IndexController@loginOut");
+    Route::post('/changePWDLogin',"\App\Http\Controllers\Index\User\IndexController@changePWDLogin");
 });

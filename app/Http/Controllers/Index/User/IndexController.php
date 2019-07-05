@@ -124,6 +124,11 @@ class IndexController extends Controller
         return $this->returnJson(1,'发送成功');
     }
 
+    /**
+     * 用户未登陆 修改密码
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|string
+     */
     public function changePWD(Request $request){
         $account = $request->input('account','');
         $pwd = $request->input('password','');
@@ -153,6 +158,63 @@ class IndexController extends Controller
             return $this->returnJson(0, $v_res['msg']);
         }
         else{
+            $pwd = $this->rc4($pwd);
+            $res = userModel::changePWD(compact('account','pwd','sms_code'));
+            if($res['code'] == 1){
+                $jwt_payload = array('u_id'=>$res['u_id']);
+
+                $jwt_token = JWT::getToken($jwt_payload);
+                return response()->json([
+                    'code'=>1,
+                    'account'=>$account,
+                    'nickname'=>''
+                ])->cookie('tokenIndex',$jwt_token);
+            }
+            else{
+                return $this->returnJson(0,$res['msg']);
+            }
+        }
+    }
+
+    /**
+     * 用户已登陆 修改密码
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|string
+     */
+    public function changePWDLogin(Request $request){
+        $token = $request->cookie('tokenIndex');
+        $u_id = JWT::getTokenUID($token);
+        $old_pwd = $request->input('old_pwd','');
+        $new_pwd = $request->input('new_pwd','');
+        $re_pwd = $request->input('re_pwd','');
+        $verify = $request->input('verify','');
+
+        $rules = [
+            'old_pwd'=>'required|min:6|max:12',
+            'new_pwd'=>'required|min:6|max:12',
+            're_pwd'=>'same:new_pwd',
+            'verify' => 'required|captcha',
+        ];
+
+        $messages = [
+            'old_pwd.required' => '请填写旧密码',
+            'old_pwd.min' => '密码最小6位 最长12位',
+            'old_pwd.max' => '密码最小6位 最长12位',
+            'new_pwd.required' => '请填写新密码',
+            'new_pwd.min' => '密码最小6位 最长12位',
+            'new_pwd.max' => '密码最小6位 最长12位',
+            're_pwd.same' => '两次密码不一致',
+            'verify.required' => '请填写验证码',
+            'verify.captcha' => '验证码错误',
+        ];
+
+        $v_res = $this->validatorData($request,$rules,$messages);
+        if($v_res['code']==0) {
+            return $this->returnJson(0, $v_res['msg']);
+        }
+        else{
+            //TODO
+            return;
             $pwd = $this->rc4($pwd);
             $res = userModel::changePWD(compact('account','pwd','sms_code'));
             if($res['code'] == 1){
