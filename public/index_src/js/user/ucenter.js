@@ -54,7 +54,6 @@ var _uc=(function(){
             if(cmd=="info"){
                 var flip=$(".flip-num");
                 flip.html("");
-                flip_num(flip);
             }
         }
 
@@ -293,50 +292,6 @@ var _uc=(function(){
                 },300);
             },time);
         },50);
-    }
-
-    /*翻牌数字*/
-    function flip_num(list){
-        $.each(list,function(){
-            init_flip($(this));
-        });
-         window.flip=flip;
-        window.f1=$(".flip-num").eq(0);
-        function flip(dom,num,end){
-            if(num>end)
-                return;
-            var fp_dom=$( '<div class="flip">' +
-                    ' <span class="cover"><span></span></span>' +
-                    ' <span class="back"><span></span></span>' +
-                    ' </div>'),
-                top=dom.find(".top span"),
-                bot=dom.find(".bottom span"),
-                fp_prev=fp_dom.find(".cover span"),
-                fp_next=fp_dom.find(".back span");
-            fp_next.text(num);
-            fp_prev.text(top.text());
-            dom.append(fp_dom);
-            top.text(num);
-            setTimeout(function(){
-                dom.addClass("active");
-                setTimeout(function(){
-                    bot.text(num);
-                    fp_dom.remove();
-                    dom.removeClass("active");
-                    flip(dom,num+1,end);
-                },300);
-            },50);
-        }
-
-        function init_flip(dom){
-            var html='<div class="top"><span>0</span></div> ' +
-                '<div class="bottom"><span>0</span></div> ' ;
-            dom.append(html);
-            var num=parseInt(dom.data("num"));
-            if(num>0){
-                flip(dom,1,num);
-            }
-        }
     }
 
     return {

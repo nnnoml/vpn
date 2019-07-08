@@ -86,6 +86,11 @@ class UserModel extends Model
         return $res;
     }
 
+    /**
+     * 未登陆修改密码
+     * @param $data
+     * @return mixed
+     */
     public static function changePWD($data){
         $res['code'] = 0;
         $res['u_id'] = 0;
@@ -97,7 +102,6 @@ class UserModel extends Model
             $user_info = self::where('account',$data['account'])->first();
             if($user_info){
                 unset($data['sms_code']);
-                $data['created_at'] = date('Y-m-d H:i:s');
                 $update_res = self::where('account',$data['account'])->update([
                     'pwd'=>$data['pwd'],
                     'updated_at'=>date('Y-m-d H:i:s')
@@ -133,6 +137,57 @@ class UserModel extends Model
             $res['msg'] = '短信验证码错误';
             DB::rollBack();
         }
+        return $res;
+    }
+
+    /**
+     * 登陆后修改密码
+     * @param $data
+     * @return mixed
+     */
+    public static function changePWDLogin($data){
+        $res['code'] = 0;
+        $res['msg'] = '';
+
+        DB::beginTransaction();
+        $user_info = self::where('u_id',$data['u_id'])->first();
+        if(!$user_info){
+            $res['msg'] = '未找到该用户';
+            DB::rollBack();
+        }
+        else{
+            if($user_info['pwd'] != $data['old_pwd']){
+                $res['msg'] = '旧密码错误 请重试';
+                DB::rollBack();
+            }
+            else{
+                $update_res = self::where('u_id',$data['u_id'])->update([
+                    'pwd'=>$data['new_pwd'],
+                    'updated_at'=>date('Y-m-d H:i:s')
+                ]);
+                if($update_res === false){
+                    $res['msg'] = '修改失败 请重试';
+                    DB::rollBack();
+                }
+                else{
+                    //task通知C
+                    $task_info['task_url'] = config('sys_conf.C_server').'/loaduser';
+                    $task_info['task_params'] = json_encode(['uid'=>$data['u_id']]);
+
+                    $ret = TaskController::create($task_info);
+                    //判断是否投递成功
+                    if($ret){
+                        $res['code'] = 1;
+                        DB::commit();
+                    }
+                    else{
+                        $res['msg'] = '执行失败 请重试';
+                        DB::rollBack();
+                    }
+                }
+            }
+        }
+
         return $res;
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Index\User;
 use App\Http\Controllers\Common\Common;
 use App\Http\Controllers\Common\Plug\JWT;
 use App\Http\Controllers\Common\TaskController;
+use App\Http\Model\OrderModel;
 use App\Http\Model\UserModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -24,8 +25,11 @@ class IndexController extends Controller
 
     public function Index(Request $request){
         $token = $request->cookie('tokenIndex');
-        $info = UserModel::userInfo(JWT::getTokenUID($token));
-        return view('Index.User.index',array_merge($this->ret_data,compact('info')));
+        $u_id = JWT::getTokenUID($token);
+        $info = UserModel::userInfo($u_id);
+        $order_list = OrderModel::getOrderList($u_id);
+
+        return view('Index.User.index',array_merge($this->ret_data,compact('info','order_list')));
     }
 
     public function regDo(Request $request){
@@ -186,8 +190,6 @@ class IndexController extends Controller
         $u_id = JWT::getTokenUID($token);
         $old_pwd = $request->input('old_pwd','');
         $new_pwd = $request->input('new_pwd','');
-        $re_pwd = $request->input('re_pwd','');
-        $verify = $request->input('verify','');
 
         $rules = [
             'old_pwd'=>'required|min:6|max:12',
@@ -213,19 +215,12 @@ class IndexController extends Controller
             return $this->returnJson(0, $v_res['msg']);
         }
         else{
-            //TODO
-            return;
-            $pwd = $this->rc4($pwd);
-            $res = userModel::changePWD(compact('account','pwd','sms_code'));
-            if($res['code'] == 1){
-                $jwt_payload = array('u_id'=>$res['u_id']);
+            $old_pwd = $this->rc4($old_pwd);
+            $new_pwd = $this->rc4($new_pwd);
 
-                $jwt_token = JWT::getToken($jwt_payload);
-                return response()->json([
-                    'code'=>1,
-                    'account'=>$account,
-                    'nickname'=>''
-                ])->cookie('tokenIndex',$jwt_token);
+            $res = userModel::changePWDLogin(compact('u_id','old_pwd','new_pwd'));
+            if($res['code'] == 1){
+                return $this->returnJson(1);
             }
             else{
                 return $this->returnJson(0,$res['msg']);

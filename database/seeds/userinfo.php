@@ -13,8 +13,8 @@ class userinfo extends Seeder
     public function run()
     {
         \Illuminate\Support\Facades\DB::table('user')->insert([
-            'account'=>'t',
-            'pwd'=>$this->rc4('123'),
+            'account'=>'13111111111',
+            'pwd'=>$this->rc4('123456'),
         ]);
     }
 }

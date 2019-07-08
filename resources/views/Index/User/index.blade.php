@@ -60,19 +60,49 @@
             <div class="module record ">
                 <div class="record-sel">
                     <h4><span>充值记录</span><i class="iconfont">&#xe617;</i></h4>
-                    <ul class="download-sel">
-                        <li data-tab="all" data-type="" id="all">全部记录</li>
-                        <li data-tab="charge" data-type="open" id="charge_online">在线充值</li>
-                        <li data-tab="card" data-type="convert" id="charge_card">卡密充值</li>
-                    </ul>
+                    {{--<ul class="download-sel">--}}
+                        {{--<li data-tab="all" data-type="" id="all">全部记录</li>--}}
+                        {{--<li data-tab="charge" data-type="open" id="charge_online">在线充值</li>--}}
+                        {{--<li data-tab="card" data-type="convert" id="charge_card">卡密充值</li>--}}
+                    {{--</ul>--}}
                 </div>
                 <h4>充值记录</h4>
                 <div class="rec-list">
-                    <div class="tab-change">
-                        <span class="active" data-time="this">本月</span>
-                        <span class="" data-time="last">上月</span>
-                    </div>
                     <div class="uc-tables">
+                        @if($order_list)
+                            <ul class="th">
+                                <li class="td td-1"><span><i class="iconfont"></i></span>订单名称</li>
+                                <li class="td td-2"><span><i class="iconfont"></i></span>订单号</li>
+                                <li class="td td-3"><span><i class="iconfont"></i></span>金额</li>
+                                <li class="td td-4"><span><i class="iconfont"></i></span>支付方式</li>
+                                <li class="td td-5"><span><i class="iconfont"></i></span>充值状态</li>
+                                <li class="td td-6"><span><i class="iconfont"></i></span>时间</li>
+                            </ul>
+                            @foreach($order_list as $key=>$vo)
+                                <div class="tr">
+                                    <span class="td td-1">{{$vo['desc']}}</span>
+                                    <span class="td td-2">{{$vo['order_no']}}</span>
+                                    <span class="td td-3">{{$vo['pay_money']/100}}</span>
+                                    <span class="td td-4">
+                                        @if($vo['pay_type'] == 1)微信
+                                        @elseif($vo['pay_type'] == 2)支付宝
+                                        @else --
+                                        @endif
+                                    </span>
+                                    <span class="td td-5">
+                                        @if($vo['pay_status'] == 0)未支付
+                                        @elseif($vo['pay_status'] == 1)已支付
+                                        @elseif($vo['pay_status'] == 2)已取消
+                                        @else --
+                                        @endif
+                                    </span>
+                                    <span class="td td-6">{{$vo['created_at']}}</span>
+                                </div>
+                            @endforeach
+                            <div class="page" id="page"></div>
+                        @else
+                            <div class="record-none">暂无记录</div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -112,7 +142,7 @@
                                 <span class="titles">默认保留最近5个IP，特殊需求请联系客服</span>
                             </h1>
                         </div>
-                        <div class="uc-tables active">
+                        <div class="uc-tables-h active">
 
 
                             <div class="record-none input_list">暂无记录</div>
@@ -138,7 +168,7 @@
 
             <div class="module usemoney ">
                     <h4>余额使用记录<p class="mt-tips"><i class="iconfont"></i><span class="titles">您可查询近2周的使用记录，存在略微误差属正常情况，<br>更多使用记录请联系客服。</span></p></h4>
-                    <div class="uc-tables active">
+                    <div class="uc-tables-h active">
                         <div class="status">
                             <div class="content">
                                 <h1 class="record">使用概况</h1>
