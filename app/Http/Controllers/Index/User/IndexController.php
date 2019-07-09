@@ -28,7 +28,6 @@ class IndexController extends Controller
         $u_id = JWT::getTokenUID($token);
         $info = UserModel::userInfo($u_id);
         $order_list = OrderModel::getOrderList($u_id);
-
         return view('Index.User.index',array_merge($this->ret_data,compact('info','order_list')));
     }
 

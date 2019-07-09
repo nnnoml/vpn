@@ -17,6 +17,10 @@ class UserModel extends Model
         return $res;
     }
 
+    public static function userAppKey($u_id){
+        return self::where('u_id',$u_id)->pluck('appkey');
+    }
+
     /**
      * 登陆验证
      * @param $account

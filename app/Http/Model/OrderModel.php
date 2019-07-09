@@ -18,7 +18,8 @@ class OrderModel extends Model
             ->leftJoin("$product_table as p",'p.p_id','o.p_id')
             ->where('o.u_id',$u_id)
             ->select('o.*','p.desc')
-            ->get();
+            ->orderby('o.o_id','desc')
+            ->get()->toArray();
         return $res;
     }
 }

@@ -301,15 +301,6 @@ var _uc=(function(){
 $(function(){
     _uc.init();
 
-    //18/7/30注释
-    // $(".sp_url,.sp_code").zclip({
-    //     path: $('#clip_url').val(),
-    //     copy: function () {
-    //         return $(this).prev().val();
-    //     }
-    // });
-    //-------end--------
-
     /*新人活动*/
     new_person();
     function new_person() {
@@ -324,5 +315,35 @@ $(function(){
         });
     }
     //-------end-------
+
+    //leee add 19.7.9
+    //iplist
+    $('#input_ip').bind('input propertychange', function(){
+        if($(this).val()!=''){
+            $(".save_ip").addClass('active');
+        }
+        else{
+            $(".save_ip").removeClass('active');
+        }
+    })
+    $('.save_ip').click(function(){
+        if($(this).hasClass('active')){
+            var pattern = /((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})(\.((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})){3}/g;
+            var str = $('#input_ip').val();
+            if(pattern.test(str)){
+                ajaxDo('/user/whiteList','post',{'ip':str},function(data){
+                    if(data.code == 1){
+                        window.location.reload();
+                    }
+                    else{
+                        layer.msg(data.msg);
+                    }
+                })
+            }
+            else{
+                layer.msg('ip格式错误');
+            }
+        }
+    })
 
 });

@@ -32,6 +32,7 @@
     <article class="uc-modules">
         <div class="mod-warp">
 
+            {{--账号管理--}}
             <div class="module info ">
                 <h4>账号设置</h4>
                 <div class="uca-block">
@@ -57,15 +58,16 @@
                 </div>
             </div>
 
+            {{--充值记录--}}
             <div class="module record ">
-                <div class="record-sel">
-                    <h4><span>充值记录</span><i class="iconfont">&#xe617;</i></h4>
+                {{--<div class="record-sel">--}}
+                    {{--<h4><span>充值记录</span><i class="iconfont">&#xe617;</i></h4>--}}
                     {{--<ul class="download-sel">--}}
                         {{--<li data-tab="all" data-type="" id="all">全部记录</li>--}}
                         {{--<li data-tab="charge" data-type="open" id="charge_online">在线充值</li>--}}
                         {{--<li data-tab="card" data-type="convert" id="charge_card">卡密充值</li>--}}
                     {{--</ul>--}}
-                </div>
+                {{--</div>--}}
                 <h4>充值记录</h4>
                 <div class="rec-list">
                     <div class="uc-tables">
@@ -99,7 +101,7 @@
                                     <span class="td td-6">{{$vo['created_at']}}</span>
                                 </div>
                             @endforeach
-                            <div class="page" id="page"></div>
+                            {{--<div class="page" id="page"></div>--}}
                         @else
                             <div class="record-none">暂无记录</div>
                         @endif
@@ -107,16 +109,7 @@
                 </div>
             </div>
 
-            <div class="module change ">
-                <h4>余额变更记录</h4>
-                <div class="rec-list">
-                    <div class="uc-tables">
-
-                    </div>
-
-                </div>
-            </div>
-
+            {{--ip白名单--}}
             <div class="module iplist ">
                     <h4>IP白名单</h4>
                     <div class="recharge-block uca-block">
@@ -124,10 +117,10 @@
                             <h1>
                                 设置IP白名单<i class="iconfont"></i>
                                 <span class="titles">使用或者提取IP，都需要设置白名单！</span>
-                                <label for="">
-                                    <a href="http://wapi.http.cnapi.cc/index/index/get_white_link" target="_blank" style="font-size: 10px">点击获取添加白名单接口</a>
-                                    <a href="http://wapi.http.cnapi.cc/index/index/del_white_link" target="_blank" style="font-size: 10px">点击获取删除白名单接口</a>
-                                </label>
+                                {{--<label for="">--}}
+                                    {{--<a href="http://wapi.http.cnapi.cc/index/index/get_white_link" target="_blank" style="font-size: 10px">点击获取添加白名单接口</a>--}}
+                                    {{--<a href="http://wapi.http.cnapi.cc/index/index/del_white_link" target="_blank" style="font-size: 10px">点击获取删除白名单接口</a>--}}
+                                {{--</label>--}}
                             </h1>
                             <label for="">
                                 <input type="text" name="" id="input_ip" value="" placeholder="请输入IP地址以添加">
