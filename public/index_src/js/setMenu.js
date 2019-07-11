@@ -1,42 +1,22 @@
 $(function () {
-    var sum_price;
-    // var red_packet_money;
     var index;
     var func = {
-        accsub:function(arg1,arg2){
-            var r1,r2,m;
-            try{
-                r1=arg1.toString().split(".")[1].length
-            }catch(e){
-                r1=0
-            }
-            try{
-                r2=arg2.toString().split(".")[1].length
-            }catch(e){
-                r2=0
-            }
-            m=Math.pow(10,Math.max(r1,r2))
-            return (arg1*m-arg2*m)/m
-        },
-        exec_price : function(){
-            if(typeof sum_price == "undefined"){
-                return;
-            }
-            var type = $(".sel").data("type");
-            if(type == "alipay"){
-                var show_money = sum_price;
-                $(".price").html(show_money); //add
-            }else{
-                $(".price").html(sum_price); //add
-            }
-        },
         //实时计算
-        exec: function (thi) {
-            var foo = thi.parent().parent().find(".buy_num");
+        exec: function () {
+            var foo = $('div.package_list.active').find(".buy_num");
 
             var num = foo.val();
-            var price = foo.attr('price');
-            $('.price').html(num*price)
+            if(num != undefined){
+                var price = foo.attr('price');
+                $('.price').html(num*price)
+            }
+            else{
+                foo = $('div.package_list.active').find('h2').html();
+                $('.price').html(foo)
+            }
+            if($('input[name="username"]').val()!=''){
+                this.enable_pay();
+            }
         },
         //禁用优惠券
         lock_coupon: function () {
@@ -91,206 +71,60 @@ $(function () {
         order: function () {
             var obj=$('.package_content.active');
             var type = $('.payment.sel').data('type');
-            var url = $('#gateway').val();
             var username = $("input[name='username']").val();
-            var pak_id = obj.find('.package_list.active').data('id');
+            var p_id = $('.package_list.active').data('id');
             var coupon = $(".coupon_text").val();
-            var dtype=obj.data('type');
-            if(dtype=='add_time'){
-                var num = obj.find('.package_list.active').find(".buy_num").val();
-            }else {
-                var num = 1;
-            }
-            var add_terminal = $(".add_terminal").val();
+            var num = $('.package_list.active').find(".buy_num").val();
+            num == undefined ? num=1 : '';
 
             var param = {
                 username: username,
-                req_type: '2',
-                exec_type: dtype,
-                pak_id: pak_id,
-                coupon: coupon,
+                p_id: p_id,
                 num: num,
-                add_terminal: add_terminal,
-                plat:'web',
+                type:type
             };
-            var is_money_input=$('#is_money_input').val();
-            if(is_money_input=='1'){
-                common.ajax_jsonp(url, param, function (rt) {
-                    common.post_tips(rt, function (obj) {
-                        if(obj.ret_data.is_money==1){
-                            layer.msg(obj.msg,{icon:1});
-                            setTimeout(function () {
-                                location.reload()
 
-                            },2000);
-                            return true;
-                        }
-                        var order = obj.ret_data.order;
-                        if (!order) {
-                            if (dtype=='add_time'&&obj.ret_data.coupon_info.code =='0') {
-                                func.unlock_coupon();
-                                func.exec();
-                                func.order();
-                            }
-                            return false;
-                        }
+                ajaxDo('/order','post',param,function(data){
+                    if(data.code == 1){
                         switch (type) {
                             case 'alipay':
-                                if(dtype=='add_time'){
-                                    window.open($("#alipay_url").val() + '?order=' + order);
-                                }else if (dtype=='charge') {
-                                    window.open($("#money_alipay_url").val() + '?order=' + order);
-                                }
+                                window.open($("#money_alipay_url").val() + '?order=' + order);
                                 return false;
-                                // $("#order_form_none").attr('action', $("#alipay_url").val() + '?order=' + order);
-                                // $('#order_form_none').submit();
                                 break;
                             case 'wechat':
-
-                                func.wechat_pay(order,dtype);
-
-
-                                break;
-                            case 'under_line':
-                                $("#order_form").attr("action", '/under_line?order=' + order);
+                                func.wechat_pay(data.img_url,data.o_id);
                                 break;
                         }
-                    }, function (obj) {
-                        layer.msg(obj.msg);
-                    });
-                }, true, [0.1, '#eee']);
-            }else {
-                common.ajax_post(url, param,false, function (rt) {
-                    common.post_tips(rt, function (obj) {
-                        if(obj.ret_data.is_money==1){
-                            layer.msg(obj.msg,{icon:1});
-                            setTimeout(function () {
-                                location.reload()
+                    }
+                    else{
+                        layer.msg(data.msg,{icon:0});
+                    }
+                })
 
-                            },2000);
-                            return true;
-                        }
-                        var order = obj.ret_data.order;
-                        if (!order) {
-                            if (dtype=='add_time'&&obj.ret_data.coupon_info.code =='0') {
-                                func.unlock_coupon();
-                                func.exec();
-                                func.order();
-                            }
-                            return false;
-                        }
-                        switch (type) {
-                            case 'alipay':
-                                if(dtype=='add_time'){
-                                    window.open($("#alipay_url").val() + '?order=' + order);
-
-
-                                }else if (dtype=='charge') {
-                                    window.open($("#money_alipay_url").val() + '?order=' + order);
-                                }
-                                return false;
-                                // $("#order_form_none").attr('action', $("#alipay_url").val() + '?order=' + order);
-                                // $('#order_form_none').submit();
-                                break;
-                            case 'wechat':
-
-                                func.wechat_pay(order,dtype);
-
-
-                                break;
-                            case 'under_line':
-                                $("#order_form").attr("action", '/under_line?order=' + order);
-                                break;
-                        }
-                    }, function (obj) {
-                        layer.msg(obj.msg);
-                    });
-                }, true, [0.1, '#eee']);
-            }
-
-        },
-        newWinUrl:function( url ){
-            var f=document.createElement("form");
-            f.setAttribute("action" , url );
-            f.setAttribute("method" , 'get' );
-            f.setAttribute("target" , '_blank' );
-            document.body.appendChild(f)
-            f.submit();
         },
         //微信支付
-        wechat_pay: function (order,dtype) {
+        wechat_pay: function (img_url,o_id) {
             layer.closeAll();
-            //获取微信二维码url
-            if(dtype=='add_time'){
-                var url=$('#get_qrcode_url').val();
-            }else if (dtype=='charge'){
-                var url=$('#get_qrcode_money_url').val();
-            } else {
-                return false;
-            }
-            var param = {
-                order: order
-            };
-            common.ajax_jsonp(url, param, function (rt) {
-                layer.closeAll();
-                common.post_tips(rt, function (obj) {
-                    func.start_scan(order,dtype);
-                    var url = obj.ret_data.url;
-                    $('.layer_weixin img').attr('src',url);
-                    layer_weixin();
-                }, function (obj) {
-                    layer.msg(obj.msg);
-                });
 
-            });
+            func.start_scan(o_id);
+            $('.layer_weixin img').attr('src',img_url);
+            layer_weixin();
         },
         //开始扫描
-        start_scan: function (order,dtype) {
-            if(dtype=='add_time'){
-                var url = $('#get_order_pay_status').val();
-
-            }else if (dtype=='charge'){
-                var url = $('#get_money_order_pay_status').val();
-
-            } else {
-                return false;
-            }
-
+        start_scan: function (o_id) {
 
             index = window.setInterval(function () {
-                common.ajax_jsonp(url, {'order': order}, function (rt) {
-                    common.post_tips(rt, function (obj) {
+                ajaxDo('/order/scan/'+o_id,'get',{},function(data){
+                    if(data.code==1){
                         layer.closeAll();
                         func.stop_scan();
-
-
-                        if(dtype=='add_time'){
-                            if(obj.code==1){
-
-                                location.href='/pay_result/success.html?out_trade_no='+order;
-
-                                //add
-                                //window.location.reload();
-                                // location.href='/ucenter/#info';
-                                //add
-
-                            }else {
-                                location.href='/pay_result/fail.html';
-                            }
-                        }else {
-                            if(obj.code==1){
-                                $('.layer_weixin').fadeOut();
-                                layer.msg('充值成功',{icon:1});
-                                setTimeout(function () {
-                                    location.href='/ucenter/'
-                                },2000)
-                            }
-                        }
-
-                    }, function () {
-                        console.log('扫描订单支付状态');
-                    })
-                });
+                        $('.layer_weixin').fadeOut();
+                        layer.msg('充值成功',{icon:1});
+                        setTimeout(function () {
+                            location.href='/user/'
+                        },2000)
+                    }
+                })
             }, 3000);
         },
         //停止扫描
@@ -301,11 +135,10 @@ $(function () {
 
     $(document).on("click",".choise .item",function () {
         var index=$(this).index();
-        $(this).addClass("active")
-            .siblings(".item").removeClass("active");
+        $(this).addClass("active").siblings(".item").removeClass("active");
 
-        $(".content_inner .package_content").removeClass("active")
-            .eq(index).addClass("active");
+        $(".content_inner .package_content").removeClass("active").eq(index).addClass("active");
+
         if(index==1){
             $(".content_inner span.discount").removeClass("active");
             $('.pay_last').removeClass('active');
@@ -421,12 +254,26 @@ $(function () {
         $(".package_content>.package_list").eq(a).addClass("active").siblings(".package_content>.package_list").removeClass("active");
         $(".package_content>.package_list").eq(a).find("i").addClass("active").parents(".package_content>.package_list").siblings(".package_content>.package_list").find("i").removeClass("active");
 
-        func.exec($(this).find(".buy_num"));
+        func.exec();
     })
     //增加数量的时候触发
     $(document).on('click', '.reduce,.add', function () {
-        func.exec($(this));
+        func.exec();
     });
+
+    //leee 19.7.10 新增
+    //检测充值账户是否有输入
+    $('input[name="username"]').bind('input propertychange', function(){
+        if($(this).val()==''){
+            func.disable_pay();
+        }
+        else{
+            if(!isNaN($('.price').html())){
+                func.enable_pay();
+            }
+        }
+    })
+
 });
 
 function close(){
@@ -483,7 +330,7 @@ function add(){
 $(function(){
     close();
     add();
-    //layer_weixin();
+//    layer_weixin();
 });
 
 $(function () {
@@ -510,3 +357,4 @@ $(function () {
     });
 
 })
+

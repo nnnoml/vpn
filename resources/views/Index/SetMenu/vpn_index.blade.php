@@ -56,11 +56,20 @@
             <div class="package_content package_content_open">
                 @foreach($list as $key=>$vo)
                 <div data-id="{{$vo['p_id']}}" class="package_list">
-                    <h1>按月购买</h1>
+                    <h1>{{$vo['desc']}}</h1>
                     <h2>{{$vo['money']/100}}</h2>
                     <h3>原价：{{($vo['money']/100)}}元</h3>
+                    @if($loop->index == 0)
                     <span class="feedback-red">¥{{$vo['money']/100}}/<a>月</a></span>
+                    @elseif($loop->index == 1)
+                        <span class="feedback-red">¥{{ceil($vo['money']/100/2)}}/<a>月</a></span>
+                    @elseif($loop->index == 2)
+                        <span class="feedback-red">¥{{ceil($vo['money']/100/6)}}/<a>月</a></span>
+                    @elseif($loop->index == 3)
+                        <span class="feedback-red">¥{{ceil($vo['money']/100/12)}}/<a>月</a></span>
+                    @endif
                     <div class="choice">
+                        @if($loop->index == 0)
                         <label for="" class="Bt_val">
                             <button type="button" name="button" class="reduce"><i class="iconfont"></i></button>
                         </label>
@@ -71,6 +80,13 @@
                         <label for="" class="Bt_val">
                             <button type="button" name="button" class="add"><i class="iconfont"></i></button>
                         </label>
+                        @elseif($loop->index==1)
+                            <label for="" class="lab_val lable_only">2个月</label>
+                        @elseif($loop->index==2)
+                            <label for="" class="lab_val lable_only ">6个月</label>
+                        @elseif($loop->index==3)
+                            <label for="" class="lab_val lable_only">12个月</label>
+                        @endif
                     </div>
                 </div>
                 @endforeach
@@ -81,23 +97,23 @@
                 <div for="" class="entry_list">
                     <span class="h1_span">账户名称</span>
                     <p class="line-tip package_account_reg">没有账号?<a class="reg_modal">立即注册</a></p>
-                    <input type="text" name="username" value="" placeholder="请输入账户名称" class="entry_input pay_p login-username">
+                    <input type="text" name="username" value="{{$account}}" placeholder="请输入账户名称" class="entry_input pay_p login-username">
                     <span class="close"></span>
                 </div>
 
-                <div for="" class="entry_list coupon_div_activity" >
-                    <span class="h1_span">优惠券</span>
-                    <label for="" class="" style="display:none">
-                        <input type="text" value="" placeholder="请输入优惠券卡号" class="entry_input entry_input1 coupon_text">
-                        <span class="close close1"></span>
-                        <span class="confirms confirms1 coupons_ok">确认使用</span>
-                        <span class="confirms pay_cancel">取消使用</span>
-                    </label>
-                    <div class="coupon">
-                        <a class="coupon_inner"></a>
-                        <span>优惠券仅在活动期间发放，活动时间请关注微信公众号“zhimadaili”</span>
-                    </div>
-                </div>
+                {{--<div for="" class="entry_list coupon_div_activity" >--}}
+                    {{--<span class="h1_span">优惠券</span>--}}
+                    {{--<label for="" class="" style="display:none">--}}
+                        {{--<input type="text" value="" placeholder="请输入优惠券卡号" class="entry_input entry_input1 coupon_text">--}}
+                        {{--<span class="close close1"></span>--}}
+                        {{--<span class="confirms confirms1 coupons_ok">确认使用</span>--}}
+                        {{--<span class="confirms pay_cancel">取消使用</span>--}}
+                    {{--</label>--}}
+                    {{--<div class="coupon">--}}
+                        {{--<a class="coupon_inner"></a>--}}
+                        {{--<span>优惠券仅在活动期间发放，活动时间请关注微信公众号“zhimadaili”</span>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
 
                 <!--新增套餐抵用劵-->
                 <!--       <div for="" class="entry_list" >
@@ -119,6 +135,7 @@
                                </ul>
                            </div>
                        </div>-->
+
                 <div class="entry_list payment_list">
                     <span class="h1_span">支付方式</span>
                     <div class="payment sel active" data-type="alipay">

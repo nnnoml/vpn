@@ -46,13 +46,13 @@
                       </span>
                         <span class="line2">
                         <a class="price">{{$vo['money']/100}}</a>
-                            @if($vo['money_asc'])
+                            @if($vo['money_add'])
                             <a class="send">
                                 {{--<i>赠送<br>10%</i>--}}
-                                <i>赠送<br>￥{{$vo['money_asc']/100}}</i>
+                                <i>赠送<br>￥{{$vo['money_add']/100}}</i>
                             </a>
                             @endif
-                        <a class="prime_cost">实到：<i>{{($vo['money']+$vo['money_asc'])/100}}</i>元</a>
+                        <a class="prime_cost">实到：<i>{{($vo['money']+$vo['money_add'])/100}}</i>元</a>
                     </span>
                         <span class="line3">
                           价目表
@@ -60,7 +60,7 @@
                         @foreach($vo['h_type_list'] as $k2=>$v2)
                         <span class="line4"><i>{{$v2['start_second_format']}} - {{$v2['end_second_format']}}</i>：<i>{{$v2['price']/100}}</i>元/IP</span>
                         @endforeach
-                        <a data-id="1" data-money="50" data-buytype="recharge" class="act_pay pay">立即充值</a>
+                        <a data-pid="{{$vo['p_id']}}" data-buytype="recharge" class="act_pay pay">立即充值</a>
                     </li>
                 @endforeach
             </ul>
@@ -134,4 +134,55 @@
         {{--</li>--}}
 
     {{--</ul>--}}
+    <div class="recharge_layer">
+        <div class="item pay active">
+            <span class="logo"><i class="iconfont">&#xE63A;</i></span>
+            <h1>选择支付方式</h1>
+            <div class="edit-form">
+                <label class="edf-line" for="pay_zfb">
+                    <input type="radio" name="radio" value="alipay" checked="checked" id="pay_zfb" class="st-one">
+                    <i class="checkbox_ico"></i>
+                    <span><i class="iconfont">&#xE668;</i>支付宝支付</span>
+                </label>
+                <label class="edf-line" for="pay_wx">
+                    <input type="radio" name="radio" value="wechat" id="pay_wx" class="st-one">
+                    <i class="checkbox_ico"></i>
+                    <span><i class="iconfont wx">&#xE689;</i>微信支付</span>
+                </label>
+
+                <a class="pay go_to_pay">立即支付</a>
+            </div>
+            <span class="close"><i class="iconfont">&#xE627;</i></span>
+        </div>
+    </div>
+
+    {{--<script src="http://static.http.cnapi.cc/static/index/src/js/jquery.min.js"></script>--}}
+    {{--<script src="http://static.http.cnapi.cc/static/plugin/jquery.cookie.js?v=1.0"></script>--}}
+
+    {{--<script src="http://static.http.cnapi.cc/static/index/src/js/mCustomScrollbar.js"></script>--}}
+    {{--<script src="http://static.http.cnapi.cc/static/plugin/layer/2.1/layer.js"></script>--}}
+    {{--<script src="http://static.http.cnapi.cc/static/plugin/laydate/laydate.js"></script>--}}
+    {{--<script src="http://static.http.cnapi.cc/static/public/js/common.js?v=1.0"></script>--}}
+    {{--<script src="http://static.http.cnapi.cc/static/index/src/js/common.js?v=1.0"></script>--}}
+    {{--<script src="http://static.http.cnapi.cc/static/plugin/Chart.js"></script>--}}
+    {{--<script src="http://static.http.cnapi.cc/static/plugin/webuploader/0.1.5/webuploader.min.js"></script>--}}
+
+    {{--<script src="http://static.http.cnapi.cc/static/index/js/users/login.js?v=1.0"></script>--}}
+    {{--<script src="http://static.http.cnapi.cc/static/index/js/users/register.js?v=1.0"></script>--}}
+    {{--<script src="http://static.http.cnapi.cc/static/index/js/users/logout.js?v=1.0"></script>--}}
+    {{--<script src="http://static.http.cnapi.cc/static/index/js/users/all_common.js?v=1.0"></script>--}}
+    {{--<script>--}}
+        {{--$(".win .close").click(function () {--}}
+            {{--$(".win-bind").hide()--}}
+        {{--});--}}
+        {{--$(".btns .links").click(function () {--}}
+            {{--$(".win-bind").show()--}}
+        {{--})--}}
+    {{--</script>--}}
+
+    {{--<script type="text/javascript" src="http://static.http.cnapi.cc/static/index/js/footer.js"></script>--}}
+
+    {{--<script type="text/javascript" src="http://static.http.cnapi.cc/static/index/src/js/jquery-ui.min.js"></script>--}}
+
+    <script type="text/javascript" src="{{asset('index_src/js')}}/setMenuHttp.js"></script>
 @endsection

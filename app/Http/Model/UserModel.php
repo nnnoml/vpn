@@ -17,8 +17,14 @@ class UserModel extends Model
         return $res;
     }
 
+    //获取用户appkey
     public static function userAppKey($u_id){
-        return self::where('u_id',$u_id)->pluck('appkey');
+        return self::where('u_id',$u_id)->value('appkey');
+    }
+
+    //检测用户是否存在 充值用
+    public static function checkOrderUserInfo($account){
+        return self::where('account',$account)->value('u_id');
     }
 
     /**

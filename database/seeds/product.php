@@ -39,6 +39,42 @@ class product extends Seeder
                 'on_show'=>1,
                 'created_at'=>date('Y-m-d H:i:s')
             ],
+            [
+                'type'=>1,
+                'h_type'=>0,
+                'money'=>10000,
+                'h_type_id'=>'1,2,3,4,5',
+                'desc'=>'按月购买',
+                'on_show'=>1,
+                'created_at'=>date('Y-m-d H:i:s')
+            ],
+            [
+                'type'=>1,
+                'h_type'=>0,
+                'money'=>19000,
+                'h_type_id'=>'1,2,3,4,5',
+                'desc'=>'双月购买',
+                'on_show'=>1,
+                'created_at'=>date('Y-m-d H:i:s')
+            ],
+            [
+                'type'=>1,
+                'h_type'=>0,
+                'money'=>50000,
+                'h_type_id'=>'1,2,3,4,5',
+                'desc'=>'半年购买',
+                'on_show'=>1,
+                'created_at'=>date('Y-m-d H:i:s')
+            ],
+            [
+                'type'=>1,
+                'h_type'=>0,
+                'money'=>90000,
+                'h_type_id'=>'1,2,3,4,5',
+                'desc'=>'全年购买',
+                'on_show'=>1,
+                'created_at'=>date('Y-m-d H:i:s')
+            ],
         ]);
 
         \Illuminate\Support\Facades\DB::table('product_h_type')->insert([

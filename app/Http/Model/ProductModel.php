@@ -40,4 +40,9 @@ class ProductModel extends Model
         $res = self::where('on_show',1)->where('type',$type)->where('is_del',0)->get()->toArray();
         return $res;
     }
+
+    //下订单 核查产品信息
+    public static function checkOrderProductInfo($p_id){
+        return self::where('p_id',$p_id)->where('on_show',1)->where('is_del',0)->first();
+    }
 }

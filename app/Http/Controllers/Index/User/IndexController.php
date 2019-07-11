@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Index\User;
 
 use App\Http\Controllers\Common\Common;
 use App\Http\Controllers\Common\Plug\JWT;
-use App\Http\Controllers\Common\TaskController;
 use App\Http\Model\OrderModel;
 use App\Http\Model\UserModel;
 use Illuminate\Http\Request;
@@ -28,7 +27,8 @@ class IndexController extends Controller
         $u_id = JWT::getTokenUID($token);
         $info = UserModel::userInfo($u_id);
         $order_list = OrderModel::getOrderList($u_id);
-        return view('Index.User.index',array_merge($this->ret_data,compact('info','order_list')));
+        $white_list = (new WhiteListController())->showList($u_id);
+        return view('Index.User.index',array_merge($this->ret_data,compact('info','order_list','white_list')));
     }
 
     public function regDo(Request $request){

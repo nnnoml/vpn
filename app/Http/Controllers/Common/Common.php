@@ -194,6 +194,31 @@ trait Common{
         return $output;
     }
 
+    /**
+     * http get 请求
+     * @param $url
+     * @return mixed
+     */
+    function httpGet($url)
+    {
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_TIMEOUT, 500);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+
+        curl_setopt($curl, CURLOPT_URL, $url);
+
+//        curl_setopt($curl, CURLOPT_URL, 'http://192.168.201.131/do');
+//        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Host: vpns.com'));
+
+        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1); //如果有跳转 循环跟进
+        $res = curl_exec($curl);
+
+        curl_close($curl);
+        return $res;
+    }
+
 
     /**
      * 字段开关操作 公共方法

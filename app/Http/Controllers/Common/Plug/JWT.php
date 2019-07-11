@@ -53,12 +53,18 @@ class JWT extends Controller
      * @return int
      */
     public static function getTokenUID($token){
-        $tokens = explode('.', $token);
-        $base64payload=self::base64UrlDecode(json_encode($tokens[1],JSON_UNESCAPED_UNICODE));
-        if(isset(json_decode($base64payload)->u_id)) {
-            return json_decode($base64payload)->u_id;
+        $payload = self::verifyToken($token);
+        if($payload){
+//            $tokens = explode('.', $token);
+//            $base64payload=self::base64UrlDecode(json_encode($tokens[1],JSON_UNESCAPED_UNICODE));
+            if(isset($payload['u_id'])) {
+                return $payload['u_id'];
+            }
+            return 0;
         }
-        return 0;
+        else{
+            return 0;
+        }
     }
 
     /**

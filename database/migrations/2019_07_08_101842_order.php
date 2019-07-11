@@ -18,6 +18,7 @@ class Order extends Migration
             $table->string('order_no',255)->default('')->comment('订单id 编号');
             $table->unsignedInteger('p_id')->default(0)->comment('产品id');
             $table->unsignedInteger('u_id')->default(0)->comment('用户id 购买者');
+            $table->unsignedInteger('buy_num')->default(0)->comment('购买数量');
             $table->string('charge_u_id',255)->default('')->comment('充值用户id 多个用,分开');
             $table->unsignedTinyInteger('pay_type')->default(0)->comment('支付类型 0未知 1微信 2支付宝');
             $table->unsignedInteger('order_money')->default(0)->comment('订单金额'); //100

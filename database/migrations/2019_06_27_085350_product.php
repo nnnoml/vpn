@@ -18,8 +18,8 @@ class Product extends Migration
             $table->unsignedTinyInteger('type')->comment('1vpn包时 2按次');
             $table->unsignedTinyInteger('h_type')->comment('按次类型 1按次 2包周 3包月 4长效可匿');
             $table->integer('money')->default('0')->comment('售价 分');
-            $table->integer('money_desc')->default('0')->comment('充值满减 分');
-            $table->integer('money_asc')->default('0')->comment('充值赠送 分');
+            $table->integer('money_sub')->default('0')->comment('充值满减 分');
+            $table->integer('money_add')->default('0')->comment('充值赠送 分');
             $table->integer('time_length')->default('0')->comment('时间长度 秒');
             $table->string('h_type_id',255)->default('')->comment('按次产品类型 关联product_h_type 多对一');
             $table->integer('h_daily_limit')->default('0')->comment('每天使用上限 按次包周使用');
@@ -47,5 +47,6 @@ class Product extends Migration
     public function down()
     {
         Schema::dropIfExists('product');
+        Schema::dropIfExists('product_h_type');
     }
 }

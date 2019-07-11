@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Index\SetMenu;
 
+use App\Http\Controllers\Common\Plug\JWT;
 use App\Http\Model\ProductModel;
 use App\Http\Controllers\Controller;
+use App\Http\Model\UserModel;
+use Illuminate\Http\Request;
 
 class VpnController extends Controller
 {
@@ -15,8 +18,11 @@ class VpnController extends Controller
         $this->ret_data['nav'] = 'setMenu_vpn';
     }
 
-    public function Index(){
+    public function Index(Request $request){
         $list = ProductModel::getIndexList(1);
-        return view('Index.SetMenu.vpn_index',array_merge($this->ret_data,compact('list')));
+        $token = $request->cookie('tokenIndex');
+        $u_id = JWT::getTokenUID($token);
+        $account = UserModel::where('u_id',$u_id)->value('account');
+        return view('Index.SetMenu.vpn_index',array_merge($this->ret_data,compact('list','account')));
     }
 }

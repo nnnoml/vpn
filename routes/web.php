@@ -53,6 +53,12 @@ Route::group(['middleware' => 'checkTokenIndex'], function () {
 
 //短信验证码api
     Route::post('/user/sms',"\App\Http\Controllers\Index\User\IndexController@getSms");
+
+//下订单
+    Route::group(['prefix' => 'order'],function(){
+        Route::post('/',"\App\Http\Controllers\Index\Order\IndexController@setOrder");
+        Route::get('/scan/{o_id}',"\App\Http\Controllers\Index\Order\IndexController@scanOrder");
+    });
 });
 /**
  * web路由 已登录 过中间件 用户中心

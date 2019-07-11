@@ -8,7 +8,6 @@ var _uc=(function(){
         init_bind();
         rest_time();
         set_main_height();
-        set_logout();
         set_content_scroll();
         init_pages();
     }
@@ -109,47 +108,6 @@ var _uc=(function(){
             perimeter = Math.PI * 2 *r;
         cir.attr('stroke-dasharray', perimeter * percent + " " + perimeter * (1- percent));
         dom.find("span").text(val+"%");
-    }
-    /*设置顶部退出按钮效果*/
-    function set_logout(){
-        var btn=$(".uc-t-ava img"),
-            nav=$(".uc-t-ava .uc-t-logout");
-        /*btn.on("click",function(){
-            if(nav.hasClass("active")){
-                close();
-            }else{
-                open();
-            }
-        });
-        $(document).on("click",function(e){
-            var target=$(e.target||e.toElement);
-            if(target.parents(".uc-t-ava").length<=0){
-               close();
-            }
-        });*/
-        function open(){
-            nav.addClass("active");
-            dynamics.animate(nav[0], {
-                opacity: 1,
-                scale: 1
-            }, {
-                type: dynamics.spring,
-                frequency: 200,
-                friction: 270,
-                duration: 800
-            })
-        }
-        function close(){
-            nav.removeClass("active");
-            dynamics.animate(nav[0], {
-                opacity: 0,
-                scale: 0
-            }, {
-                type: dynamics.easeInOut,
-                duration: 300,
-                friction: 100
-            })
-        }
     }
 
     /*设置内容页滚动条*/
@@ -345,5 +303,15 @@ $(function(){
             }
         }
     })
-
+    $('.white_list_del').click(function(){
+        var ip = $(this).data('ip');
+        ajaxDo('/user/whiteList/'+ip,'delete',{},function(data){
+            if(data.code == 1){
+                window.location.reload();
+            }
+            else{
+                layer.msg(data.msg);
+            }
+        })
+    })
 });
