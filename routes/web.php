@@ -56,7 +56,7 @@ Route::group(['middleware' => 'checkTokenIndex'], function () {
 
 //下订单
     Route::group(['prefix' => 'order'],function(){
-        Route::post('/',"\App\Http\Controllers\Index\Order\IndexController@setOrder");
+        Route::post('/addOrder/{type}',"\App\Http\Controllers\Index\Order\IndexController@setOrder");
         Route::get('/scan/{o_id}',"\App\Http\Controllers\Index\Order\IndexController@scanOrder");
     });
 });

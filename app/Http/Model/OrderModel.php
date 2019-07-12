@@ -28,13 +28,12 @@ class OrderModel extends Model
 
 
     public static function addOrder($data){
-        $charge_user_id = UserModel::checkOrderUserInfo($data['username']);
         $product_info = ProductModel::checkOrderProductInfo($data['p_id']);
-        if($charge_user_id && $product_info){
+        if($product_info){
             $insert_data['p_id'] = $data['p_id'];
             $insert_data['u_id'] = $data['u_id'];
             $insert_data['buy_num'] = $data['num'];
-            $insert_data['charge_u_id'] = $charge_user_id;
+            $insert_data['charge_u_id'] = $data['charge_u_id'];
             $pay_type = config('sys_conf.pay_type');
             $insert_data['pay_type'] = isset($pay_type[$data['type']]) ? $pay_type[$data['type']]:0;
             $insert_data['order_money'] = ($product_info['money'] + $product_info['money_add'])*$data['num'];
@@ -54,9 +53,6 @@ class OrderModel extends Model
             }
             DB::rollback();
             return '执行失败，请重试';
-        }
-        if(!$charge_user_id){
-            return '充值账户不存在';
         }
         if($product_info){
             return '购买产品不存在';

@@ -84,7 +84,7 @@ $(function () {
                 type:type
             };
 
-                ajaxDo('/order','post',param,function(data){
+                ajaxDo('/order/addOrder/vpn','post',param,function(data){
                     if(data.code == 1){
                         switch (type) {
                             case 'alipay':
