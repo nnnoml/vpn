@@ -155,34 +155,5 @@
             <span class="close"><i class="iconfont">&#xE627;</i></span>
         </div>
     </div>
-
-    {{--<script src="http://static.http.cnapi.cc/static/index/src/js/jquery.min.js"></script>--}}
-    {{--<script src="http://static.http.cnapi.cc/static/plugin/jquery.cookie.js?v=1.0"></script>--}}
-
-    {{--<script src="http://static.http.cnapi.cc/static/index/src/js/mCustomScrollbar.js"></script>--}}
-    {{--<script src="http://static.http.cnapi.cc/static/plugin/layer/2.1/layer.js"></script>--}}
-    {{--<script src="http://static.http.cnapi.cc/static/plugin/laydate/laydate.js"></script>--}}
-    {{--<script src="http://static.http.cnapi.cc/static/public/js/common.js?v=1.0"></script>--}}
-    {{--<script src="http://static.http.cnapi.cc/static/index/src/js/common.js?v=1.0"></script>--}}
-    {{--<script src="http://static.http.cnapi.cc/static/plugin/Chart.js"></script>--}}
-    {{--<script src="http://static.http.cnapi.cc/static/plugin/webuploader/0.1.5/webuploader.min.js"></script>--}}
-
-    {{--<script src="http://static.http.cnapi.cc/static/index/js/users/login.js?v=1.0"></script>--}}
-    {{--<script src="http://static.http.cnapi.cc/static/index/js/users/register.js?v=1.0"></script>--}}
-    {{--<script src="http://static.http.cnapi.cc/static/index/js/users/logout.js?v=1.0"></script>--}}
-    {{--<script src="http://static.http.cnapi.cc/static/index/js/users/all_common.js?v=1.0"></script>--}}
-    {{--<script>--}}
-        {{--$(".win .close").click(function () {--}}
-            {{--$(".win-bind").hide()--}}
-        {{--});--}}
-        {{--$(".btns .links").click(function () {--}}
-            {{--$(".win-bind").show()--}}
-        {{--})--}}
-    {{--</script>--}}
-
-    {{--<script type="text/javascript" src="http://static.http.cnapi.cc/static/index/js/footer.js"></script>--}}
-
-    {{--<script type="text/javascript" src="http://static.http.cnapi.cc/static/index/src/js/jquery-ui.min.js"></script>--}}
-
     <script type="text/javascript" src="{{asset('index_src/js')}}/setMenuHttp.js"></script>
 @endsection

@@ -269,4 +269,14 @@ trait Common{
         }
     }
 
+    //数组转对象
+    function arrayToObject($e){
+        if( gettype($e)!='array' ) return;
+        foreach($e as $k=>$v){
+            if( gettype($v)=='array' || getType($v)=='object' )
+                $e[$k]=(object)arrayToObject($v);
+        }
+        return (object)$e;
+    }
+
 }

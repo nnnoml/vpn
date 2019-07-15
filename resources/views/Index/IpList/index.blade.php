@@ -15,15 +15,15 @@
                     <div class="search_box">
                         <div class="search">
                             <i class="iconfont"></i>
-                            <input type="text" placeholder="请输入关键词搜索（省份 / 城市）" name="" value="" class="inpt" id="search_word">
+                            <input type="text" placeholder="请输入关键词搜索（省份 / 城市）" name="" value="{{$key}}" class="inpt" id="search_word">
                             <i class="iconfont close_remove" style="display: inline;"></i>
                             <a href="javascript:;" class="btn search_btn">立即搜索</a>
                         </div>
-                        <ul class="hot_word">
-                            <li class="hot1">搜索热词：</li><li class="hot_words">淮南</li><li class="hot_words">南通</li><li class="hot_words">广州</li><li class="hot_words">宁波</li><li class="hot_words">普洱</li>
-                        </ul>
+                        {{--<ul class="hot_word">--}}
+                            {{--<li class="hot1">搜索热词：</li><li class="hot_words">淮南</li><li class="hot_words">南通</li><li class="hot_words">广州</li><li class="hot_words">宁波</li><li class="hot_words">普洱</li>--}}
+                        {{--</ul>--}}
                     </div>
-                    <a href="javascript:;" class="export" id="export">导出Excel</a>
+                    {{--<a href="javascript:;" class="export" id="export">导出Excel</a>--}}
                 </div>
             </div>
         </div>
@@ -37,56 +37,24 @@
                         <div class="table-th td-1"><i class="iconfont"></i>协议</div>
                         <div class="table-th td-1"><i class="iconfont"></i>状态</div>
                         <div class="table-th td-2"><i class="iconfont"></i>线路域名</div>
-                        <div class="table-th td-1"><i class="iconfont" style="font-size: 20px"></i>直连密码</div>
                     </div>
+                    @foreach($list as $key=>$vo)
                     <div class="table-tr">
-                        <div class="table-td td-1">福建</div>
-                        <div class="table-td td-1">南平</div>
+                        <div class="table-td td-1">{{$vo['vpn_province']}}</div>
+                        <div class="table-td td-1">{{$vo['vpn_city']}}</div>
+                        <div class="table-td td-1">{{$vo['vpn_operator']}}</div>
+                        <div class="table-td td-1">{{$vo['vpn_protocol']}}</div>
                         <div class="table-td td-1">
-                            电信                    </div>
-
-                        <div class="table-td td-1">L2TP ｜ PPTP</div>
-                        <div class="table-td td-1">可用</div>
-                        <div class="table-td td-2 ">
-                            dx350700-2.zhimace.com
+                            @if($vo['vpn_status'])
+                                可用
+                            @else
+                                不可用
+                            @endif
                         </div>
-                        <div class="table-td td-1">
-                            <!--获取密码的样式-->
-                            <a href="javascript:;" class="h-pass login_modal">获取账号密码</a>
-                        </div>
+                        <div class="table-td td-2 ">{{$vo['vpn_domain']}}</div>
                     </div>
-                    <div class="table-tr">
-                        <div class="table-td td-1">山东</div>
-                        <div class="table-td td-1">滨州</div>
-                        <div class="table-td td-1">
-                            联通                    </div>
+                    @endforeach
 
-                        <div class="table-td td-1">L2TP ｜ PPTP</div>
-                        <div class="table-td td-1">可用</div>
-                        <div class="table-td td-2 ">
-                            lt371600-4.zhimace.com
-                        </div>
-                        <div class="table-td td-1">
-                            <!--获取密码的样式-->
-                            <a href="javascript:;" class="h-pass login_modal">获取账号密码</a>
-                        </div>
-                    </div>
-                    <div class="table-tr">
-                        <div class="table-td td-1">江西</div>
-                        <div class="table-td td-1">景德镇</div>
-                        <div class="table-td td-1">
-                            电信                    </div>
-
-                        <div class="table-td td-1">L2TP ｜ PPTP</div>
-                        <div class="table-td td-1">可用</div>
-                        <div class="table-td td-2 ">
-                            dx360200-2.zhimace.com
-                        </div>
-                        <div class="table-td td-1">
-                            <!--获取密码的样式-->
-                            <a href="javascript:;" class="h-pass login_modal">获取账号密码</a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

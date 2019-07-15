@@ -40,7 +40,7 @@ class IndexController extends Controller
         else{
             $login_res = SysModel::checkLogin($account,sha1($pwd));
             if($login_res['code'] == 1){
-                $jwt_payload = array('id'=>$login_res['info']['id']);
+                $jwt_payload = array('u_id'=>$login_res['info']['id']);
                 $jwt_token = JWT::getToken($jwt_payload);
                 return response()->json([
                     'code'=>1,

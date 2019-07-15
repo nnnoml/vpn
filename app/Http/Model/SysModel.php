@@ -28,7 +28,19 @@ class SysModel extends Model
         else{
             return ['code'=>-1,'info'=>'登陆失败 账号不存在'];
         }
+    }
 
+    public static function changePWD($admin_id,$o_pwd,$n_pwd){
+        $self = new self;
+        $self->table = 'sys_admin';
+        $admin_info = $self->where('id',$admin_id)->first();
+
+        if($admin_info->password != sha1($o_pwd)){
+            return '旧密码错误';
+        }
+        else{
+            return $self->where('id',$admin_id)->update(['password'=>sha1($n_pwd),'updated_at'=>date('Y-m-d H:i:s')]);
+        }
     }
 
     /**

@@ -25,6 +25,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::group(['middleware'=>'login.admin'],function(){
         Route::get('/', "\App\Http\Controllers\Admin\Index\IndexController@Index");//后台首页
         Route::get('loginOut', "\App\Http\Controllers\Admin\Login\IndexController@loginOut");//登出
+        Route::get('changePWD', "\App\Http\Controllers\Admin\Index\IndexController@changePWD");//修改密码
 
         Route::resource('ArticleClass', "\App\Http\Controllers\Admin\Article\ArticleClassController");//文章分类
         Route::resource('ArticleDetail', "\App\Http\Controllers\Admin\Article\ArticleDetailController");//文章内容
@@ -35,8 +36,12 @@ Route::group(['prefix' => 'admin'], function () {
         Route::resource('Product', "\App\Http\Controllers\Admin\Product\ProductController");//产品列表
         Route::resource('ProductHType', "\App\Http\Controllers\Admin\Product\ProductHTypeController");//产品附表
 
+        Route::resource('LogCenter', "\App\Http\Controllers\Admin\LogCenter\LogCenterController");//日志中心查询
+
         Route::group(['prefix' => 'api'], function () {
             Route::post('upload/{type?}', "\App\Http\Controllers\Common\UploaderController@img");
+            Route::post('sysConf', "\App\Http\Controllers\Admin\Index\IndexController@sysConf");
+            Route::post('changePWD', "\App\Http\Controllers\Admin\Index\IndexController@changePWDDo");
         });
     });
 });

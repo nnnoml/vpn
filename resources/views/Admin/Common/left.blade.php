@@ -13,6 +13,8 @@
                         <dd><a href="">超链接</a></dd>
                     </dl>
                 </li>
+
+                <li class="layui-nav-item @if($nav == 'conf') layui-nav-itemed @endif"><a href="javascript:;">基础配置</a></li>
                 <li class="layui-nav-item @if($nav == 'article') layui-nav-itemed @endif">
                     <a href="javascript:;">文章管理</a>
                     <dl class="layui-nav-child">
@@ -34,9 +36,9 @@
                         <dd><a @if($nav2 == 'product_h_type')  class="layui-this" @endif href="/{{config('sys_conf.admin')}}/ProductHType">产品类型列表</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a href="">云市场</a></li>
-                <li class="layui-nav-item"><a href="">发布商品</a></li>
-                <li class="layui-nav-item"><a href="javascript:;">基础配置</a></li>
+                <li class="layui-nav-item @if($nav == 'log_center') layui-nav-itemed @endif"><a href="/{{config('sys_conf.admin')}}/LogCenter">日志中心</a></li>
+                {{--<li class="layui-nav-item"><a href="">发布商品</a></li>--}}
+                {{--<li class="layui-nav-item"><a href="javascript:;">基础配置</a></li>--}}
             </ul>
         </div>
     </div>
