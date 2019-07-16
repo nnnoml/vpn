@@ -60,4 +60,14 @@ class SysModel extends Model
             return false;
         }
     }
+
+    public static function getArea($level,$code=0){
+        $self = new self;
+        $self->table = 'areas';
+        $p_id = 0;
+        if($code){
+            $p_id = $self->where('code',$code)->value('id');
+        }
+        return $self->where('type',$level)->where('parent_id',$p_id)->orderby('id','asc')->get();
+    }
 }

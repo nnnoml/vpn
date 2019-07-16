@@ -41,8 +41,7 @@ Route::group(['middleware' => 'checkTokenIndex'], function () {
 //获取API
     Route::get('/getIP',"\App\Http\Controllers\Index\GetIp\IndexController@Index");
     Route::post('/getIP',"\App\Http\Controllers\Index\GetIp\IndexController@formatUrl");
-
-    Route::any('/do',"\App\Http\Controllers\Index\Index\IndexController@do");
+    Route::get('/getIP/city/{code}',"\App\Http\Controllers\Index\GetIp\IndexController@getCity");
 
 
 //登陆api

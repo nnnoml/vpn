@@ -13,7 +13,9 @@ class UserModel extends Model
     public static function userInfo($u_id){
         $self = new self();
         $res = $self->where('u_id',$u_id)->first();
-        $res['money'] = $self->setConnection('mysql_c')->from('tb_user_direct_order')->where('u_id',$res['u_id'])->sum('money');
+        if($res){
+            $res['money'] = $self->setConnection('mysql_c')->from('tb_user_direct_order')->where('u_id',$res['u_id'])->sum('money');
+        }
         return $res;
     }
 

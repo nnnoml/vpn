@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Common;
 
 use App\Http\Controllers\Controller;
+use App\Http\Model\SysModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
@@ -277,6 +278,16 @@ trait Common{
                 $e[$k]=(object)arrayToObject($v);
         }
         return (object)$e;
+    }
+
+    //获得省份
+    function getProvince(){
+        return SysModel::getArea(1);
+    }
+
+    //获得城市
+    function getCity($p_id){
+        return SysModel::getArea(2,$p_id);
     }
 
 }

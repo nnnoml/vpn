@@ -31,7 +31,7 @@
                                 </div>
                             </div>
                         </form>
-                        <div class="free_btn ok_free_btn"><a id="get_free_day_package">领取每日免费IP</a></div>
+                        {{--<div class="free_btn ok_free_btn"><a id="get_free_day_package">领取每日免费IP</a></div>--}}
                     </div>
                 </div>
                 <h1>账户概况
@@ -40,14 +40,19 @@
                 <div class="survey survey1" id="balance_div" style="display: block;">
                     <div class="survey_content">
                         <div class="line1">
+                            @if(isset($user_info))
                             <span class="left balance_money">
-                                  <a>当前账户余额（芝麻币）</a>
-                                  <a id="balance">0</a>
-                                  <input type="hidden" id="balance_money" value="0">
+                                  <a>当前账户余额</a>
+                                  <a id="balance">{{$user_info['money']}}</a>
+                                  <input type="hidden" id="balance_money" value="{{$user_info['money']}}">
                               </span>
-                            <a class="actPay" href="/pay/" target="_blank">立即充值</a>
-                            <a class="right go_to_pay gologin" style="display: none">您还未登录！<i class="page_login">立即登录</i></a>
-                            <a href="/pay/#recharge" class="right" id="balance_lower" style="display: none">您的余额不足，<i class="">立即充值</i></a>
+                            <a class="actPay" href="/setMenu/http" target="_blank">立即充值</a>
+                                @if($user_info['money']<=0)
+                                <a href="/setMenu/http" class="right" id="balance_lower">您的余额不足，<i class="">立即充值</i></a>
+                                @endif
+                            @else
+                                <a class="actPay log-in nav-combtn login_modal reg_li_base" >立即登录</a>
+                            @endif
 
                         </div>
                         <ul class="line2">
@@ -77,15 +82,11 @@
                     <h1 class="left">IP协议</h1>
                     <div class="right agent">
                         <label>
-                            <input type="radio" name="port_type" value="1" checked="checked">
+                            <input type="radio" name="prot_type" value="1" checked="checked">
                             <i class="radios"></i>HTTP
                         </label>
-                        <label class="no_long_pack">
-                            <input type="radio" name="port_type" value="11">
-                            <i class="radios"></i>HTTPS
-                        </label>
                         <label>
-                            <input type="radio" name="port_type" value="2">
+                            <input type="radio" name="prot_type" value="2">
                             <i class="radios"></i>SOCKS5
                         </label>
                     </div>
@@ -115,13 +116,24 @@
                             <input type="radio" name="data_type" value="2" class="buttons_json">
                             <i class="radios"></i>JSON
                         </label>
-                        <label class="buttons ">
-                            <input type="radio" name="data_type" value="3" class="buttons_html">
-                            <i class="radios"></i>HTML
-                        </label>
+                        {{--<label class="buttons ">--}}
+                            {{--<input type="radio" name="data_type" value="3" class="buttons_html">--}}
+                            {{--<i class="radios"></i>HTML--}}
+                        {{--</label>--}}
                     </div>
                 </div>
-
+                <script>
+                    $("input[name='data_type']").change(function(){
+                        if($(this).val()==1){
+                            $(".choose_fg").show();
+                            $(".choose_sx").hide();
+                        }
+                        else{
+                            $(".choose_fg").hide();
+                            $(".choose_sx").show();
+                        }
+                    });
+                </script>
                 <!-- 分隔符 -->
                 <div class="region_list choose_fg">
                     <h1 class="left">
@@ -157,65 +169,69 @@
                     </div>
                 </div>
 
+                <div class="region_list choose_sx" style="display: none;">
+                    <h1 class="left">选择属性</h1>
+                    <div class="right agent nature">
+                        <label>
+                            <input type="checkbox" name="st-con" disabled checked="checked" id="st-one1">
+                            <i class="radios"></i>
+                            IP：Port
+                        </label>
+
+                        <label>
+                            <input type="checkbox" name="st-con" id="st-one2">
+                            <i class="radios"></i>
+                            过期时间
+                        </label>
+
+                        <label>
+                            <input type="checkbox" name="st-con" id="st-one3">
+                            <i class="radios"></i>
+                            显示位置
+                        </label>
+                    </div>
+                </div>
+
                 <div class="region_list no_long_pack" id="regin_check_div">
                     <h1 class="left">地区选择</h1>
                     <div class="right">
                         <div class="appointe">
                             <label class="label1">
-                                <input type="radio" name="st-con" checked="checked" value="1">
+                                <input type="radio" name="st-con" checked="checked" value="0">
+                                <i class="radios"></i>
+                                不指定城市
+                            </label>
+                            <label class="label1">
+                                <input type="radio" name="st-con" value="1">
                                 <i class="radios"></i>
                                 指定城市
                             </label>
-                            <label class="label2">
-                                <input type="radio" name="st-con" value="0">
-                                <i class="radios"></i>
-                                省份混拨
-                                <span style="color:red">（注：未勾选默认全国混拨）</span>
-                            </label>
+                            {{--<label class="label2">--}}
+                                {{--<input type="radio" name="st-con" value="0">--}}
+                                {{--<i class="radios"></i>--}}
+                                {{--省份混拨--}}
+                                {{--<span style="color:red">（注：未勾选默认全国混拨）</span>--}}
+                            {{--</label>--}}
                         </div>
 
                         <form class="layui-form" action="">
                             <div class="layui-form-item">
                                 <div class="layui-input-inline">
-                                    <select name="pro">
-                                        <option value="">请选择省</option>
-                                        <option value="浙江" selected="">浙江省</option>
-                                        <option value="你的工号">江西省</option>
-                                        <option value="你最喜欢的老师">福建省</option>
+                                    <select name="pro" lay-filter="province">
+                                        <option selected="" value="">请选择省</option>
+                                        @foreach($province as $key=>$vo)
+                                        <option value="{{$vo->code}}">{{$vo->name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="layui-input-inline">
                                     <select name="city">
-                                        <option value="">请选择市</option>
-                                        <option value="杭州">杭州</option>
-                                        <option value="宁波" disabled="">宁波</option>
-                                        <option value="温州">温州</option>
-                                        <option value="温州">台州</option>
-                                        <option value="温州">绍兴</option>
                                     </select>
                                 </div>
                             </div>
 
                         </form>
 
-                    </div>
-                </div>
-                <div class="region_list no_long_pack">
-                    <h1 class="left">端口位数</h1>
-                    <div class="right agent">
-                        <label>
-                            <input type="radio" name="port_bit" value="4" checked="checked">
-                            <i class="radios"></i>4位端口
-                        </label>
-                        <label>
-                            <input type="radio" name="port_bit" value="5">
-                            <i class="radios"></i>5位端口
-                        </label>
-
-                        <label>
-                            <input type="radio" name="port_bit" value="45">
-                            <i class="radios"></i>端口位数随机
-                        </label>
                     </div>
                 </div>
 
@@ -237,24 +253,6 @@
                     </div>
                 </div>
 
-                <div class="region_list no_long_pack">
-                    <h1 class="left">运营商</h1>
-                    <div class="right agent">
-                        <label>
-                            <input type="radio" name="demo" value="0" checked="checked">
-                            <i class="radios"></i>不限
-                        </label>
-                        <label>
-                            <input type="radio" name="demo" value="100026">
-                            <i class="radios"></i>联通
-                        </label>
-                        <label>
-                            <input type="radio" name="demo" value="100017">
-                            <i class="radios"></i>电信
-                        </label>
-                    </div>
-                </div>
-
             </div>
             <div class="pay">
                 <span class="open">生成API链接</span>
@@ -268,13 +266,19 @@
 
                 <a href="#" class="openUrl" target="_blank">打开链接</a>
 
-                <label id="con" style="font-size:20px">隧道IP<i class="iconfont"></i>
-                    <span class="hint">专线中转，不同的端口号分配不同的出口IP</span>
-                </label><span>（请复制下面的链接地址，在新的浏览器或标签页打开并查看)</span>
-                <input id="api_link2" class="api_link" placeholder="点击上方按钮，生成API链接：">
-                <input type="button" class="copyUrl" readonly="readonly" id="copyUrl2" value="复制链接">
-                <a href="#" class="openUrl2" target="_blank">打开链接</a>
-
+                {{--<label id="con" style="font-size:20px">隧道IP<i class="iconfont"></i>--}}
+                    {{--<span class="hint">专线中转，不同的端口号分配不同的出口IP</span>--}}
+                {{--</label><span>（请复制下面的链接地址，在新的浏览器或标签页打开并查看)</span>--}}
+                {{--<input id="api_link2" class="api_link" placeholder="点击上方按钮，生成API链接：">--}}
+                {{--<input type="button" class="copyUrl" readonly="readonly" id="copyUrl2" value="复制链接">--}}
+                {{--<a href="#" class="openUrl2" target="_blank">打开链接</a>--}}
+<script>
+    $("#copyUrl").click(function(){
+        $("#api_link").select();
+        document.execCommand("Copy");
+        layer.msg('复制成功')
+    })
+</script>
                 <div class="annotate">
                     <h1>请求参数注释</h1>
                     <div class="table">
@@ -284,7 +288,12 @@
                             <div class="td td-1">必选</div>
                             <div class="td td-2">说明</div>
                         </div>
-
+                        <div class="tr">
+                            <div class="td td-1">appkey</div>
+                            <div class="td td-1">string</div>
+                            <div class="td td-1">是</div>
+                            <div class="td td-2">用户个人识别标志</div>
+                        </div>
                         <div class="tr">
                             <div class="td td-1">num</div>
                             <div class="td td-1">int</div>
@@ -303,24 +312,12 @@
                             <div class="td td-1">否</div>
                             <div class="td td-2">城市，默认全国</div>
                         </div>
-                        <div class="tr">
-                            <div class="td td-1">regions</div>
-                            <div class="td td-1">int</div>
-                            <div class="td td-1">否</div>
-                            <div class="td td-2">全国混拨地区</div>
-                        </div>
 
                         <div class="tr">
-                            <div class="td td-1">yys</div>
+                            <div class="td td-1">prot</div>
                             <div class="td td-1">int</div>
                             <div class="td td-1">是</div>
-                            <div class="td td-2">0:不限 100026:联通 100017:电信</div>
-                        </div>
-                        <div class="tr">
-                            <div class="td td-1">port</div>
-                            <div class="td td-1">int</div>
-                            <div class="td td-1">是</div>
-                            <div class="td td-2">IP协议 1:HTTP 2:SOCK5 11:HTTPS</div>
+                            <div class="td td-2">IP协议 1:HTTP 2:SOCK5</div>
                         </div>
                         <div class="tr">
                             <div class="td td-1">time</div>
@@ -333,33 +330,23 @@
                             <div class="td td-1">type</div>
                             <div class="td td-1">int</div>
                             <div class="td td-1">否</div>
-                            <div class="td td-2">数据格式：1:TXT 2:JSON 3:html</div>
+                            <div class="td td-2">数据格式：1:TXT 2:JSON</div>
                         </div>
-                        <div class="tr">
-                            <div class="td td-1">pack</div>
-                            <div class="td td-1">int</div>
-                            <div class="td td-1">否</div>
-                            <div class="td td-2">用户套餐ID</div>
-                        </div>
+
                         <div class="tr">
                             <div class="td td-1">ts</div>
                             <div class="td td-1">int</div>
                             <div class="td td-1">否</div>
-                            <div class="td td-2">是否显示IP过期时间: 1显示  2不显示</div>
+                            <div class="td td-2">[JSON格式] 是否显示IP过期时间: 1显示  2不显示</div>
                         </div>
 
-                        <div class="tr">
-                            <div class="td td-1">ys</div>
-                            <div class="td td-1">int</div>
-                            <div class="td td-1">否</div>
-                            <div class="td td-2">是否显示IP运营商: 1显示</div>
-                        </div>
                         <div class="tr">
                             <div class="td td-1">cs</div>
                             <div class="td td-1">int</div>
                             <div class="td td-1">否</div>
-                            <div class="td td-2">否显示位置: 1显示</div>
+                            <div class="td td-2">[JSON格式] 否显示位置: 1显示</div>
                         </div>
+
                         <div class="tr">
                             <div class="td td-1">lb</div>
                             <div class="td td-1">int</div>
@@ -378,12 +365,6 @@
                             <div class="td td-1">否</div>
                             <div class="td td-2">去重选择（1:360天去重 2:单日去重 3:不去重）</div>
                         </div>
-                        <div class="tr">
-                            <div class="td td-1">pb</div>
-                            <div class="td td-1">int</div>
-                            <div class="td td-1">否</div>
-                            <div class="td td-2">端口位数（4:4位端口  5:5位端口）</div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -392,28 +373,19 @@
                 <h1>返回结果示例</h1>
                 <div class="box">
           <pre>
-        {
-          "code":0,
-          "success":true,
-          "msg":"0",
-          "data":[
-              {
-                  "ip":"49.68.68.197",
-                  "port":33220,
-                  "expire_time":"2019-05-24 08:58:31",
-                  "city":"徐州市",
-                  "isp":"电信"
-              },
-              {
-                  "ip":"58.218.201.108", //隧道ip （代理ip）
-                  "port":2690,           // 代理端口
-                  "expire_time":"2019-05-24 08:55:31",
-                  "city":"苏州市",
-                  "isp":"电信",
-                  "outip":"219.136.47.161",  // 隧道ip的出口ip
-              }
-          ]
-        }
+          {
+            "result":1,
+            "msg":"0",
+            "data":[
+                {
+                   "ip":"",
+                   "port":"",
+                   "expire_time":"",
+                   "city":"",
+                   "isp":""
+                }
+              ]
+          }
          </pre>
                 </div>
                 <div class="annotate" style="background-position: -3px -447px;">
@@ -426,14 +398,14 @@
                         </div>
 
                         <div class="tr">
-                            <div class="td td-1">code</div>
+                            <div class="td td-1">result</div>
                             <div class="td td-1">int</div>
-                            <div class="td td-1 td-left">0为成功，1为失败</div>
+                            <div class="td td-1 td-left">1为成功，0为失败</div>
                         </div>
                         <div class="tr">
-                            <div class="td td-1">success</div>
-                            <div class="td td-1">bool</div>
-                            <div class="td td-1 td-left">true为成功，false为失败</div>
+                            <div class="td td-1">msg</div>
+                            <div class="td td-1">string</div>
+                            <div class="td td-1 td-left">提示信息</div>
                         </div>
                         <div class="tr">
                             <div class="td td-1">ip</div>
@@ -460,11 +432,6 @@
                             <div class="td td-1">string</div>
                             <div class="td td-1 td-left">运营商（电信、联通）</div>
                         </div>
-                        <div class="tr">
-                            <div class="td td-1">outip</div>
-                            <div class="td td-1">string</div>
-                            <div class="td td-1 td-left">隧道ip的出口ip</div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -482,56 +449,56 @@
                 </p>
             </div>
 
-            <div class="demo-down">
-                <h1>用户接入芝麻HTTP代码demo</h1>
-                <div class="demo-box">
-                    <div class="demo-list">
-                        <span>C语言</span>
-                        <p>用户接入芝麻HTTP代码demo</p>
-                        <a href="http://com-download.getlema.com/public/C%E8%AF%AD%E8%A8%80%E4%BB%A3%E7%90%86%E7%94%A8%E6%B3%95.zip" target="_blank">点此下载</a>
-                    </div>
-                    <div class="demo-list">
-                        <span>GO语言</span>
-                        <p>用户接入芝麻HTTP代码demo</p>
-                        <a href="http://com-download.getlema.com/public/GO%E8%AF%AD%E8%A8%80%E4%BB%A3%E7%90%86%E7%94%A8%E6%B3%95.zip" target="_blank">点此下载</a>
-                    </div>
-                    <div class="demo-list">
-                        <span>Phantomjs语言</span>
-                        <p>用户接入芝麻HTTP代码demo</p>
-                        <a href="http://com-download.getlema.com/public/Phantomjs%E4%BB%A3%E7%90%86%E7%94%A8%E6%B3%95.txt" target="_blank">点此下载</a>
-                    </div>
-                    <div class="demo-list">
-                        <span>Php语言</span>
-                        <p>用户接入芝麻HTTP代码demo</p>
-                        <a href="http://com-download.getlema.com/public/php%E4%BB%A3%E7%90%86%E7%94%A8%E6%B3%95.txt" target="_blank">点击下载</a>
-                    </div>
-                    <div class="demo-list">
-                        <span>Java语言</span>
-                        <p>用户接入芝麻HTTP代码demo</p>
-                        <a href="http://com-download.getlema.com/public/proxy_sdk_java_v1.zip" target="_blank">点此下载</a>
-                    </div>
-                    <div class="demo-list">
-                        <span>Python语言</span>
-                        <p>用户接入芝麻HTTP代码demo</p>
-                        <a href="http://com-download.getlema.com/public/python%E4%BB%A3%E7%90%86%E7%94%A8%E6%B3%95.txt" target="_blank">点此下载</a>
-                    </div>
-                    <div class="demo-list">
-                        <span>Selenium语言</span>
-                        <p>用户接入芝麻HTTP代码demo</p>
-                        <a href="http://com-download.getlema.com/public/Selenium%E4%BB%A3%E7%90%86%E7%94%A8%E6%B3%95.txt" target="_blank">点此下载</a>
-                    </div>
-                    <div class="demo-list">
-                        <span>易语言</span>
-                        <p>用户接入芝麻HTTP代码demo</p>
-                        <a href="http://com-download.getlema.com/public/%E6%98%93%E8%AF%AD%E8%A8%80.zip" target="_blank">点此下载</a>
-                    </div>
-                    <div class="demo-list">
-                        <span>C#语言</span>
-                        <p>用户接入芝麻HTTP代码demo</p>
-                        <a href="http://com-download.getlema.com/public/ClientProxyDemo.zip" target="_blank">点此下载</a>
-                    </div>
-                </div>
-            </div>
+            {{--<div class="demo-down">--}}
+                {{--<h1>用户接入芝麻HTTP代码demo</h1>--}}
+                {{--<div class="demo-box">--}}
+                    {{--<div class="demo-list">--}}
+                        {{--<span>C语言</span>--}}
+                        {{--<p>用户接入芝麻HTTP代码demo</p>--}}
+                        {{--<a href="http://com-download.getlema.com/public/C%E8%AF%AD%E8%A8%80%E4%BB%A3%E7%90%86%E7%94%A8%E6%B3%95.zip" target="_blank">点此下载</a>--}}
+                    {{--</div>--}}
+                    {{--<div class="demo-list">--}}
+                        {{--<span>GO语言</span>--}}
+                        {{--<p>用户接入芝麻HTTP代码demo</p>--}}
+                        {{--<a href="http://com-download.getlema.com/public/GO%E8%AF%AD%E8%A8%80%E4%BB%A3%E7%90%86%E7%94%A8%E6%B3%95.zip" target="_blank">点此下载</a>--}}
+                    {{--</div>--}}
+                    {{--<div class="demo-list">--}}
+                        {{--<span>Phantomjs语言</span>--}}
+                        {{--<p>用户接入芝麻HTTP代码demo</p>--}}
+                        {{--<a href="http://com-download.getlema.com/public/Phantomjs%E4%BB%A3%E7%90%86%E7%94%A8%E6%B3%95.txt" target="_blank">点此下载</a>--}}
+                    {{--</div>--}}
+                    {{--<div class="demo-list">--}}
+                        {{--<span>Php语言</span>--}}
+                        {{--<p>用户接入芝麻HTTP代码demo</p>--}}
+                        {{--<a href="http://com-download.getlema.com/public/php%E4%BB%A3%E7%90%86%E7%94%A8%E6%B3%95.txt" target="_blank">点击下载</a>--}}
+                    {{--</div>--}}
+                    {{--<div class="demo-list">--}}
+                        {{--<span>Java语言</span>--}}
+                        {{--<p>用户接入芝麻HTTP代码demo</p>--}}
+                        {{--<a href="http://com-download.getlema.com/public/proxy_sdk_java_v1.zip" target="_blank">点此下载</a>--}}
+                    {{--</div>--}}
+                    {{--<div class="demo-list">--}}
+                        {{--<span>Python语言</span>--}}
+                        {{--<p>用户接入芝麻HTTP代码demo</p>--}}
+                        {{--<a href="http://com-download.getlema.com/public/python%E4%BB%A3%E7%90%86%E7%94%A8%E6%B3%95.txt" target="_blank">点此下载</a>--}}
+                    {{--</div>--}}
+                    {{--<div class="demo-list">--}}
+                        {{--<span>Selenium语言</span>--}}
+                        {{--<p>用户接入芝麻HTTP代码demo</p>--}}
+                        {{--<a href="http://com-download.getlema.com/public/Selenium%E4%BB%A3%E7%90%86%E7%94%A8%E6%B3%95.txt" target="_blank">点此下载</a>--}}
+                    {{--</div>--}}
+                    {{--<div class="demo-list">--}}
+                        {{--<span>易语言</span>--}}
+                        {{--<p>用户接入芝麻HTTP代码demo</p>--}}
+                        {{--<a href="http://com-download.getlema.com/public/%E6%98%93%E8%AF%AD%E8%A8%80.zip" target="_blank">点此下载</a>--}}
+                    {{--</div>--}}
+                    {{--<div class="demo-list">--}}
+                        {{--<span>C#语言</span>--}}
+                        {{--<p>用户接入芝麻HTTP代码demo</p>--}}
+                        {{--<a href="http://com-download.getlema.com/public/ClientProxyDemo.zip" target="_blank">点此下载</a>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
         </div>
         <a class="detection-down fadeInRight ipchecktool" href="/agent" target="_blank">
             IP检测工具入口
@@ -602,20 +569,52 @@
         });
 
 
+     form.on('select(province)', function(data){
+       $("select[name='city']").html('');
+       form.render();
+       ajaxDo('/getIP/city/'+data.value,'get',{},function(data){
+            var html = '<option value="">请选择市</option>';
+                data.forEach(function(v){
+                    html += '<option value="'+v.code+'">'+v.name+'</option>'
+                })
+                $("select[name='city']").html(html);
+                form.render();
+        });
+      data.value
+    });
+
 $(".open").click(function(){
 
     var post = {};
     post['num'] = $("#scrollBarTxt").html();
-    post['port'] = $("input[name='port_type']:checked").val();
+    post['prot'] = $("input[name='prot_type']:checked").val();
     post['time'] = $("input[name='time_select']:checked").val();
     post['type'] = $("input[name='data_type']:checked").val();
-
-    if($("input[name='special']").val() == '' || $("input[name='special']").val() == undefined){
-        post['lb'] = $("input[name='line_break']:checked").val();
+    //txt
+    if(post['type'] == 1){
+        if($("input[name='special']").val() == '' || $("input[name='special']").val() == undefined){
+            post['lb'] = $("input[name='line_break']:checked").val();
+        }
+        else{
+            post['lb'] = 6;
+            post['sb'] = $("input[name='special']").val();
+        }
     }
+    //json
     else{
-        post['lb'] = $("input[name='special']").val();
+        //过期时间选中
+        if($("#st-one2").is(':checked')){
+            post['ts'] = 1;
+        }
+        else{
+            post['ts'] = 2;
+        }
+        //显示位置选中
+        if($("#st-one3").is(':checked')){
+            post['cs'] = 1;
+        }
     }
+
 
     if($("input[name='st-con']").val()){
         post['pro'] = $("select[name='pro']").val();
@@ -626,15 +625,14 @@ $(".open").click(function(){
         post['city'] = 0;
     }
 
-    post['pb'] = $("input[name='port_bit']:checked").val();
     post['mr'] = $("input[name='m_repeat']:checked").val();
-    post['yys'] = $("input[name='demo']:checked").val();
 
     var url = '';
     ajaxDo(url,'post',post,function(data){
         if (data['code'] == '1'){
             $("#api_link").val(data['msg']);
-            $("#api_link2").val(data['msg']);
+            {{--$("#api_link2").val(data['msg']);--}}
+            $(".openUrl").attr('href',data['msg'])
         }else{
             layer.msg(data['msg']);
         }
