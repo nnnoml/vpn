@@ -26,7 +26,7 @@ class TaskController extends Task{
 //        sleep(10);
 //        echo "ok";
 //    }
-
+    use Common;
     private $data;
     private $task_loop = true;//默认任务状态，
     private $result;
@@ -40,7 +40,7 @@ class TaskController extends Task{
         // throw new \Exception('an exception');// handle时抛出的异常上层会忽略，并记录到Swoole日志，需要开发者try/catch捕获处理
 
         $data = $this->data;
-        Log::info(__CLASS__ . ':handle start', [$data]);
+        Log::channel('daily')->info('Task start'.[$data]);
 
         //流程
         //通知频率 暂时不设置 每3秒通知一次 通知到死
@@ -61,19 +61,20 @@ class TaskController extends Task{
             }
             $data['task_url'] .=$key.'='.$vo;
         }
-        Log::info('http get url '.$data['task_url']);
         $result=$this->httpGet($data['task_url']);
+        $result=json_decode($result,true);
 
-        Log::info('http get '.json_encode($result));
-        if($result['result'] == 1){//成功更换状态
+        //只要请求有正常返回值，不管结果，都退出任务
+        if($result['result'] == 1 || $result['result'] == 0){
+            //成功更换状态
             $this->task_loop = false;
-            Log::info('task success');
+            Log::channel('daily')->info('Task success');
         }
         else{
-            Log::info('task loop');
+            Log::channel('daily')->info('Task  loop');
         }
 
-        //新任务
+        //新任务 入库 等待循环
         if($task_id == 0){
             $data['created_at'] = date('Y-m-d H:i:s');
             $task_id = DB::table('task')->insertGetId($data);
@@ -100,10 +101,10 @@ class TaskController extends Task{
     // 循环投递
     public function finish()
     {
-        Log::info(__CLASS__ . ' finish ');
+        Log::channel('daily')->info('Task finish end');
         if($this->task_loop){
             self::create($this->data);
-            Log::info(__CLASS__ . ':re task', [$this->result]);
+            Log::channel('daily')->info('Task loop retask',[$this->result]);
         }
         else{
             //执行完毕删除
@@ -129,27 +130,5 @@ class TaskController extends Task{
         }
         return Task::deliver($task);
     }
-
-    //通知函数
-    function httpGet($url)
-    {
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_TIMEOUT, 500);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
-
-        curl_setopt($curl, CURLOPT_URL, $url);
-
-//        curl_setopt($curl, CURLOPT_URL, 'http://192.168.201.131/do');
-//        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Host: vpns.com'));
-
-        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1); //如果有跳转 循环跟进
-        $res = curl_exec($curl);
-
-        curl_close($curl);
-        return json_decode($res,true);
-    }
-
 
 }

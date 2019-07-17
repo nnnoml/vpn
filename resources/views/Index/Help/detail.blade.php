@@ -1,5 +1,5 @@
 @extends('Index.app')
-@section('title',$title)
+
 
 @extends('Index.Common.nav_index')
 @extends('Index.Common.right_index')

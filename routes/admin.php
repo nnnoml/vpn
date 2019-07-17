@@ -36,7 +36,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::resource('Product', "\App\Http\Controllers\Admin\Product\ProductController");//产品列表
         Route::resource('ProductHType', "\App\Http\Controllers\Admin\Product\ProductHTypeController");//产品附表
 
-        Route::resource('LogCenter', "\App\Http\Controllers\Admin\LogCenter\LogCenterController");//日志中心查询
+        Route::get('LogCenter', "\App\Http\Controllers\Admin\LogCenter\LogCenterController@index");//日志中心查询
+        Route::post('LogCenter/{isPage}', "\App\Http\Controllers\Admin\LogCenter\LogCenterController@index");//日志中心查询分页
 
         Route::group(['prefix' => 'api'], function () {
             Route::post('upload/{type?}', "\App\Http\Controllers\Common\UploaderController@img");

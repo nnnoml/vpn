@@ -2,26 +2,47 @@
 
 namespace App\Http\Controllers\Admin\Index;
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Common\Common;
 use App\Http\Controllers\Common\Plug\JWT;
-use App\Http\Controllers\Controller;
 use App\Http\Model\SysModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 
-class IndexController extends Controller
+class IndexController extends AdminController
 {
     use Common;
-    private $ret_data;
 
     public function __construct()
     {
+        parent::__construct();
         $this->ret_data['title'] = Config::get('sys_conf.web_title');
-        $this->ret_data['nav'] = '';
-        $this->ret_data['nav2'] = '';
+        $this->ret_data['nav'] = 'conf';
+        $this->ret_data['nav2'] = 'conf';
     }
     public function Index(){
         return view('Admin.Index.index',array_merge($this->ret_data));
+    }
+
+    public function sysConf(Request $request){
+        $data['title'] = $request->input('title','');
+        $data['keywords'] = $request->input('keywords','');
+        $data['description'] = $request->input('description','');
+        $data['qq'] = $request->input('qq','');
+        $data['tel'] = $request->input('tel','');
+        $data['icp'] = $request->input('icp','');
+        $data['comp_name'] = $request->input('comp_name','');
+        $data['comp_address'] = $request->input('comp_address','');
+        $data['wechat'] = $request->input('wechat','');
+        $data['logo'] = $request->input('logo','');
+        $data['logo2'] = $request->input('logo2','');
+        $res = SysModel::setSysConf($data);
+        if($res !==false){
+            return $this->returnJson(1,'success');
+        }
+        else{
+            return $this->returnJson(0,'fail');
+        }
     }
 
     public function changePWD(){

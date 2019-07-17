@@ -202,6 +202,7 @@ trait Common{
      */
     function httpGet($url)
     {
+        Log::channel('daily')->info('httpGET req '.$url);
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_TIMEOUT, 500);
@@ -216,6 +217,7 @@ trait Common{
         curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1); //如果有跳转 循环跟进
         $res = curl_exec($curl);
 
+        Log::channel('daily')->info('httpGET resp '.$res);
         curl_close($curl);
         return $res;
     }

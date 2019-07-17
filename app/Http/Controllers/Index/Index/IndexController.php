@@ -2,20 +2,16 @@
 
 namespace App\Http\Controllers\Index\Index;
 
-
-use App\Http\Controllers\Controller;
 use App\Http\Model\ArticleClassModel;
 use App\Http\Model\ArticleDetailModel;
-use Illuminate\Support\Facades\Config;
 
 
-class IndexController extends Controller
+class IndexController extends \App\Http\Controllers\Index\IndexController
 {
-    private $ret_data;
 
     public function __construct()
     {
-        $this->ret_data['title'] = Config::get('sys_conf.web_title');
+        parent::__construct();
         $this->ret_data['nav'] = '';
     }
     public function Index(){

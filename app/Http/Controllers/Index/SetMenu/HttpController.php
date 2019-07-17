@@ -3,18 +3,19 @@
 namespace App\Http\Controllers\Index\SetMenu;
 
 use App\Http\Controllers\Common\Common;
+use App\Http\Controllers\Index\IndexController;
 use App\Http\Model\ProductHTypeModel;
 use App\Http\Model\ProductModel;
 use App\Http\Controllers\Controller;
 
-class HttpController extends Controller
+class HttpController extends IndexController
 {
     use Common;
-    private $ret_data;
 
     public function __construct()
     {
-        $this->ret_data['title'] = 'http套餐购买';
+        parent::__construct();
+        $this->ret_data['sys_conf']['title'] = 'http套餐购买 '.$this->ret_data['sys_conf']['title'];
         $this->ret_data['nav'] = 'setMenu_http';
     }
 

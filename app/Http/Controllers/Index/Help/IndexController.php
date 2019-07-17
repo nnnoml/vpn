@@ -8,14 +8,15 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Config;
 
-class IndexController extends Controller
+class IndexController extends \App\Http\Controllers\Index\IndexController
 {
-    private $ret_data;
 
     public function __construct()
     {
-        $this->ret_data['title'] = Config::get('sys_conf.web_title');
-        $this->ret_data['nav'] = 'help';
+        parent::__construct();
+        $this->ret_data['sys_conf']['title'] = '使用帮助 '.$this->ret_data['sys_conf']['title'];
+        $this->ret_data['nav'] = 'getIp';
+        $this->ret_data['logo2'] = true;
     }
 
     //新手学堂

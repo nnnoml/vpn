@@ -628,37 +628,37 @@ function modal_forget_submit() {
             }
         })
 }
-
-function setQQModal() {
-    var link="http://q.url.cn/s/gL29h6m?_type=wpa";
-    setTimeout(function(){
-        var modal=$(".service-modal");
-        if(modal.length>0){
-            modal.find(".sem-btn.submit").on("click",function(){
-                window.open(link);
-            });
-            modal.show();
-            setTimeout(function(){
-                modal.addClass("active");
-            },50);
-            modal.find(".close").on("click",function(){
-                modal.removeClass("active");
-                setTimeout(function(){
-                    modal.hide();
-                },300);
-            });
-        }
-        $(".header .nav a").on("click",function(){
-            modal.removeClass("active");
-            setTimeout(function(){
-                modal.hide();
-            },300);
-        });
-    },500);
-
-}
+//
+//function setQQModal() {
+//    var link="http://q.url.cn/s/gL29h6m?_type=wpa";
+//    setTimeout(function(){
+//        var modal=$(".service-modal");
+//        if(modal.length>0){
+//            modal.find(".sem-btn.submit").on("click",function(){
+//                window.open(link);
+//            });
+//            modal.show();
+//            setTimeout(function(){
+//                modal.addClass("active");
+//            },50);
+//            modal.find(".close").on("click",function(){
+//                modal.removeClass("active");
+//                setTimeout(function(){
+//                    modal.hide();
+//                },300);
+//            });
+//        }
+//        $(".header .nav a").on("click",function(){
+//            modal.removeClass("active");
+//            setTimeout(function(){
+//                modal.hide();
+//            },300);
+//        });
+//    },500);
+//
+//}
 $(function(){
-    setQQModal();
+//    setQQModal();
     var referrer = AdGetQueryString('referrer');
     if(referrer) {
         $('#referrer').val(referrer)

@@ -27,7 +27,7 @@ class UploaderController extends Controller
             $ret["code"] = 1;
             $ret["msg"] = '上传文件过大,最大允许1M';
         }
-        else if(!in_array($type,['article','help'])){
+        else if(!in_array($type,['article','help','conf'])){
             $ret["code"] = 1;
             $ret["msg"] = '上传失败 参数错误';
         }

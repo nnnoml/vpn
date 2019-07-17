@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SysModel extends Model
 {
+    public $timestamps = false;
     /**
      * 登陆验证
      * @param $account
@@ -69,5 +70,19 @@ class SysModel extends Model
             $p_id = $self->where('code',$code)->value('id');
         }
         return $self->where('type',$level)->where('parent_id',$p_id)->orderby('id','asc')->get();
+    }
+
+    public static function getSysConf(){
+        $self = new self;
+        $self->table = 'sys_conf';
+        $res = $self->first();
+        return $res;
+    }
+
+    public static function setSysConf($data){
+        $self = new self;
+        $self->table = 'sys_conf';
+        $res = $self->where('id',1)->update($data);
+        return $res;
     }
 }

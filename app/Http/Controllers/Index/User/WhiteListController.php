@@ -8,7 +8,7 @@ use App\Http\Model\UserModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class WhiteListController extends Controller
+class WhiteListController extends \App\Http\Controllers\Index\IndexController
 {
     use Common;
 

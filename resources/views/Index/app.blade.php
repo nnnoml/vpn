@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta charset="utf-8" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title')VPN</title>
+    <title>{{$sys_conf['title']}}</title>
+    <meta name="keywords" content="{{$sys_conf['keywords']}}">
+    <meta name="description" content="{{$sys_conf['description']}}">
 
     <link rel="stylesheet" type="text/css" href="{{asset('index_src/css')}}/common.css" />
     <link rel="stylesheet" type="text/css" href="{{asset('index_src/css')}}/public.css" />

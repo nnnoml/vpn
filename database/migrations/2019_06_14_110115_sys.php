@@ -15,7 +15,18 @@ class Sys extends Migration
     {
         //网站基础配置
         Schema::create('sys_conf', function (Blueprint $table) {
-            $table->timestamps();
+            $table->increments('id')->comment('id');
+            $table->string('title',100)->default('')->comment('网站名称');
+            $table->string('keywords',255)->default('')->comment('网站关键词');
+            $table->string('description',255)->default('')->comment('网站描述');
+            $table->string('qq',50)->default('')->comment('qq');
+            $table->string('tel',15)->default('')->comment('联系方式');
+            $table->string('icp',15)->default('')->comment('icp备案');
+            $table->string('comp_name',255)->default('')->comment('公司名称');
+            $table->string('comp_address',255)->default('')->comment('公司地址');
+            $table->string('logo',255)->default('')->comment('logo 图片');
+            $table->string('logo2',255)->default('')->comment('logo 图片浅色');
+            $table->string('wechat',255)->default('')->comment('微信 图片');
         });
 
         //后台用户

@@ -67,6 +67,12 @@ return [
             'url' => '/upload/help',
         ],
 
+        'img_conf' => [
+            'driver' => 'local',
+            'root' => public_path('upload/conf'),
+            'url' => '/upload/conf',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

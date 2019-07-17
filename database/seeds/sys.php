@@ -23,5 +23,19 @@ class sys extends Seeder
             'status' => 0,
             'created_at' => date('Y-m-d H:i:s')
         ]);
+
+        \Illuminate\Support\Facades\DB::table('sys_conf')->insert([
+            'title' => 'title',
+            'keywords' => 'keywords',
+            'description' => 'description',
+            'qq' => 'qq',
+            'tel' => 'tel',
+            'icp' => 'icp',
+            'comp_name' => 'comp_name',
+            'comp_address' => 'comp_address',
+            'logo' => '/index_src/img/new_index_logo2.png',
+            'logo2' => '/index_src/img/new_index_logo.png',
+            'wechat' => '/index_src/img/weiweiwei.png',
+        ]);
     }
 }

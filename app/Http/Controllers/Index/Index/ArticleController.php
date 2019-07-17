@@ -8,14 +8,14 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Config;
 
-class ArticleController extends Controller
+class ArticleController extends \App\Http\Controllers\Index\IndexController
 {
-    private $ret_data;
 
     public function __construct()
     {
-        $this->ret_data['title'] = Config::get('sys_conf.web_title');
+        $this->ret_data['sys_conf']['title'] = '文档中心 '.$this->ret_data['sys_conf']['title'];
         $this->ret_data['nav'] = '';
+        $this->ret_data['logo2'] = true;
     }
     public function Index(Request $request,$ac_id){
         $page = $request->input('page',1); //页码

@@ -68,8 +68,8 @@
               <p>请使用微信扫描二维码注册<br>“芝麻软件”</p>
             </div> -->
             <div class="mlogin-form">
-                <h4>注册免费试用</h4>
-                <span class="st">注册后联系客服获取免费资格</span>
+                <h4>注册试用</h4>
+                {{--<span class="st">注册后联系客服获取免费资格</span>--}}
                 <form id="modal_footer_reg_form">
                     <div class="form-line"><i class="iconfont">&#xe686;</i><input  placeholder="请输入手机号" name="phone" onkeydown="reg_keydown()"></div>
                     <div class="form-line has-see-btn"><i class="iconfont">&#xe692;</i>

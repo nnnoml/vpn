@@ -15,41 +15,41 @@
     <div style="padding: 15px;">
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
             <legend>{{$title}}</legend>
-            <form class="layui-form" action="">
+            <form class="layui-form" action="" lay-filter="formTest" >
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">本地IP</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="local_ip"  autocomplete="off" class="layui-input">
+                            <input type="text" name="sip" autocomplete="off" class="layui-input">
                         </div>
                         <label class="layui-form-label" style="width:auto;padding:9px 5px;">:</label>
                         <div class="layui-input-inline">
-                            <input style="width:60px;" type="text" name="local_port" autocomplete="off" class="layui-input">
+                            <input style="width:60px;" type="text" name="spt" autocomplete="off" class="layui-input">
                         </div>
                     </div>
 
                     <div class="layui-inline">
                         <label class="layui-form-label">远程IP</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="remote_ip" autocomplete="off" class="layui-input">
+                            <input type="text" name="dip" autocomplete="off" class="layui-input">
                         </div>
                         <label class="layui-form-label" style="width:auto;padding:9px 5px;">:</label>
                         <div class="layui-input-inline">
-                            <input style="width:60px;" type="text" name="remote_port" autocomplete="off" class="layui-input">
+                            <input style="width:60px;" type="text" name="dpt" autocomplete="off" class="layui-input">
                         </div>
                     </div>
 
                     <div class="layui-inline">
                         <label class="layui-form-label">用户名</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="username" autocomplete="off" class="layui-input">
+                            <input type="text" name="uname" autocomplete="off" class="layui-input">
                         </div>
                     </div>
 
                     <div class="layui-block">
                         <label class="layui-form-label" style="color:red;">*日期范围</label>
                         <div class="layui-input-block">
-                            <input type="text" name="data" class="layui-input" lay-verify="required" id="data_between" placeholder=" - ">
+                            <input type="text" name="date" class="layui-input" lay-verify="required" id="date_between" placeholder=" - ">
                         </div>
                     </div>
                 </div>
@@ -64,51 +64,132 @@
 
         </fieldset>
 
-        <div class="layui-form">
-            <table class="layui-table">
-                <colgroup>
-                    <col width="150">
-                    <col width="150">
-                    <col width="200">
-                </colgroup>
-                <thead>
-                <tr>
-                    <th>ip</th>
-                    <th>行为</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach ($list as $key=>$vo)
-                    <tr>
-                        <td>{{$vo['ip']}}</td>
-                        <td>{{$vo['action']}}</td>
-                    </tr>
+        <div class="layui-tab layui-tab-card" >
+            <ul class="layui-tab-title">
+                @foreach($date_list as $key=>$vo)
+                <li @if($loop->index==0) class="layui-this" @endif >{{$vo}}</li>
                 @endforeach
-                </tbody>
-            </table>
+            </ul>
+            <div class="layui-tab-content" >
+                @foreach($res as $key=>$vo)
+                <div class="layui-tab-item @if($loop->index==0)layui-show @endif">
+                    <div class="layui-form">
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="150">
+                                <col width="150">
+                                <col width="200">
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th>用户</th>
+                                <th>客户端ip 端口</th>
+                                <th>远程ip 端口</th>
+                                <th>插入时间</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tbody{{$key}}">
+                            @if(isset($vo['list']))
+                                @foreach ($vo['list'] as $k2=>$v2)
+                                    <tr>
+                                        <td>{{$v2['name']}}</td>
+                                        <td>{{$v2['clientIp']}} （{{$v2['clientPort']}}）</td>
+                                        <td>{{$v2['remoteIp']}} （{{$v2['remotePort']}}）</td>
+                                        <td>{{$v2['insertTime']}}</td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="page{{$key}}"></div>
+                </div>
+                @endforeach
+            </div>
         </div>
+
+
     </div>
 </div>
 
 
 <script>
-layui.use(['form','laydate'], function(){
+var pn = 1;
+var pc = 20;
+layui.use(['form','laydate','laypage'], function(){
    var form = layui.form
-        ,laydate = layui.laydate;
+        ,laydate = layui.laydate
+        ,laypage = layui.laypage;
     //日期时间范围
     laydate.render({
-        elem: '#data_between'
+        elem: '#date_between'
         ,type: 'datetime'
         ,range: true
     });
 
+    form.val("formTest", {
+        "sip": '{{$data['sip']}}'
+        ,"spt": '{{$data['spt']}}'
+        ,"dip": '{{$data['dip']}}'
+        ,"dpt": '{{$data['dpt']}}'
+        ,"date": '{{$date}}'
+    })
+
     form.on('submit(demo1)', function(data){
-    console.log(data);
-        layer.alert(JSON.stringify(data.field), {
-          title: '最终的提交信息'
-        })
+        window.location.href='?sip='+data.field.sip
+        +'&spt='+data.field.spt
+        +'&dip='+data.field.dip
+        +'&dpt='+data.field.dpt
+        +'&uname='+data.field.uname
+        +'&date='+data.field.date
+        +'&pn='+pn
+        +'&pc='+pc;
+
         return false;
     });
+
+@foreach($res as $key=>$vo)
+      laypage.render({
+        elem: 'page{{$key}}'
+        ,count: {{$res[$key]['count']}}
+        ,curr: {{$pn+1}}
+        ,limit:20
+        ,jump: function(obj, first){
+            if(!first){
+            var postData = {};
+            postData.sip = $("input[name='sip']").val();
+            postData.spt = $("input[name='spt']").val();
+            postData.dip = $("input[name='dip']").val();
+            postData.dpt = $("input[name='dpt']").val();
+            postData.uname = $("input[name='uname']").val();
+            postData.date = $("input[name='date']").val();
+            postData.pn = obj.curr;
+            postData.pc = obj.limit;
+
+            ajaxDo('/{{config('sys_conf.admin')}}/LogCenter/isPage','post',postData,function(data){
+                if(data.code==1){
+                    var html = '';
+                    data.info.list.forEach(function(v){
+                        html += '<tr>\
+                            <td>'+v.name+'</td>\
+                            <td>'+v.clientIp+' （'+v.clientPort+'）</td>\
+                            <td>'+v.remoteIp+' （'+v.remotePort+'）</td>\
+                            <td>'+v.insertTime+'</td>\
+                        </tr>';
+                    })
+
+                    $("#tbody{{$key}}").html(html);
+                }
+                else{
+                    layer.msg(data.msg);
+                }
+            })
+            }
+        }
+      });
+@endforeach
+
 });
 </script>
 @endsection

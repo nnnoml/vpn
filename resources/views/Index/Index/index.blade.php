@@ -1,5 +1,4 @@
 @extends('Index.app')
-@section('title',$title)
 
 @extends('Index.Common.nav_index')
 @extends('Index.Common.right_index')
@@ -8,23 +7,6 @@
 @section('main')
     <link rel="stylesheet" type="text/css" href="{{asset('index_src/css')}}/index2.css" />
     <link rel="stylesheet" type="text/css" href="{{asset('index_src/css')}}/iframe_consult.css" />
-
-    <div class="suspend-code" style="display:none">
-        <div class="circle">
-            <div class="code">
-                <i class="iconfont">&#xe63e;</i>
-            </div>
-            <div class="qr-code">
-                <img src= "{{asset('index_src/img')}}/qr-a.png" style="height: 120px;width: 120px;" alt="芝麻软件微信公众号">
-                <span></span>
-            </div>
-        </div>
-        <div class="circle ">
-            <a class="code" href="http://www.zhimaruanjian.com/detail/26.html" target="_blank">
-                <span>VIP</span>
-            </a>
-        </div>
-    </div>
 
     <div class="new-index">
         <!--初始代码-->
@@ -67,7 +49,7 @@
                             <div class="toggle-button-icon"></div>
                         </div>
                         <p class="warning-font">
-                            *芝麻软件仅适用于营销或工作使用, 切勿做违法用途
+                            *本软件仅适用于营销或工作使用, 切勿做违法用途
                         </p>
                     </div>
                 </div>
@@ -94,7 +76,7 @@
                     </div>
                 </div>
                 <div class="maps">
-                    <div class="tips"><a href="/citylist/">覆盖北京，深圳，广州，成都等200+城市<span>&nbsp;&nbsp;》》查看详情</span></a></div>
+                    <div class="tips"><a href="JavaScript:;">覆盖北京，深圳，广州，成都等200+城市</a></div>
                     <ul class="notes">
                         <li class="n-1">已开通</li>
                     </ul>
@@ -210,20 +192,20 @@
     <script type="text/javascript" src="{{asset('index_src/js')}}/inc.js"></script>
 
     <!-- 首页直接 客服弹框-->
-    <div class="service-modal">
-        <div class="modal-main">
-            <div class="sem-top">
-                <span>欢迎使用芝麻软件</span>
-                <button class="close"></button>
-            </div>
-            <div class="sem-body">
-                <h4>立即注册，免费试用</h4>
-                <p>工作时间:&nbsp; 9:00-24:00</p>
-            </div>
-            <div class="sem-bot">
-                <a class="sem-btn submit">确定</a>
-                <a class="sem-btn cancel close">取消</a>
-            </div>
-        </div>
-    </div>
+    {{--<div class="service-modal">--}}
+        {{--<div class="modal-main">--}}
+            {{--<div class="sem-top">--}}
+                {{--<span>欢迎使用芝麻软件</span>--}}
+                {{--<button class="close"></button>--}}
+            {{--</div>--}}
+            {{--<div class="sem-body">--}}
+                {{--<h4>立即注册，免费试用</h4>--}}
+                {{--<p>工作时间:&nbsp; 9:00-24:00</p>--}}
+            {{--</div>--}}
+            {{--<div class="sem-bot">--}}
+                {{--<a class="sem-btn submit">确定</a>--}}
+                {{--<a class="sem-btn cancel close">取消</a>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</div>--}}
 @endsection

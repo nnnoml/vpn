@@ -11,14 +11,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Cookie;
 
-class IndexController extends Controller
+class IndexController extends \App\Http\Controllers\Index\IndexController
 {
     use Common;
-    private $ret_data;
 
     public function __construct()
     {
-        $this->ret_data['title'] = Config::get('sys_conf.web_title');
+        parent::__construct();
+        $this->ret_data['sys_conf']['title'] = '用户中心 '.$this->ret_data['sys_conf']['title'];
         $this->ret_data['nav'] = '';
     }
 

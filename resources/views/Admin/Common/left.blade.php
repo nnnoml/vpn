@@ -4,17 +4,17 @@
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
 
-                <li class="layui-nav-item @if($nav == '') layui-nav-itemed @endif">
-                    <a class="" href="javascript:;">基础配置</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">列表一</a></dd>
-                        <dd><a href="javascript:;">列表二</a></dd>
-                        <dd><a href="javascript:;">列表三</a></dd>
-                        <dd><a href="">超链接</a></dd>
-                    </dl>
-                </li>
+                {{--<li class="layui-nav-item @if($nav == '') layui-nav-itemed @endif">--}}
+                    {{--<a class="" href="javascript:;">基础配置</a>--}}
+                    {{--<dl class="layui-nav-child">--}}
+                        {{--<dd><a href="javascript:;">列表一</a></dd>--}}
+                        {{--<dd><a href="javascript:;">列表二</a></dd>--}}
+                        {{--<dd><a href="javascript:;">列表三</a></dd>--}}
+                        {{--<dd><a href="">超链接</a></dd>--}}
+                    {{--</dl>--}}
+                {{--</li>--}}
 
-                <li class="layui-nav-item @if($nav == 'conf') layui-nav-itemed @endif"><a href="javascript:;">基础配置</a></li>
+                <li class="layui-nav-item @if($nav == 'conf') layui-nav-itemed @endif"><a href="/{{config('sys_conf.admin')}}">基础配置</a></li>
                 <li class="layui-nav-item @if($nav == 'article') layui-nav-itemed @endif">
                     <a href="javascript:;">文章管理</a>
                     <dl class="layui-nav-child">

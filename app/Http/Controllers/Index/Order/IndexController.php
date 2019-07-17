@@ -9,7 +9,7 @@ use App\Http\Model\UserModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class IndexController extends Controller
+class IndexController extends \App\Http\Controllers\Index\IndexController
 {
     use Common;
     public function setOrder(Request $request,$type){

@@ -7,15 +7,16 @@ use App\Http\Model\IpListModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class IndexController extends Controller
+class IndexController extends \App\Http\Controllers\Index\IndexController
 {
     use Common;
-    private $ret_data;
 
     public function __construct()
     {
-        $this->ret_data['title'] = 'ips';
+        parent::__construct();
+        $this->ret_data['sys_conf']['title'] = 'ip列表 '.$this->ret_data['sys_conf']['title'];
         $this->ret_data['nav'] = 'ipList';
+        $this->ret_data['logo2'] = true;
     }
 
     public function Index(Request $request)

@@ -11,14 +11,14 @@ use App\Http\Model\UserModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class IndexController extends Controller
+class IndexController extends \App\Http\Controllers\Index\IndexController
 {
     use Common;
-    private $ret_data;
 
     public function __construct()
     {
-        $this->ret_data['title'] = '获取IP';
+        parent::__construct();
+        $this->ret_data['sys_conf']['title'] = '获取IP '.$this->ret_data['sys_conf']['title'];
         $this->ret_data['nav'] = 'getIp';
     }
 

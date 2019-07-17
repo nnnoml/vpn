@@ -597,57 +597,6 @@ var float_tip = function () {
     }
 }();
 
-
-////翻页函数
-//$.turn_page = function (url, ajaxdiv, ajaxform) {
-//    if (typeof(ajaxform) == "undefined") {
-//        var data = "{}";
-//    } else {
-//        var data = $("#" + ajaxform).serialize();
-//    }
-//
-//    var lineNum = $('#lineNumSelect').val() ? $('#lineNumSelect').val() : 10;
-//    if (url.indexOf('?') > 0) {
-//        url += "&line=" + lineNum;
-//    } else {
-//        url += "?&line=" + lineNum;
-//    }
-//    $.ajax({
-//        type: "POST",
-//        url: url,
-//        data: data,
-//        beforeSend: function () {
-//            //$("#" + ajaxdiv).html($('#loadShadeImg').html());
-//            common.loading_layer();
-//        },
-//        success: function (html) {
-//            $("#" + ajaxdiv).html(html);
-//            common.loading_layer_close();
-//            return false;
-//        }
-//    });
-//};
-
-
-//ajax刷新当前页
-//@param contentid 要被刷新的容器ID
-//@param conditionid 搜索条件的表单ID，没有则传入空
-//@param callback 刷新页面的回调函数（必须，如果数据只有一页的情况）
-//$.trunTocurrenPage = function (contentid, conditionid, callback) {
-//    var url = $('#currenPageId').data('url');
-//    if (typeof(url) === 'undefined' && typeof(callback) === 'function') {
-//        callback();
-//    } else {
-//        $.turn_page(url, contentid, conditionid);
-//    }
-//};
-//
-//$(document).on("keydown", "input[name='verify'],input[name='password'],input[name='re_password']", function (e) {
-//    if (e.keyCode == 13) {
-//        $("input.submit_btn,input.lg-sub,input.login_m_sub").trigger("click");
-//    }
-//});
-
 //弹出全屏窗口
 
 function jsSetCookie(name,value)
