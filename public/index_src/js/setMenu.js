@@ -88,7 +88,7 @@ $(function () {
                     if(data.code == 1){
                         switch (type) {
                             case 'alipay':
-                                window.open($("#money_alipay_url").val() + '?order=' + order);
+                                window.open('/order/alipay/' + data.o_id);
                                 return false;
                                 break;
                             case 'wechat':
@@ -107,7 +107,7 @@ $(function () {
             layer.closeAll();
 
             func.start_scan(o_id);
-            $('.layer_weixin img').attr('src',img_url);
+            $('.layer_weixin img').attr('src','/order/qrCode?url='+img_url);
             layer_weixin();
         },
         //开始扫描

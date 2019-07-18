@@ -34,8 +34,8 @@ class ProductController extends Controller
 
     public function store(Request $request){
         $money = $request->input('money',0)*100;
-        $money_desc = $request->input('money_desc',0)*100;
-        $money_asc = $request->input('money_asc',0)*100;
+        $money_sub = $request->input('money_sub',0)*100;
+        $money_add = $request->input('money_add',0)*100;
         $time_length = $request->input('time_length',0);
         $type = $request->input('type',0);
         $h_type = $request->input('h_type',0);
@@ -44,8 +44,8 @@ class ProductController extends Controller
 
         $rules = [
             'money'=>'integer',
-            'money_desc'=>'integer',
-            'money_asc'=>'integer',
+            'money_sub'=>'integer',
+            'money_add'=>'integer',
             'time_length'=>'integer',
             'type'=>'integer',
             'h_type'=>'integer',
@@ -54,8 +54,8 @@ class ProductController extends Controller
 
         $messages = [
             'money.integer' => '金额异常',
-            'money_desc.integer' => '充值满减异常',
-            'money_asc.integer' => '充值赠送异常',
+            'money_sub.integer' => '充值满减异常',
+            'money_add.integer' => '充值赠送异常',
             'time_length.integer' => '时长异常',
             'type.integer' => '类型异常',
             'h_type.integer' => '按次类型异常',
@@ -67,7 +67,7 @@ class ProductController extends Controller
             return $this->returnJson(0, $v_res['msg']);
         }
         else{
-            $res = ProductModel::add(compact('money','money_desc','money_asc','time_length','type','h_type','on_show','desc'));
+            $res = ProductModel::add(compact('money','money_sub','money_add','time_length','type','h_type','on_show','desc'));
             if($res){
                 return $this->returnJson(1,'新增成功');
             }
@@ -84,8 +84,8 @@ class ProductController extends Controller
 
     public function update(Request $request,$id){
         $money = $request->input('money',0)*100;
-        $money_desc = $request->input('money_desc',0)*100;
-        $money_asc = $request->input('money_asc',0)*100;
+        $money_sub = $request->input('money_sub',0)*100;
+        $money_add = $request->input('money_add',0)*100;
         $time_length = $request->input('time_length',0);
         $type = $request->input('type',0);
         $h_type = $request->input('h_type',0);
@@ -94,8 +94,8 @@ class ProductController extends Controller
 
         $rules = [
             'money'=>'integer',
-            'money_desc'=>'integer',
-            'money_asc'=>'integer',
+            'money_sub'=>'integer',
+            'money_add'=>'integer',
             'time_length'=>'integer',
             'type'=>'integer',
             'h_type'=>'integer',
@@ -104,8 +104,8 @@ class ProductController extends Controller
 
         $messages = [
             'money.integer' => '金额异常',
-            'money_desc.integer' => '充值满减异常',
-            'money_asc.integer' => '充值赠送异常',
+            'money_sub.integer' => '充值满减异常',
+            'money_add.integer' => '充值赠送异常',
             'time_length.integer' => '时长异常',
             'type.integer' => '类型异常',
             'h_type.integer' => '按次类型异常',
@@ -117,7 +117,7 @@ class ProductController extends Controller
             return $this->returnJson(0, $v_res['msg']);
         }
         else{
-            $res = ProductModel::edit($id,compact('money','money_desc','money_asc','time_length','type','h_type','on_show','desc'));
+            $res = ProductModel::edit($id,compact('money','money_sub','money_add','time_length','type','h_type','on_show','desc'));
             if($res){
                 return $this->returnJson(1,'成功');
             }

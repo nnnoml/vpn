@@ -56,10 +56,21 @@ Route::group(['middleware' => 'checkTokenIndex'], function () {
 
 //下订单
     Route::group(['prefix' => 'order'],function(){
-        Route::post('/addOrder/{type}',"\App\Http\Controllers\Index\Order\IndexController@setOrder");
+        Route::post('/addOrder/{type}',"\App\Http\Controllers\Index\Order\IndexController@addOrder");
+
+        Route::get('/alipay/{o_id}',"\App\Http\Controllers\Index\Order\AlipayController@alipay");//支付宝吊起支付页面
+        Route::get('/alipay/notify',"\App\Http\Controllers\Index\Order\AlipayController@notify");//支付宝异步回调
+        Route::get('/alipay/return',"\App\Http\Controllers\Index\Order\AlipayController@return");//支付宝成功回调
+
+        Route::get('/qrCode',"\App\Http\Controllers\Index\Order\IndexController@qrCode"); //生成二维码
+        Route::get('/wechat/notify',"\App\Http\Controllers\Index\Order\WechatController@notify");//微信异步回调
+
         Route::get('/scan/{o_id}',"\App\Http\Controllers\Index\Order\IndexController@scanOrder");
     });
 });
+
+Route::get('/test/{order_no}',"\App\Http\Controllers\Index\Order\IndexController@test");
+
 /**
  * web路由 已登录 过中间件 用户中心
  */

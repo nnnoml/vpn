@@ -202,6 +202,7 @@ trait Common{
      */
     function httpGet($url)
     {
+        $url = str_replace(' ', '%20', $url);
         Log::channel('daily')->info('httpGET req '.$url);
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -251,6 +252,7 @@ trait Common{
      * @return string
      */
     function export_csv($data = [], $header_data = [], $cols = [], $file_name = ''){
+        //laravels 不能使用header TODO
         header('Content-Type: application/octet-stream');
         header('Content-Disposition: attachment; filename=' . $file_name);
 

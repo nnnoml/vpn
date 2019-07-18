@@ -40,7 +40,7 @@ class TaskController extends Task{
         // throw new \Exception('an exception');// handle时抛出的异常上层会忽略，并记录到Swoole日志，需要开发者try/catch捕获处理
 
         $data = $this->data;
-        Log::channel('daily')->info('Task start'.[$data]);
+        Log::channel('daily')->info('Task start'.json_encode($data));
 
         //流程
         //通知频率 暂时不设置 每3秒通知一次 通知到死
@@ -55,6 +55,7 @@ class TaskController extends Task{
         foreach ($params as $key => $vo) {
             if($params_index == 0){
                 $data['task_url'] .= '?';
+                $params_index = 1;
             }
             else{
                 $data['task_url'] .= '&';
@@ -65,7 +66,7 @@ class TaskController extends Task{
         $result=json_decode($result,true);
 
         //只要请求有正常返回值，不管结果，都退出任务
-        if($result['result'] == 1 || $result['result'] == 0){
+        if(isset($result['result']) && ($result['result'] == 1 || $result['result'] == 0)){
             //成功更换状态
             $this->task_loop = false;
             Log::channel('daily')->info('Task success');
@@ -83,7 +84,7 @@ class TaskController extends Task{
         }
         //旧任务
         else{
-            $exists = DB::table('task')->where('task_id',$task_id)->exists();
+            $exists = DB::table('task')->where('task_id',$task_id)->where('is_del',0)->exists();
             //如果任务存在 更新
             if($exists){
                 DB::table('task')->where('task_id',$task_id)->update([
@@ -124,6 +125,7 @@ class TaskController extends Task{
         isset($task_info['task_id']) ? '': $task_info['task_id'] = 0;
 
         $task = new TaskController($task_info);
+
         //非新任务 延迟
         if($task_info['task_id']){
             $task->delay(10);

@@ -3,6 +3,7 @@
 namespace App\Http\Model;
 
 use App\Http\Controllers\Common\Common;
+use App\Http\Controllers\Common\TaskController;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
@@ -62,5 +63,73 @@ class OrderModel extends Model
     //扫描支付结果
     public static function scan($o_id){
         return self::where('o_id',$o_id)->value('pay_status');
+    }
+
+    public static function setOrder($order_no){
+        //其他检测
+        $order_info = self::where('order_no',$order_no)->first();
+        if(!$order_info){
+            return 'order error';
+        }
+        if($order_info->pay_status !=0){
+            return 1;
+        }
+
+        $product_info = ProductModel::where('p_id',$order_info->p_id)->first();
+        if(!$product_info){
+            return 'product error';
+        }
+
+        DB::beginTransaction();
+        self::where('order_no',$order_no)->where('pay_status',0)->update([
+            'pay_status'=>1,
+            'payed_at'=>date('Y-m-d H:i:s'),
+            'updated_at'=>date('Y-m-d H:i:s'),
+        ]);
+
+        //vpn
+        if($product_info->type == 1){
+            //vpn time
+            $real_time_length = time()+$product_info->time_length*$order_info->buy_num;
+            $task_info['task_url'] = config('sys_conf.C_server').'/paybytime';
+            $task_info['task_params'] = json_encode(['uid'=>$order_info->charge_u_id,'endtime'=>$real_time_length]);
+        }
+        else if($product_info->type == 2){
+            $task_info['task_url'] = config('sys_conf.C_server').'/paybycount';
+            $task_info['task_params'] = json_encode(['uid'=>$order_info->charge_u_id,'money'=>$order_info->order_money]);
+        }
+        else{
+            return 'product type error';
+        }
+
+        $ret = TaskController::create($task_info);
+
+        //判断是否投递成功
+        if($ret){
+            DB::commit();
+            return 1;
+        }
+        else{
+            DB::rollBack();
+            return 'task fail';
+        }
+
+
+    }
+
+    //订单详情
+    public static function getOrderInfo($o_id){
+        $self = new self();
+        $self_table = $self->getTable();
+        $product = new ProductModel();
+        $product_table = $product->getTable();
+
+        $res = $self->from("$self_table as o")
+            ->leftJoin("$product_table as p",'p.p_id','o.p_id')
+            ->where('o.o_id',$o_id)
+            ->select('o.*','p.desc')
+            ->first();
+
+        return $res;
     }
 }

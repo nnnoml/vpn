@@ -7,12 +7,14 @@ use App\Http\Controllers\Common\Plug\JWT;
 use App\Http\Model\OrderModel;
 use App\Http\Model\UserModel;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class IndexController extends \App\Http\Controllers\Index\IndexController
 {
     use Common;
-    public function setOrder(Request $request,$type){
+    public function addOrder(Request $request,$type){
+
+        //不同产品类型不同处理方式
         if(!in_array($type,['vpn','http'])){
             return $this->returnJson(0, '接口格式错误');
         }
@@ -31,7 +33,24 @@ class IndexController extends \App\Http\Controllers\Index\IndexController
             }
             $res = OrderModel::addOrder($v_res['data']);
             if (is_numeric($res)) {
-                return $this->returnJson(1, '下单成功', ['o_id' => $res, 'img_url' => 'http://www.baidu.com']);
+                //微信直接下单
+                if($v_res['data']['type'] == 'wechat'){
+
+                    $wechat = new WechatController();
+                    $wechat_res = $wechat->wechat($res);
+                    if($wechat_res->return_code =='SUCCESS'){
+                        return $this->returnJson(1, '下单成功', ['o_id' => $res, 'img_url' => $wechat_res->code_url]);
+                    }
+                    else{
+                        return $this->returnJson(0, 'order verify error');
+                    }
+                }
+                else if($v_res['data']['type'] == 'alipay'){
+                    return $this->returnJson(1, '下单成功', ['o_id' => $res]);
+                }
+                else{
+                    return $this->returnJson(0, 'error pay type');
+                }
             }
             else {
                 return $this->returnJson(0, $res);
@@ -107,6 +126,17 @@ class IndexController extends \App\Http\Controllers\Index\IndexController
         return $ret;
     }
 
+
+    /**
+     * 根据参数生成二维码 微信扫码使用
+     * @param $url
+     * @return mixed
+     */
+    public function qrCode(Request $request){
+        $url = $request->input('url','');
+        return QrCode::format('png')->errorCorrection('H')->size(200)->generate($url);
+    }
+
     /**
      * 扫描订单状态
      * @param $order_no
@@ -119,6 +149,20 @@ class IndexController extends \App\Http\Controllers\Index\IndexController
         }
         else{
             return $this->returnJson(0,'支付未成功');
+        }
+    }
+
+    /**
+     * TODO 假装付款成功
+     * @param $order_no
+     */
+    public function test($order_no){
+        $res = OrderModel::setOrder($order_no);
+        if($res == 1){
+            echo "<br />success";
+        }
+        else{
+            echo "fail".$res;
         }
     }
 }

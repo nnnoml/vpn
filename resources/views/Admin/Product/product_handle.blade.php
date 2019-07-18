@@ -26,14 +26,14 @@
         <div class="layui-form-item">
             <label class="layui-form-label">充值满减</label>
             <div class="layui-input-inline">
-                <input type="text" name="money_desc" lay-verify="required|number" autocomplete="off" class="layui-input" value="0">
+                <input type="text" name="money_sub" lay-verify="number" autocomplete="off" class="layui-input" value="0">
             </div>
             <div class="layui-form-mid layui-word-aux">单位 元</div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">充值赠送</label>
             <div class="layui-input-inline">
-                <input type="text" name="money_asc" lay-verify="required|number" autocomplete="off" class="layui-input" value="0">
+                <input type="text" name="money_add" lay-verify="number" autocomplete="off" class="layui-input" value="0">
             </div>
             <div class="layui-form-mid layui-word-aux">单位 元</div>
         </div>
@@ -41,20 +41,20 @@
         <div class="layui-form-item">
             <label class="layui-form-label">时长</label>
             <div class="layui-input-inline">
-                <input type="text" name="time_length" lay-verify="required|number" autocomplete="off" class="layui-input" value="0">
+                <input type="text" name="time_length" lay-verify="number" autocomplete="off" class="layui-input" value="0">
             </div>
             <div class="layui-form-mid layui-word-aux">单位 秒</div>
         </div>
 
         <div class="layui-form-item">
             <label class="layui-form-label">产品类型</label>
-            <div class="layui-input-block">
-                <input type="radio" name="type" value="1" title="VPN" checked="">
-                <input type="radio" name="type" value="2" title="按次">
+            <div class="layui-input-block" >
+                <input type="radio" name="type" value="1" lay-filter="h_type" title="VPN" checked="">
+                <input type="radio" name="type" value="2" lay-filter="h_type" title="按次">
             </div>
         </div>
 
-        <div class="layui-form-item">
+        <div class="layui-form-item" id="h_type" @if($info['type']==1)style="display:none;" @endif>
             <label class="layui-form-label">按次产品类型</label>
             <div class="layui-input-block">
                 <input type="radio" name="h_type" value="1" title="按次扣次" checked="">
@@ -94,8 +94,8 @@ layui.use(['form'], function(){
     //表单初始赋值
     form.val('edit', {
       "money": '{{$info['money']}}'
-      ,"money_desc": '{{$info['money_desc']}}'
-      ,"money_asc": '{{$info['money_asc']}}'
+      ,"money_sub": '{{$info['money_sub']}}'
+      ,"money_add": '{{$info['money_add']}}'
       ,"time_length": '{{$info['time_length']}}'
       ,"type": '{{$info['type']}}'
       ,"h_type": '{{$info['h_type']}}'
@@ -104,6 +104,14 @@ layui.use(['form'], function(){
     })
   @endif
 
+    form.on('radio(h_type)', function(data){
+        if(data.value==1){
+            $("#h_type").hide();
+        }
+        else{
+            $("#h_type").show();
+        }
+    });
 
   //监听提交
   form.on('submit(submitBtn)', function(data){
