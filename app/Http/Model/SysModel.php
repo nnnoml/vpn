@@ -45,15 +45,35 @@ class SysModel extends Model
     }
 
     /**
+     * 保存验证码 等待验证
      * @param $tel
      * @param $code
-     * @param int $type TODO 预留 短信要增加类型
-     * @return bool
+     * @param int $type 短信类型 1注册，2找回密码
+     * @return mixed
      */
-    public static function checkSmsCode($tel,$code,$type=1){
+    public static function saveSmsCode($tel,$code,$type=0){
         $self = new self;
         $self->table = 'sys_sms_log';
-        $res = $self->where('tel',$tel)->where('code',$code)->where('status',0)->first();
+
+        return $self->insert([
+            'tel'=>$tel,
+            'code'=>$code,
+            'type'=>$type,
+            'status'=>0,
+            'created_at'=>date('Y-m-d H:i:s')
+        ]);
+    }
+
+    /**
+     * @param $tel
+     * @param $code
+     * @param int $type 短信类型 1注册 2找回密码
+     * @return bool
+     */
+    public static function checkSmsCode($tel,$code,$type=0){
+        $self = new self;
+        $self->table = 'sys_sms_log';
+        $res = $self->where('tel',$tel)->where('code',$code)->where('type',$type)->where('status',0)->first();
         if($res){
             return $self->where('id',$res['id'])->where('status',0)->update(['status'=>1,'updated_at'=>date('Y-m-d H:i:s')]);
         }

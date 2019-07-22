@@ -24,25 +24,18 @@
             </h2>
             <div class="content">
                 <p style="line-height: 2em;">
-                    {{$article['main']['content']}}
+                    {!! $article['main']['content'] !!}
                 </p>
             </div>
             {{--<a class="list">换IP地址</a>--}}
             {{--<a class="list">芝麻IP</a>--}}
             {{--<a class="list">Python爬虫</a>--}}
             <div class="next">
-                <!---->
-                <!--<a><span>上一篇</span>没有了</a>-->
-                <!---->
-                {{--<a href="/syjq/6269.html"><span>下一篇</span>如何解决爬虫的IP地址受限问题?                <i>爬虫</i>--}}
-                    {{--<i>ip受限</i>--}}
-                    {{--<i>芝麻代理</i>--}}
-                {{--</a>--}}
             </div>
             <div class="code">
-                <img src="http://md-juhe.oss-cn-hangzhou.aliyuncs.com/c76afc9022c8404930c45384f45a8ca6.png" class="left" alt="">
+                <img src="{{$sys_conf['wechat']}}" class="left" alt="">
                 <div class="right">
-                    更多内容，请关注微信号：<span>zhimadaili</span><br>
+                    更多内容，请关注微信号：<span>....</span><br>
                     官网活动和优惠券都在这里<br>
                     联系客服惊喜不断哦！
                 </div>

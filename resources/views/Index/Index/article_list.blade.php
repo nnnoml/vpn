@@ -1,6 +1,5 @@
 @extends('Index.app')
 
-
 @extends('Index.Common.nav_index')
 @extends('Index.Common.right_index')
 @extends('Index.Common.foot_index')
@@ -27,7 +26,7 @@
                             <a class="titles-h1" href="/article/{{$article['self']['ac_id']}}/{{$vo['id']}}"><h2>{{$vo['title']}}</h2></a>
                             <p>发布时间 {{$vo['created_at']}} </p>
                         </div>
-                        <div class="subtitle">{{$vo['content']}}</div>
+                        <div class="subtitle">{{substr(strip_tags($vo['content']),0,100)}}</div>
                     </div>
                 @endforeach
 

@@ -16,9 +16,14 @@
  */
 Route::group(['prefix' => 'admin'], function () {
     //未登陆路由
-    Route::get('login', "\App\Http\Controllers\Admin\Login\IndexController@login");
+    Route::get('login', "\App\Http\Controllers\Admin\Login\LoginController@login");
     Route::group(['prefix' => 'api'], function () {
-        Route::post('loginDo', "\App\Http\Controllers\Admin\Login\IndexController@loginDo");
+        Route::post('loginDo', "\App\Http\Controllers\Admin\Login\LoginController@loginDo");
+        Route::group(['middleware'=>'login.admin'],function(){
+            Route::post('upload/{type?}', "\App\Http\Controllers\Common\UploaderController@img");
+            Route::post('sysConf', "\App\Http\Controllers\Admin\Index\IndexController@sysConf");
+            Route::post('changePWD', "\App\Http\Controllers\Admin\Index\IndexController@changePWDDo");
+        });
     });
 
     //已登录路由 中间件
@@ -39,10 +44,5 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('LogCenter', "\App\Http\Controllers\Admin\LogCenter\LogCenterController@index");//日志中心查询
         Route::post('LogCenter/{isPage}', "\App\Http\Controllers\Admin\LogCenter\LogCenterController@index");//日志中心查询分页
 
-        Route::group(['prefix' => 'api'], function () {
-            Route::post('upload/{type?}', "\App\Http\Controllers\Common\UploaderController@img");
-            Route::post('sysConf', "\App\Http\Controllers\Admin\Index\IndexController@sysConf");
-            Route::post('changePWD', "\App\Http\Controllers\Admin\Index\IndexController@changePWDDo");
-        });
     });
 });

@@ -51,14 +51,14 @@
                     {{--</div>--}}
                     {{--<a>感谢您的评分！若您有还有其他意见和建议，欢迎在评论区留言，我们会努力做得更好！</a>--}}
                 {{--</div>--}}
-                <div class="zskf">
-                    <div class="name">
-                        魏经理
-                    </div>
-                    <span class="qq">2781589383</span>
-                    <span class="tell">18905201785</span>
-                    <img src="http://webapi.apehorse.com/static/kefu/weiweiwei.png" alt="">
-                </div>
+                {{--<div class="zskf">--}}
+                    {{--<div class="name">--}}
+                        {{--魏经理--}}
+                    {{--</div>--}}
+                    {{--<span class="qq">2781589383</span>--}}
+                    {{--<span class="tell">18905201785</span>--}}
+                    {{--<img src="http://webapi.apehorse.com/static/kefu/weiweiwei.png" alt="">--}}
+                {{--</div>--}}
                 {{--<form id="comment_form">--}}
                     {{--<div class="feedback-area">--}}
                         {{--<div class="title">--}}

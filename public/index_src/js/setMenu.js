@@ -121,7 +121,7 @@ $(function () {
                         $('.layer_weixin').fadeOut();
                         layer.msg('充值成功',{icon:1});
                         setTimeout(function () {
-                            location.href='/user/'
+                            location.href='/user'
                         },2000)
                     }
                 })

@@ -7,6 +7,7 @@ use App\Http\Model\SysModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Qcloud\Sms\SmsSingleSender;
 
 trait Common{
     /**
@@ -195,6 +196,40 @@ trait Common{
         return $output;
     }
 
+    function sendSms($tel,$type,$code){
+        //TODO
+        return true;
+        // 短信应用SDK AppID
+        $appid = 140000; // 1400开头
+        // 短信应用SDK AppKey
+        $appkey = "ddddaaaa";
+        // 短信模板ID，需要在短信应用中申请
+        //        $templateId = 123;  // NOTE: 这里的模板ID`7839`只是一个示例，真实的模板ID需要在短信控制台中申请
+        //        $smsSign = "123"; // NOTE: 这里的签名只是示例，请使用真实的已申请的签名，签名参数使用的是`签名内容`，而不是`签名ID`
+        $content = '【112】';
+        switch($type){
+            case(1) : $content.=' 注册模板'.$code;break;
+            case(2) : $content.=' 找回密码模板'.$code;break;
+        }
+        $content = '【112】'.$content;
+        try {
+            $ssender = new SmsSingleSender($appid, $appkey);
+            $result = $ssender->send(0, "86", $tel, $content, "", "");
+            $rsp = json_decode($result);
+
+            if($rsp->errmsg=='OK'){
+//                saveLog("../storage/logs/PhoneSms_".date("Ymd").".log",'success time:'.date('Y-m-d H:i:s').PHP_EOL.'tel:'.$tel.PHP_EOL.'content:'.$content);
+                return true;
+            }
+            else{
+//                saveLog("../storage/logs/PhoneSms_".date("Ymd").".log",'fail time:'.date('Y-m-d H:i:s').PHP_EOL.'tel:'.$tel.PHP_EOL.'content:'.$content.PHP_EOL.'res:'.json_encode($rsp));
+                return false;
+            }
+        } catch(\Exception $e) {
+            var_dump($e);
+            return false;
+        }
+    }
     /**
      * http get 请求
      * @param $url
@@ -252,12 +287,9 @@ trait Common{
      * @return string
      */
     function export_csv($data = [], $header_data = [], $cols = [], $file_name = ''){
-        //laravels 不能使用header TODO
-        header('Content-Type: application/octet-stream');
-        header('Content-Disposition: attachment; filename=' . $file_name);
-
+        $res = '';
         if (!empty($header_data)) {
-            echo iconv('utf-8','gbk//TRANSLIT','"'.implode('","',$header_data).'"'."\n");
+            $res = iconv('utf-8','gbk//TRANSLIT','"'.implode('","',$header_data).'"'."\n");
         }
 
         $columns = count($cols);
@@ -267,11 +299,14 @@ trait Common{
             if($columns > 0){
                 for($i=0;$i<$columns;$i++){
                     $key = $cols[$i];
-                    $output[] = $value->$key;
+                    $output[] = $value[$key];
                 }
             }
-            echo iconv('utf-8','gbk//TRANSLIT','"'.implode('","', $output).'"'."\n");
+            $res .= iconv('utf-8','gbk//TRANSLIT','"'.implode('","', $output).'"'."\n");
         }
+        return response()->make($res,200,['Content-Type'=>'application/octet-stream','Content-Disposition'=>'attachment; filename=' . $file_name]);
+//        return response()->json(['data'=>time()])->setContent($res)->header('Content-Type','application/octet-stream')->header('Content-Disposition','attachment; filename=' . $file_name);
+
     }
 
     //数组转对象
@@ -279,7 +314,7 @@ trait Common{
         if( gettype($e)!='array' ) return;
         foreach($e as $k=>$v){
             if( gettype($v)=='array' || getType($v)=='object' )
-                $e[$k]=(object)arrayToObject($v);
+                $e[$k]=(object)$this->arrayToObject($v);
         }
         return (object)$e;
     }

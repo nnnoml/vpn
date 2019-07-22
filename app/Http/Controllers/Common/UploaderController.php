@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 class UploaderController extends Controller
 {
-    //TODO 整体过滤没做
-
     //{
     //    "code": 0 //0表示成功，其它失败
     //    ,"msg": "" //提示信息 //一般上传失败后返回

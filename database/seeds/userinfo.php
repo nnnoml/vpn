@@ -14,7 +14,9 @@ class userinfo extends Seeder
     {
         \Illuminate\Support\Facades\DB::table('user')->insert([
             'account'=>'13111111111',
+            'appkey'=>'asdfasdfasdf123',
             'pwd'=>$this->rc4('123456'),
+            'created_at'=>date('Y-m-d H:i:s'),
         ]);
     }
 }

@@ -22,11 +22,9 @@ $(function() {
     })
 })
 
-var search_word = '';
-
 $(function () {
     function new_page() {
-        search_word = $('#search_word').val();
+        var search_word = $('#search_word').val();
         window.location.href='/ipList?key='+search_word;
     }
 
@@ -34,6 +32,7 @@ $(function () {
         new_page()
     })
     $(document).on('click','#export',function () {
+        var search_word = $('#search_word').val();
         window.open('/ipList?key='+search_word+'&export=1')
     })
 });

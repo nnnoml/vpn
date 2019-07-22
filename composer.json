@@ -13,6 +13,7 @@
         "laravel/tinker": "^1.0",
         "mews/captcha": "^2.2",
         "overtrue/laravel-wechat": "~4.0",
+        "qcloudsms/qcloudsms_php": "^0.1.4",
         "simplesoftwareio/simple-qrcode": "^2.0",
         "yansongda/laravel-pay": "^2.0"
     },

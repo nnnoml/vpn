@@ -98,7 +98,7 @@
                         @foreach($h_type_list as $key=>$vo)
                         <label>
                             <input type="radio" name="time_select" value="{{$vo['h_type_id']}}"@if($loop->index ==0) checked="checked" @endif>
-                            <i class="radios"></i>{{$vo['start_second_format']}}至{{$vo['end_second_format']}}【{{$vo['price']/100}}芝麻币/个】
+                            <i class="radios"></i>{{$vo['start_second_format']}}至{{$vo['end_second_format']}}【{{$vo['price']/100}}元/个】
                         </label>
                         @endforeach
                         <a href="/help" target="_blank" class="more">了解更多&gt;</a>
@@ -441,11 +441,7 @@
                     <span>* 生成API链接，调用HTTP GET请求即可返回所需的IP结果</span>
                     <span>* 可以直接按照以下格式组装所需的API链接:<a class="link">https.com/getip/num/10/type/2/pro/0/city/0/port/1/time/1/yys/0</a></span>
                     <span>* 获取余额接口:</span>
-                    <span class="balance_api">web.http.cnapi.cc/index/index/get_my_balance?neek=XX&amp;appkey=XX</span>
-                    <span>* 添加白名单接口:</span>
-                    <span class="white_api">web.http.cnapi.cc/index/index/save_white?neek=XX&amp;appkey=XX&amp;white=您的ip</span>
-                    <span>* 删除白名单接口:</span>
-                    <span class="white_del">web.http.cnapi.cc/index/index/del_white?neek=XX&amp;appkey=XX&amp;white=您的ip</span>
+                    <span class="balance_api">web.http.11vpn.com/api/getMoney?appkey=xxx</span>
                 </p>
             </div>
 

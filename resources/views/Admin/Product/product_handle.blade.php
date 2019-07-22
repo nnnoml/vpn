@@ -72,7 +72,7 @@
         </div>
 
         <div class="layui-form-item layui-form-text">
-            <label class="layui-form-label">描述</label>
+            <label class="layui-form-label">描述(产品名称)</label>
             <div class="layui-input-block">
                 <textarea name="desc" id="textEditor" placeholder="请输入内容" class="layui-textarea"></textarea>
             </div>

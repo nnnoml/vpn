@@ -18,7 +18,7 @@
     <aside class="uc-aside">
         <div id="user_info">
             <div class="user-info" style="display: block">
-                <img src="{{asset('index_src/img')}}/no_pic.jpg" class="ava">
+                <img src="{{asset('index_src/img')}}/no_pic.png" class="ava">
                 <a class="user-name" >{{$info['account']}}</a>
                 <span class="user-label vip">
                     <img src="{{asset('index_src/img')}}/basics-vip.png" alt="">基础vip

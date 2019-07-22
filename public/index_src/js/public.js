@@ -426,11 +426,14 @@ function modal_get_phone_code(verify,obj_1) {
     }
     var url = '/user/sms';
 
-    ajaxDo(url,'post',{'tel':phone,verify: verify},function(data){
+    ajaxDo(url,'post',{'tel':phone,verify: verify,'type':1},function(data){
         if(data['code'] == 1){
              layer.msg("获取短信验证码成功!", {icon: 1});
              obj_1.find(".modal_verify_reg").trigger('click');
              modal_time_clock(obj_1);
+        }
+        else{
+             layer.msg(data.msg, {icon: 2});
         }
     })
     var reg = "reg";
@@ -494,7 +497,7 @@ function modal_get_code(verify) {
             return;
         }
         var url = '/user/sms';
-        ajaxDo(url,'POST',{'phone':num,'verify':verify},function(data){
+        ajaxDo(url,'POST',{'tel':num,'verify':verify,'type':2},function(data){
             if(data['code'] == 1){
                 layer.msg("获取短信验证码成功", {icon: 1});
                 modal_time_clock($('.footer_modal_forget'));

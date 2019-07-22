@@ -58,7 +58,7 @@ class UserModel extends Model
         $res['msg'] = '';
 
         DB::beginTransaction();
-        $check_sms = SysModel::checkSmsCode($data['account'],$data['sms_code']);
+        $check_sms = SysModel::checkSmsCode($data['account'],$data['sms_code'],1);
         if($check_sms!==false){
             if(!self::where('account',$data['account'])->exists()){
                 unset($data['sms_code']);
@@ -99,7 +99,7 @@ class UserModel extends Model
     }
 
     /**
-     * 未登陆修改密码
+     * 未登陆找回密码
      * @param $data
      * @return mixed
      */
@@ -109,7 +109,7 @@ class UserModel extends Model
         $res['msg'] = '';
 
         DB::beginTransaction();
-        $check_sms = SysModel::checkSmsCode($data['account'],$data['sms_code']);
+        $check_sms = SysModel::checkSmsCode($data['account'],$data['sms_code'],2);
         if($check_sms!==false){
             $user_info = self::where('account',$data['account'])->first();
             if($user_info){

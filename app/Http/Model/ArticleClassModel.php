@@ -128,7 +128,7 @@ class ArticleClassModel extends Model
             ->where('d.on_show',1)
             ->where('d.is_del',0)
             ->select('d.*','c.ac_name')
-            ->first()->toArray();
+            ->first();
 
         $act_list = self::where('is_del',0)->select('ac_id','ac_name')->get()->toArray();
 

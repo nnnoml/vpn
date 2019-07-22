@@ -10,13 +10,13 @@
     <link rel="stylesheet" type="text/css" href="{{asset('index_src/css')}}/iframe_consult.css" />
     <link rel="stylesheet" type="text/css" href="{{asset('index_src/css')}}/http_setmenu.css" />
     <div class="content">
-        <ul class="ul-1 list3">
+        {{--<ul class="ul-1 list3">--}}
 
-            <li id="recharge" class="active">
-                按次购买
-                <i class="iconfont"></i>
-                <span class="pro">包月/按次质量都是独享优质IP，质量上没有区别。<br>按次：使用起来更加灵活，余额没有到期时间，不受时间限制。</span>
-            </li>
+            {{--<li id="recharge" class="active">--}}
+                {{--按次购买--}}
+                {{--<i class="iconfont"></i>--}}
+                {{--<span class="pro">包月/按次质量都是独享优质IP，质量上没有区别。<br>按次：使用起来更加灵活，余额没有到期时间，不受时间限制。</span>--}}
+            {{--</li>--}}
 
             {{--<li id="buy_week">--}}
                 {{--包周套餐--}}
@@ -33,8 +33,9 @@
                 {{--<i class="iconfont"></i>--}}
                 {{--<span class="pro">高质量长效IP，存活时间超过24小时，有效期内不限使用次数，可灵活续费使用。</span>--}}
             {{--</li>--}}
-            <li class="move"></li>
-        </ul>
+            {{--<li class="move"></li>--}}
+        {{--</ul>--}}
+        <div style="height:50px;"></div>
         <div class="pay_list">
             <ul style="display:block">
                 @foreach($list as $key=>$vo)

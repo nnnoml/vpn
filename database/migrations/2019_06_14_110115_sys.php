@@ -34,6 +34,7 @@ class Sys extends Migration
             $table->increments('id')->comment('id');
             $table->string('tel',15)->default('')->comment('手机号');
             $table->string('code',6)->default('')->comment('验证码');
+            $table->unsignedTinyInteger('type')->default('0')->comment('短信类型 0未知，1注册，2找回密码');
             $table->unsignedTinyInteger('status')->default(0)->comment('是否使用 0未使用  1已使用');
             $table->timestamps();
         });

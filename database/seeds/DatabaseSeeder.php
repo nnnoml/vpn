@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(product::class);
         $this->call(sys::class);
         $this->call(order::class);
+        $this->call(articleAndHelp::class);
     }
 }

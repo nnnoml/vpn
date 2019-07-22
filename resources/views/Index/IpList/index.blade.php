@@ -23,7 +23,7 @@
                             {{--<li class="hot1">搜索热词：</li><li class="hot_words">淮南</li><li class="hot_words">南通</li><li class="hot_words">广州</li><li class="hot_words">宁波</li><li class="hot_words">普洱</li>--}}
                         {{--</ul>--}}
                     </div>
-                    {{--<a href="javascript:;" class="export" id="export">导出Excel</a>--}}
+                    <a href="javascript:;" class="export" id="export">导出Excel</a>
                 </div>
             </div>
         </div>

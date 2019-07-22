@@ -69,7 +69,7 @@ class IndexController extends AdminController
                 }
                 else{
                     if($res!==false){
-                        $login = new \App\Http\Controllers\Admin\Login\IndexController();
+                        $login = new \App\Http\Controllers\Admin\Login\LoginController();
                         $login->loginOut();
                         return $this->returnJson(1,'成功');
                     }

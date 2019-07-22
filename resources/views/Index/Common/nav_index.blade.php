@@ -2,9 +2,11 @@
 <header class="header bg">
     <a class="new-logo seo_logo_base" href="/">
         @if(isset($logo2))
-            <img style="width: 260px;height: 48px;" src="{{$sys_conf['logo2']}}" />
+            {{--light--}}
+            <img src="{{$sys_conf['logo2']}}" />
         @else
-            <img style="width: 260px;height: 48px;" src="{{$sys_conf['logo']}}" />
+            {{--dark--}}
+            <img src="{{$sys_conf['logo']}}" />
         @endif
     </a>
     <ul class="nav">

@@ -65,4 +65,8 @@ class HelpDetailModel extends Model
         }
         return $ret;
     }
+
+    public static function addCount($id){
+        self::where('id',$id)->increment('view_count');
+    }
 }

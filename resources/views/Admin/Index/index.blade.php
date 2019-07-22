@@ -5,9 +5,7 @@
 @extends('Admin.Common.left')
 @extends('Admin.Common.foot')
 @section('body')
-    <style>
-        .layui-upload-img{width: 92px; height: 92px; margin: 0 10px 10px 0;}
-    </style>
+
     <div class="layui-body">
         <!-- 内容主体区域 -->
         <div style="padding: 15px;">
@@ -75,18 +73,18 @@
                     </div>
                 </div>
                 <div class="layui-upload" style="margin-left:100px;">
-                    <button type="button" class="layui-btn" id="test3">网站logo 260*48</button>
+                    <button type="button" class="layui-btn" id="test3">网站logo</button>
                     <div style="width:105px;height:88px" class="layui-upload-list">
-                        <img class="layui-upload-img" style="width:260px;height:48px;" id="demo3" src="{{$sys_conf->logo}}">
+                        <img class="layui-upload-img" id="demo3" src="{{$sys_conf->logo}}">
                         <input name="logo" type="hidden" value="{{$sys_conf->logo}}" />
                         <p id="demoText3"></p>
                     </div>
                 </div>
 
                 <div class="layui-upload" style="margin-left:100px;">
-                    <button type="button" class="layui-btn" id="test4">网站透明logo 260*48</button>
+                    <button type="button" class="layui-btn" id="test4">网站透明log</button>
                     <div class="layui-upload-list" >
-                        <img class="layui-upload-img" style="width:260px;height:48px;background:#afafaf" id="demo4" src="{{$sys_conf->logo2}}">
+                        <img class="layui-upload-img" style="background:#afafaf" id="demo4" src="{{$sys_conf->logo2}}">
                         <input name="logo2" type="hidden" value="{{$sys_conf->logo2}}" />
                         <p id="demoText4"></p>
                     </div>

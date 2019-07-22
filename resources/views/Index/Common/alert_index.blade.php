@@ -99,7 +99,7 @@
                         <i class="iconfont">&#xe639;</i>
                         <span class="agree">我同意</span>
                     </label>
-                    <a class="agree_open" href="/aggrement.html" target="_blank">《芝麻软件用户注册协议》</a>
+                    <a class="agree_open" href="/aggrement.html" target="_blank">《11VPN软件用户注册协议》</a>
                 </div>
                 <p class="tip">已有账号? <a class="login_modal">立即登录</a></p>
             </div>

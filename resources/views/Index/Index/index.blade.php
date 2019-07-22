@@ -88,7 +88,7 @@
         <div class="page-common page-tech">
             <div class="page-area-body page-com-body">
                 <h4>值得信赖的技术服务</h4>
-                <p>芝麻提供的高级模式，以专用私有技术，带给您从未有过的极速畅快体验</p>
+                <p>11VPN提供的高级模式，以专用私有技术，带给您从未有过的极速畅快体验</p>
                 <div class="page-tech-contain">
                     <div class="item">
                         <h4><span>用户独享宽带</span><i class="iconfont">&#xe656;</i></h4>
@@ -97,7 +97,7 @@
                     </div>
                     <div class="item">
                         <h4><span>高质量出口</span><i class="iconfont">&#xe657;</i></h4>
-                        <p>芝麻大数据IP下达系统均为自有机房<br/>
+                        <p>11VPN大数据IP下达系统均为自有机房<br/>
                             数万独拨线路，7*24小时不间断供应IP</p>
                     </div>
                     <div class="item">
@@ -175,7 +175,7 @@
                             <div class="warp c{{$loop->index+1}}"  @if($loop->index+1 != 1) style="display:none" @endif>
                                 @foreach($vo['list'] as $key2=>$vo2)
                                     <p class="news-link">
-                                        <span>{{$vo2['created_at']}}</span>
+                                        <span>{{date('Y-m-d',strtotime($vo2['created_at']))}}</span>
                                         <a href="./article/{{$vo2['ac_id']}}/{{$vo2['id']}}" target="_blank">{{$vo2['title']}}</a>
                                     </p>
                                 @endforeach

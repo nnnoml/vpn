@@ -46,8 +46,7 @@ $(function () {
                 if(data.code ==1){
                     switch (type) {
                         case 'alipay':
-                            window.open($("#money_alipay_url").val() + '?order=' + order);
-                            return false;
+                            window.open('/order/alipay/' + data.o_id);
                             break;
                         case 'wechat':
                             func.wechat_pay(data.img_url,data.o_id);
@@ -65,7 +64,7 @@ $(function () {
         wechat_pay: function (img_url,o_id) {
             layer.closeAll();
             func.start_scan(o_id);
-            layer.confirm('请用微信扫描支付<br /><img style="width: 200px;height: 200px;" src="' + img_url + '" />', {
+            layer.confirm('请用微信扫描支付<br /><img style="width: 200px;height: 200px;" src="/order/qrCode?url=' + img_url + '" />', {
                 title: false, btn: false, cancel: function () {
                     func.stop_scan();
                 }

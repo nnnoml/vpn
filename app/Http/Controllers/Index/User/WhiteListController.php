@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Index\User;
 
 use App\Http\Controllers\Common\Common;
 use App\Http\Controllers\Common\Plug\JWT;
+use App\Http\Controllers\Index\IndexController;
 use App\Http\Model\UserModel;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-class WhiteListController extends \App\Http\Controllers\Index\IndexController
+class WhiteListController extends IndexController
 {
     use Common;
 
