@@ -40,8 +40,8 @@
                     </div>
                     @foreach($list as $key=>$vo)
                     <div class="table-tr">
-                        <div class="table-td td-1">{{$vo['vpn_province']}}</div>
-                        <div class="table-td td-1">{{$vo['vpn_city']}}</div>
+                        <div class="table-td td-1">{{$vo['vpn_province_format']}}</div>
+                        <div class="table-td td-1">{{$vo['vpn_city_format']}}</div>
                         <div class="table-td td-1">{{$vo['vpn_operator']}}</div>
                         <div class="table-td td-1">{{$vo['vpn_protocol']}}</div>
                         <div class="table-td td-1">

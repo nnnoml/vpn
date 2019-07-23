@@ -61,40 +61,8 @@ $(function(){
                 $(".header").removeClass("active").addClass("year_header");
             }
 
-            // 下滑滚动
-            // if(scroll_lock){
-            //     c_st=st;
-            //     e.preventDefault();
-            //     e.stopPropagation();
-            //     return false;
-            // }else{
-            //     if(st<wh&&st>0&&st>c_st&&!scroll_lock){
-            //         _b.animate({scrollTop:wh},400);
-            //         scroll_lock=1;
-            //         clearTimeout(lock_timer);
-            //         lock_timer=setTimeout(function(){
-            //             scroll_lock=0;
-            //         },400);
-            //     }
-            //     if(st<wh&&st<c_st&&!scroll_lock){
-            //         _b.animate({scrollTop:0},400);
-            //         scroll_lock=1;
-            //         clearTimeout(lock_timer);
-            //         lock_timer=setTimeout(function(){
-            //             scroll_lock=0;
-            //
-            //         },400);
-            //     }
-            // }
-            // c_st=st;
         });
-        _w.on("mousewheel",function(e){
-            // if(scroll_lock){
-            //     e.preventDefault();
-            //     e.stopPropagation();
-            //     return false;
-            // }
-        });
+        _w.on("mousewheel",function(e){});
     }
     function set_mh() {
         switch_animation(".first-page",0,"page-active","show-active");
@@ -261,45 +229,6 @@ function KeyDown()
 (function($)  {
     //code here
 })(jQuery);
-
-// 313 半年活动
-$(function() {
-
-  $(document).on("click",".year-close",function(e) {
-
-    $(".half-a-year").addClass("active");
-    $(".header").removeClass("year_header");
-      event.stopPropagation();
-
-
-      $(".header").removeClass("year_header");
-      e.preventDefault();
-      $(".two-year").removeClass("show").fadeOut();
-  });
-
-    $(document).on("click",".half-a-year",function () {
-        window.open('/pay/?type=activity');
-    });
-
-    function init(time) {
-        if(!/^\d+$/.test(time)){
-            return false;
-        }
-
-        var dom = $(".count-down .time_out");
-        var time_out = setInterval(function () {
-            dom.html(time);
-            time = time - 1;
-            if(time<0){
-                clearInterval(time_out);
-                $(".half-a-year").addClass("active");
-                $(".header").removeClass("year_header");
-            }
-        },1000)
-    }
-
-    init(5);
-});
 /*右侧通知*/
 
 info();

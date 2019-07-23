@@ -37,7 +37,7 @@ class LoginAdmin
             return $this->returnJson(401,'Unauthorized');
         }
         else{
-            return redirect()->action('\App\Http\Controllers\Admin\Login\IndexController@login');
+            return redirect()->action('\App\Http\Controllers\Admin\Login\LoginController@login');
 //            abort(401,'Unauthorized');
         }
     }

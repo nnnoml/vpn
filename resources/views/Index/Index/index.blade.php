@@ -189,7 +189,6 @@
 
     <script type="text/javascript" src="{{asset('index_src/js')}}/index2.js"></script>
     <script type="text/javascript" src="{{asset('index_src/js')}}/dynamics.min.js"></script>
-    <script type="text/javascript" src="{{asset('index_src/js')}}/inc.js"></script>
 
     <!-- 首页直接 客服弹框-->
     {{--<div class="service-modal">--}}

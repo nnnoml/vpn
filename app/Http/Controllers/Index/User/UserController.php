@@ -19,7 +19,7 @@ class UserController extends IndexController
     {
         parent::__construct();
         $this->ret_data['sys_conf']['title'] = '用户中心 '.$this->ret_data['sys_conf']['title'];
-        $this->ret_data['nav'] = '';
+        $this->ret_data['nav'] = 'user';
     }
 
     public function Index(Request $request){

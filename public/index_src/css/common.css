@@ -249,7 +249,7 @@ a:hover { color: #999; }
 .right-customer .small-blue { display: block; box-sizing: border-box; width: 44px; height: 125px; background-color: #3899FF; color: #fff; padding: 40px 10px 0; line-height: 18px; cursor: pointer; position: relative; }
 .right-customer .small-blue:before { content: ""; display: block; width: 44px; height: 40px; background: url(../img/contact.png) no-repeat center; position: absolute; left: 0; top: 0; }
 
-.left-content { display: none; box-sizing: border-box; width: 240px; padding: 15px 15px 10px; border: 1px solid #D8D8D8; position: absolute; right: 60px; top: 0; background-color: #fff; z-index: 99; border-radius: 2px; }
+.left-content { display: none; box-sizing: border-box; width: 240px; padding: 15px 15px 10px; border: 1px solid #D8D8D8; position: absolute; right: 44px; top: 0; background-color: #fff; z-index: 99; border-radius: 2px; }
 .left-content .btn-close { color: #898989; position: absolute; right: 15px; top: 8px; cursor: pointer; }
 .left-content .btn-close:hover { color: #333; }
 .left-content .item { display: block; box-sizing: border-box; width: 100%; height: 60px; border-bottom: 1px solid #EFEFEF; color: #333; padding: 12px 0 0 50px; font-size: 12px; text-align: left; background: url("../img/icon-left.png") no-repeat; }

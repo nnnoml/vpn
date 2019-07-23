@@ -325,8 +325,8 @@ trait Common{
     }
 
     //获得城市
-    function getCity($p_id){
-        return SysModel::getArea(2,$p_id);
+    function getCity($code){
+        return SysModel::getArea(2,$code);
     }
 
 }

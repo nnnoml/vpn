@@ -566,6 +566,7 @@
 
 
      form.on('select(province)', function(data){
+       if(data.value == '' || data.value == undefined) return;
        $("select[name='city']").html('');
        form.render();
        ajaxDo('/getIP/city/'+data.value,'get',{},function(data){
