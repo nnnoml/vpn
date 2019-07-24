@@ -64,6 +64,7 @@ class UserModel extends Model
                 unset($data['sms_code']);
                 $data['created_at'] = date('Y-m-d H:i:s');
                 $u_id = self::insertGetId($data);
+                DB::commit();
                 if($u_id){
                     //task通知C
                     $task_info['task_url'] = config('sys_conf.C_server').'/loaduser';
@@ -74,16 +75,15 @@ class UserModel extends Model
                     if($ret){
                         $res['code'] = 1;
                         $res['u_id'] = $u_id;
-                        DB::commit();
                     }
                     else{
                         $res['msg'] = '执行失败 请重试';
-                        DB::rollBack();
+                        //DB::rollBack();
                     }
                 }
                 else{
                     $res['msg'] = '注册失败 请重试';
-                    DB::rollBack();
+                    //DB::rollBack();
                 }
             }
             else{
@@ -122,17 +122,16 @@ class UserModel extends Model
                     //task通知C
                     $task_info['task_url'] = config('sys_conf.C_server').'/loaduser';
                     $task_info['task_params'] = json_encode(['uid'=>$res['u_id']]);
-
+                    DB::commit();
                     $ret = TaskController::create($task_info);
                     //判断是否投递成功
                     if($ret){
                         $res['code'] = 1;
                         $res['u_id'] = $user_info['u_id'];
-                        DB::commit();
                     }
                     else{
                         $res['msg'] = '执行失败 请重试';
-                        DB::rollBack();
+                        //DB::rollBack();
                     }
                 }
                 else{
@@ -177,9 +176,10 @@ class UserModel extends Model
                     'pwd'=>$data['new_pwd'],
                     'updated_at'=>date('Y-m-d H:i:s')
                 ]);
+                DB::commit();
                 if($update_res === false){
                     $res['msg'] = '修改失败 请重试';
-                    DB::rollBack();
+                    //DB::rollBack();
                 }
                 else{
                     //task通知C
@@ -190,11 +190,10 @@ class UserModel extends Model
                     //判断是否投递成功
                     if($ret){
                         $res['code'] = 1;
-                        DB::commit();
                     }
                     else{
                         $res['msg'] = '执行失败 请重试';
-                        DB::rollBack();
+                        //DB::rollBack();
                     }
                 }
             }

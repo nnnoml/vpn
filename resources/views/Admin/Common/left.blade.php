@@ -42,6 +42,13 @@
                         <dd><a @if($nav2 == 'vpn_conf')  class="layui-this" @endif href="/{{config('sys_conf.admin')}}/VpnConf">节点列表</a></dd>
                     </dl>
                 </li>
+                <li class="layui-nav-item @if($nav == 'soft') layui-nav-itemed @endif">
+                    <a href="javascript:;">包管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a @if($nav2 == 'soft_info')  class="layui-this" @endif href="/{{config('sys_conf.admin')}}/SoftInfo">软件包信息</a></dd>
+                        <dd><a @if($nav2 == 'soft_sdk')  class="layui-this" @endif href="/{{config('sys_conf.admin')}}/SoftSDK">SDK信息</a></dd>
+                    </dl>
+                </li>
                 <li class="layui-nav-item @if($nav == 'log_center') layui-nav-itemed @endif"><a href="/{{config('sys_conf.admin')}}/LogCenter">日志中心</a></li>
                 {{--<li class="layui-nav-item"><a href="">发布商品</a></li>--}}
                 {{--<li class="layui-nav-item"><a href="javascript:;">基础配置</a></li>--}}

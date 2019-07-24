@@ -159,11 +159,11 @@ trait Common{
     }
 
     /**
-     * 格式化时间
-     * @param $s 传入秒
-     * @param $type 格式化类型，smhdw
-     * @return int|string
-     */
+ * 格式化时间
+ * @param $s 传入秒
+ * @param $type 格式化类型，smhdw
+ * @return int|string
+ */
     function formatSecond($s,$type=''){
         if($type){
             switch($type){
@@ -183,6 +183,40 @@ trait Common{
                 case($s>=86400 && $s<604800):$loop_arr = array(86400 => '天',3600 => '小时', 60 => '分', 1 => '秒');break;
                 case($s>=604800 && $s<2592000):$loop_arr = array(604800 => '周',86400 => '天',3600 => '小时', 60 => '分', 1 => '秒');break;
                 default:$loop_arr = array(2592000=>'月',604800 => '周',86400 => '天', 3600 => '小时', 60 => '分', 1 => '秒');
+            }
+        }
+        $output = '';
+        foreach ($loop_arr as $key => $value) {
+            if ($s >= $key) $output .= floor($s/$key) . $value;
+            $s %= $key;
+        }
+        if($output==''){
+            $output=0;
+        }
+        return $output;
+    }
+
+    /**
+     * 格式化大小
+     * @param $s 传入字节
+     * @param $type 格式化类型，smhdw
+     * @return int|string
+     */
+    function formatByte($s,$type=''){
+        if($type){
+            switch($type){
+                case($type=='k'): $loop_arr = array(1024 => 'KB',1=>'Byte');break;
+                case($type=='m'):$loop_arr = array( 1048576 => 'MB', 1024 => 'KB',1=>'Byte');break;
+                case($type=='g'):$loop_arr = array( 1073741824 => 'GB', 1048576 => 'MB', 1024 => 'KB',1=>'Byte');break;
+                default:$loop_arr = array( 1073741824 => 'GB', 1048576 => 'MB', 1024 => 'KB',1=>'Byte');
+            }
+        }
+        else{
+            switch($s){
+                case($s<1024): $loop_arr = array(1024 => 'KB',1=>'Byte');break;
+                case($s>=1024 && $s<1048576):$loop_arr = array( 1048576 => 'MB', 1024 => 'KB',1=>'Byte');break;
+                case($s>=1048576 && $s<1073741824):$loop_arr = array( 1073741824 => 'GB', 1048576 => 'MB', 1024 => 'KB',1=>'Byte');break;
+                default:$loop_arr = array( 1073741824 => 'GB', 1048576 => 'MB', 1024 => 'KB',1=>'Byte');
             }
         }
         $output = '';

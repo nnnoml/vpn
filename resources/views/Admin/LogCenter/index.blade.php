@@ -40,6 +40,17 @@
                     </div>
 
                     <div class="layui-inline">
+                        <label class="layui-form-label">服务器IP</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="mip" autocomplete="off" class="layui-input">
+                        </div>
+                        <label class="layui-form-label" style="width:auto;padding:9px 5px;">:</label>
+                        <div class="layui-input-inline">
+                            <input style="width:60px;" type="text" name="mpt" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
                         <label class="layui-form-label">用户名</label>
                         <div class="layui-input-inline">
                             <input type="text" name="uname" autocomplete="off" class="layui-input">
@@ -85,6 +96,7 @@
                                 <th>用户</th>
                                 <th>客户端ip 端口</th>
                                 <th>远程ip 端口</th>
+                                <th>服务器ip 端口</th>
                                 <th>插入时间</th>
                             </tr>
                             </thead>
@@ -95,6 +107,7 @@
                                         <td>{{$v2['name']}}</td>
                                         <td>{{$v2['clientIp']}} （{{$v2['clientPort']}}）</td>
                                         <td>{{$v2['remoteIp']}} （{{$v2['remotePort']}}）</td>
+                                        <td>{{$v2['svrIp']}} （{{$v2['svrPort']}}）</td>
                                         <td>{{$v2['insertTime']}}</td>
                                     </tr>
                                 @endforeach
@@ -108,8 +121,6 @@
                 @endforeach
             </div>
         </div>
-
-
     </div>
 </div>
 
@@ -133,6 +144,8 @@ layui.use(['form','laydate','laypage'], function(){
         ,"spt": '{{$data['spt']}}'
         ,"dip": '{{$data['dip']}}'
         ,"dpt": '{{$data['dpt']}}'
+        ,"mip": '{{$data['mip']}}'
+        ,"mpt": '{{$data['mpt']}}'
         ,"date": '{{$date}}'
     })
 
@@ -141,6 +154,8 @@ layui.use(['form','laydate','laypage'], function(){
         +'&spt='+data.field.spt
         +'&dip='+data.field.dip
         +'&dpt='+data.field.dpt
+        +'&mip='+data.field.mip
+        +'&mpt='+data.field.mpt
         +'&uname='+data.field.uname
         +'&date='+data.field.date
         +'&pn='+pn
@@ -162,6 +177,8 @@ layui.use(['form','laydate','laypage'], function(){
             postData.spt = $("input[name='spt']").val();
             postData.dip = $("input[name='dip']").val();
             postData.dpt = $("input[name='dpt']").val();
+            postData.mip = $("input[name='mip']").val();
+            postData.mpt = $("input[name='mpt']").val();
             postData.uname = $("input[name='uname']").val();
             postData.date = $("input[name='date']").val();
             postData.pn = obj.curr;
@@ -175,6 +192,7 @@ layui.use(['form','laydate','laypage'], function(){
                             <td>'+v.name+'</td>\
                             <td>'+v.clientIp+' （'+v.clientPort+'）</td>\
                             <td>'+v.remoteIp+' （'+v.remotePort+'）</td>\
+                            <td>'+v.svrIp+' （'+v.svrPort+'）</td>\
                             <td>'+v.insertTime+'</td>\
                         </tr>';
                     })

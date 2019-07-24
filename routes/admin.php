@@ -44,6 +44,9 @@ Route::group(['prefix' => 'admin'], function () {
         Route::resource('VpnConf', "\App\Http\Controllers\Admin\VpnConf\VpnConfController");//VPN列表
         Route::get('VpnConf/getCity/{code}', "\App\Http\Controllers\Admin\VpnConf\VpnConfController@getCity");//VPN列表获取城市
 
+        Route::resource('SoftInfo', "\App\Http\Controllers\Admin\Soft\SoftInfoController");//软件信息列表
+        Route::resource('SoftSDK', "\App\Http\Controllers\Admin\Soft\SoftSDKController");//SDK信息列表
+
         Route::get('LogCenter', "\App\Http\Controllers\Admin\LogCenter\LogCenterController@index");//日志中心查询
         Route::post('LogCenter/{isPage}', "\App\Http\Controllers\Admin\LogCenter\LogCenterController@index");//日志中心查询分页
 

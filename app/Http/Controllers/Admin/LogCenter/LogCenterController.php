@@ -30,6 +30,8 @@ class LogCenterController extends Controller
         $data['spt'] = $request->input('spt',null);
         $data['dip'] = $request->input('dip',null);
         $data['dpt'] = $request->input('dpt',null);
+        $data['mip'] = $request->input('mip',null);
+        $data['mpt'] = $request->input('mpt',null);
 
         //ajax 进来 直接返回json
         if($isPage){
