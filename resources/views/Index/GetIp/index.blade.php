@@ -576,7 +576,7 @@
                 })
                 $("select[name='city']").html(html);
                 form.render();
-        });
+        },true);
       data.value
     });
 
@@ -633,7 +633,7 @@ $(".open").click(function(){
         }else{
             layer.msg(data['msg']);
         }
-    });
+    },true);
 
 });
 

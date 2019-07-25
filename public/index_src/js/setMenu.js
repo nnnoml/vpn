@@ -99,7 +99,7 @@ $(function () {
                     else{
                         layer.msg(data.msg,{icon:0});
                     }
-                })
+                },true)
 
         },
         //微信支付

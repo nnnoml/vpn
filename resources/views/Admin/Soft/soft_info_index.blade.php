@@ -36,7 +36,6 @@
                     <th>软件id</th>
                     <th>软件名称</th>
                     <th>软件版本</th>
-                    <th>软件大小</th>
                     <th>下载次数</th>
                     <th>描述</th>
                     <th>是否上线</th>
@@ -49,7 +48,6 @@
                     <td soft_download_url="{{$vo['soft_download_url']}}">{{$vo['soft_id']}}</td>
                     <td>{{$vo['soft_name']}}</td>
                     <td>{{$vo['soft_version']}}</td>
-                    <td>{{$vo['soft_byte_format']}}</td>
                     <td>{{$vo['download_count']}}</td>
                     <td>{{$vo['desc']}}</td>
                     <td data="{{$vo['on_show']}}">@if($vo['on_show'])上线@else下线@endif</td>
@@ -160,9 +158,9 @@
             type='put';
             var soft_name = $(this).parent().parent().find('td').eq(1).html();
             var soft_version = $(this).parent().parent().find('td').eq(2).html();
-            var download_count = $(this).parent().parent().find('td').eq(4).html();
-            var desc = $(this).parent().parent().find('td').eq(5).html();
-            var on_show = $(this).parent().parent().find('td').eq(6).attr('data') ==1 ? true:false;
+            var download_count = $(this).parent().parent().find('td').eq(3).html();
+            var desc = $(this).parent().parent().find('td').eq(4).html();
+            var on_show = $(this).parent().parent().find('td').eq(5).attr('data') ==1 ? true:false;
             var soft_download_url = $(this).parent().parent().find('td').eq(0).attr('soft_download_url')
 
             layer.open({

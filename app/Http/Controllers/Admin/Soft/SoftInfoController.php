@@ -21,9 +21,9 @@ class SoftInfoController extends Controller
 
     public function index(){
         $list = SoftModel::getSoftInfoList();
-        foreach($list as $key=>$vo){
-            $list[$key]['soft_byte_format'] = $this->formatByte($vo['soft_byte']);
-        }
+//        foreach($list as $key=>$vo){
+//            $list[$key]['soft_byte_format'] = $this->formatByte($vo['soft_byte']);
+//        }
         return view('Admin.Soft.soft_info_index',array_merge($this->ret_data,compact('list')));
     }
 

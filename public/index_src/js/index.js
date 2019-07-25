@@ -1,8 +1,10 @@
 //公共方法
-function ajaxDo(url,type,data,callback){
-    var index = layer.load(1, {
+function ajaxDo(url,type,data,callback,loading){
+
+    loading && layer.load(1, {
       shade: [0.4,'#000'] //0.1透明度的白色背景
     });
+
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -12,7 +14,7 @@ function ajaxDo(url,type,data,callback){
         dataType:'json',
         type:type,
         success:function (data) {
-            layer.closeAll('loading');
+            loading && layer.closeAll('loading');
             eval(callback(data));
         },
         error:function(){

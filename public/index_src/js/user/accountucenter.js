@@ -42,7 +42,7 @@ $(function(){
                    layer.msg(data.msg,{icon:2});
                    $(".img_verify_password").trigger('click');
                 }
-           })
+           },true)
 
        },
        //绑定手机号

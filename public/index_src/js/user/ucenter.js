@@ -296,7 +296,7 @@ $(function(){
                     else{
                         layer.msg(data.msg);
                     }
-                })
+                },true)
             }
             else{
                 layer.msg('ip格式错误');
@@ -312,6 +312,6 @@ $(function(){
             else{
                 layer.msg(data.msg);
             }
-        })
+        },true)
     })
 });

@@ -30,10 +30,9 @@ class Soft extends Migration
 
         Schema::create('soft_sdk', function (Blueprint $table) {
             $table->increments('sdk_id')->comment('sdk id');
-            $table->string('soft_name',255)->default('')->comment('sdk名称');
-            $table->string('soft_type',255)->default('')->comment('sdk类型');
-            $table->string('soft_byte',255)->default('')->comment('sdk大小');
-            $table->string('soft_download_url',255)->default('')->comment('sdk下载地址');
+            $table->string('sdk_name',255)->default('')->comment('sdk名称');
+            $table->string('sdk_type',255)->default('')->comment('sdk类型');
+            $table->string('sdk_download_url',255)->default('')->comment('sdk下载地址');
             $table->integer('download_count')->default(0)->comment('下载次数');
             $table->integer('real_download_count')->default(0)->comment('真实下载次数');
             $table->unsignedTinyInteger('on_show')->default(0)->comment('是否上线 0不上 1上');

@@ -57,7 +57,7 @@ $(function () {
                     layer.closeAll();
                     layer.msg(data.msg, {icon: 3});
                 }
-            })
+            },true)
         },
 
         //微信支付

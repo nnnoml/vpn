@@ -435,7 +435,7 @@ function modal_get_phone_code(verify,obj_1) {
         else{
              layer.msg(data.msg, {icon: 2});
         }
-    })
+    },true)
     var reg = "reg";
 //    common.ajax_jsonp(url, {reg: reg, phone: phone, verify: verify,verify_id:obj_1.find("input[name='modal_verify_login_id']").val()}, function (rt) {
 //        common.post_tips(rt, function () {
@@ -506,7 +506,7 @@ function modal_get_code(verify) {
                 $('.footer_modal_forget').find(".modal_verify_reg").trigger('click');
                 layer.msg(data.msg,{icon:2});
             }
-        })
+        },true)
 }
 function modal_time_clock(obj_2) {
         var modal_expire_time=60;
@@ -556,7 +556,7 @@ function modal_reg_submit() {
                 layer.msg(data.msg, {icon: 2});
                 $('.footer_modal_reg').find(".modal_verify_reg").trigger('click');
             }
-        });
+        },true);
 }
 
 function modal_login_submit() {
@@ -585,7 +585,7 @@ function modal_login_submit() {
             else{
                 layer.msg(data.msg,{icon:2});
             }
-        })
+        },true)
 }
 
 //忘记密码 提交
@@ -629,7 +629,7 @@ function modal_forget_submit() {
             else{
                 layer.msg(data.msg,{icon:2});
             }
-        })
+        },true)
 }
 //
 //function setQQModal() {
