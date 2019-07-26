@@ -49,9 +49,8 @@ class GetIpController extends IndexController
         $data = $request->all();
         $url = config('sys_conf.C_IP_server').'?appkey='.$userAppKey;
         foreach ($data as $key => $vo) {
-            $url.=$key.'='.$vo.'&';
+            $url.='&'.$key.'='.$vo;
         }
-        $url = rtrim($url,'&');
 
         if($url){
             return $this->returnJson(1,$url);

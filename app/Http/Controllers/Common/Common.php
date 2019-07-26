@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Common;
 
-use App\Http\Controllers\Controller;
 use App\Http\Model\SysModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -230,27 +229,28 @@ trait Common{
         return $output;
     }
 
-    function sendSms($tel,$type,$code){
-        //TODO
-        return true;
+    /**
+     * @param $tel
+     * @param $code
+     * @param $type 1注册 2找回密码
+     * @return bool
+     */
+    function sendSms($tel,$code,$type){
+//
         // 短信应用SDK AppID
-        $appid = 140000; // 1400开头
+        $appid = \config('sys_conf.sms_id');
         // 短信应用SDK AppKey
-        $appkey = "ddddaaaa";
+        $appkey = \config('sys_conf.sms_key');
         // 短信模板ID，需要在短信应用中申请
-        //        $templateId = 123;  // NOTE: 这里的模板ID`7839`只是一个示例，真实的模板ID需要在短信控制台中申请
-        //        $smsSign = "123"; // NOTE: 这里的签名只是示例，请使用真实的已申请的签名，签名参数使用的是`签名内容`，而不是`签名ID`
-        $content = '【112】';
+        $content = '【聚联科技】';
         switch($type){
-            case(1) : $content.=' 注册模板'.$code;break;
-            case(2) : $content.=' 找回密码模板'.$code;break;
+            case(1) : $content.=' 11VPN 您的注册验证码：'.$code.'，有效期10分钟。如非本人操作，请忽略。';break;
+            case(2) : $content.=' 11VPN 您正在找回密码，验证码：'.$code.'，有效期10分钟。如非本人操作，请忽略。';break;
         }
-        $content = '【112】'.$content;
         try {
             $ssender = new SmsSingleSender($appid, $appkey);
             $result = $ssender->send(0, "86", $tel, $content, "", "");
             $rsp = json_decode($result);
-
             if($rsp->errmsg=='OK'){
 //                saveLog("../storage/logs/PhoneSms_".date("Ymd").".log",'success time:'.date('Y-m-d H:i:s').PHP_EOL.'tel:'.$tel.PHP_EOL.'content:'.$content);
                 return true;

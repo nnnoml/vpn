@@ -35,10 +35,11 @@ class UserController extends IndexController
         $account = $request->input('username','');
         $pwd = $request->input('password','');
         $sms_code = $request->input('sms_code','');
+        //tips 19.7.26 注册不能再次验证验证码 短信已经验证过了 不然会重复输入两次
         $rules = [
             'username'=>'required',
             'password'=>'required|min:6|max:12',
-            'verify' => 'required|captcha',
+//            'verify' => 'required|captcha',
             'sms_code' => 'required',
         ];
 
@@ -47,8 +48,8 @@ class UserController extends IndexController
             'password.required' => '请填写密码',
             'password.min' => '密码最小6位 最长12位',
             'password.max' => '密码最小6位 最长12位',
-            'verify.required' => '请填写验证码',
-            'verify.captcha' => '验证码错误',
+//            'verify.required' => '请填写验证码',
+//            'verify.captcha' => '验证码错误',
             'sms_code.required' => '短信验证码错误'
         ];
 

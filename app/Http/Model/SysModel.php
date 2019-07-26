@@ -73,7 +73,9 @@ class SysModel extends Model
     public static function checkSmsCode($tel,$code,$type=0){
         $self = new self;
         $self->table = 'sys_sms_log';
-        $res = $self->where('tel',$tel)->where('code',$code)->where('type',$type)->where('status',0)->first();
+        //验证码有效期十分钟
+        $before_10_min = date('Y-m-d H:i:s',(time()-600));
+        $res = $self->where('tel',$tel)->where('code',$code)->where('type',$type)->where('status',0)->where('created_at','>',$before_10_min)->first();
         if($res){
             return $self->where('id',$res['id'])->where('status',0)->update(['status'=>1,'updated_at'=>date('Y-m-d H:i:s')]);
         }
