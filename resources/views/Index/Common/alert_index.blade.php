@@ -45,7 +45,7 @@
                 <div class="form-line"><i class="iconfont">&#xe6a9;</i><input placeholder="手机号" name="phone" onkeydown="forget_keydown()"></div>
                 <div class="form-line with-code"><i class="iconfont">&#xe605;</i>
                     <input placeholder="图形验证码" name="verify" onkeydown="forget_keydown()">
-                    <img src="{{captcha_src('flat')}}" style="cursor: pointer" onclick="this.src='{{captcha_src('flat')}}'+Math.random()">
+                    <img src="" style="cursor: pointer" onclick="this.src='{{captcha_src('flat')}}'+Math.random()">
                 </div>
                 <div class="form-line with-code"><i class="iconfont">&#xe69b;</i>
                     <input placeholder="请输入短信验证码" name="phone_verify" onkeydown="forget_keydown()"><a class="vacode get_vacode">获取验证码</a>
@@ -78,7 +78,7 @@
                     </div>
                     <div id="show-trigger" class="form-line  with-code "><i class="iconfont">&#xe605;</i>
                         <input  placeholder="请输入图形验证码" name="verify" onkeydown="reg_keydown()">
-                        <img src="{{captcha_src('flat')}}" style="cursor: pointer" onclick="this.src='{{captcha_src('flat')}}'+Math.random()">
+                        <img src="" style="cursor: pointer" onclick="this.src='{{captcha_src('flat')}}'+Math.random()">
                         {{--<img class="modal_verify_reg" onclick="this.src='http://webapi.apehorse.com/core/api/verify/verify_id/10000.html'+'?time='+Math.random();" src="http://webapi.apehorse.com/core/api/verify/verify_id/10000.html">--}}
                     </div>
                     <div class="form-line with-code "><i class="iconfont">&#xe69b;</i>

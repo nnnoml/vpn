@@ -40,7 +40,7 @@ class TaskController extends Task{
         // throw new \Exception('an exception');// handle时抛出的异常上层会忽略，并记录到Swoole日志，需要开发者try/catch捕获处理
 
         $data = $this->data;
-        Log::channel('daily')->info('Task start'.json_encode($data));
+        Log::channel('taskLog')->info('Task start'.json_encode($data));
 
         //流程
         //通知频率 暂时不设置 每3秒通知一次 通知到死
@@ -69,10 +69,10 @@ class TaskController extends Task{
         if(isset($result['result']) && ($result['result'] == 1 || $result['result'] == 0)){
             //成功更换状态
             $this->task_loop = false;
-            Log::channel('daily')->info('Task success');
+            Log::channel('taskLog')->info('Task success');
         }
         else{
-            Log::channel('daily')->info('Task  loop');
+            Log::channel('taskLog')->info('Task  loop');
         }
 
         //新任务 入库 等待循环
@@ -102,10 +102,10 @@ class TaskController extends Task{
     // 循环投递
     public function finish()
     {
-        Log::channel('daily')->info('Task finish end');
+        Log::channel('taskLog')->info('Task finish end');
         if($this->task_loop){
             self::create($this->data);
-            Log::channel('daily')->info('Task loop retask',[$this->result]);
+            Log::channel('taskLog')->info('Task loop retask',[$this->result]);
         }
         else{
             //执行完毕删除

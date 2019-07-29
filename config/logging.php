@@ -40,7 +40,7 @@ return [
 
         'single' => [
             'driver' => 'single',
-            'path' => storage_path('logs/laravel.log'),
+            'path' => storage_path('logs/laravel1121.log'),
             'level' => 'debug',
         ],
 
@@ -49,6 +49,25 @@ return [
             'path' => storage_path('logs/laravel.log'),
             'level' => 'debug',
             'days' => 30,
+        ],
+
+        //短信日志
+        'smsLog' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/smsLog'.date('Ymd').'.log'),
+            'level' => 'debug',
+        ],
+        //核心通信日志
+        'CReqLog' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/CReqLog'.date('Ymd').'.log'),
+            'level' => 'debug',
+        ],
+        //任务执行日志
+        'taskLog' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/taskLog'.date('Ymd').'.log'),
+            'level' => 'debug',
         ],
 
         'slack' => [

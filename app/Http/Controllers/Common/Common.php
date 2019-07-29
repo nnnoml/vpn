@@ -252,11 +252,11 @@ trait Common{
             $result = $ssender->send(0, "86", $tel, $content, "", "");
             $rsp = json_decode($result);
             if($rsp->errmsg=='OK'){
-//                saveLog("../storage/logs/PhoneSms_".date("Ymd").".log",'success time:'.date('Y-m-d H:i:s').PHP_EOL.'tel:'.$tel.PHP_EOL.'content:'.$content);
+                Log::channel('smsLog')->info(' success '.$tel.' '.$content);
                 return true;
             }
             else{
-//                saveLog("../storage/logs/PhoneSms_".date("Ymd").".log",'fail time:'.date('Y-m-d H:i:s').PHP_EOL.'tel:'.$tel.PHP_EOL.'content:'.$content.PHP_EOL.'res:'.json_encode($rsp));
+                Log::channel('smsLog')->info(' fail '.$tel.' '.$content.' res:'.json_encode($rsp));
                 return false;
             }
         } catch(\Exception $e) {
@@ -272,7 +272,7 @@ trait Common{
     function httpGet($url)
     {
         $url = str_replace(' ', '%20', $url);
-        Log::channel('daily')->info('httpGET req '.$url);
+        Log::channel('CReqLog')->info('httpGET req '.$url);
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_TIMEOUT, 500);
@@ -287,7 +287,7 @@ trait Common{
         curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1); //如果有跳转 循环跟进
         $res = curl_exec($curl);
 
-        Log::channel('daily')->info('httpGET resp '.$res);
+        Log::channel('CReqLog')->info('httpGET resp '.$res);
         curl_close($curl);
         return $res;
     }
