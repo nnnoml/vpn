@@ -30,7 +30,7 @@ class IpListController extends IndexController
                     $list[$key]['vpn_status'] = $vo['vpn_status'] == 1 ? '可用':'不可用';
                 }
                 $header_data = ['id','省份','城市','运营商','协议','状态','线路域名'];
-                $cols = ['vpn_id','vpn_province','vpn_city','vpn_operator','vpn_protocol','vpn_status','vpn_domain'];
+                $cols = ['vpn_id','vpn_province_format','vpn_city_format','vpn_operator','vpn_protocol','vpn_status','vpn_domain'];
                 $filename = 'IpList_'.date('Y-m-d H:i:s').'.csv';
                 return $this->export_csv($list,$header_data,$cols,$filename);
             }else{

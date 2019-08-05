@@ -10,7 +10,10 @@ class IpListModel extends Model
         $self = new self();
         $res = $self->setConnection('mysql_c')->from('tb_conf_vpn')->where('online',1);
         if($key){
-            $res->where('vpn_province','like','%'.$key.'%')->orWhere('vpn_city','like','%'.$key.'%');
+            $self_area = new self();
+            $self_area->table = 'areas';
+            $area_list = $self_area->where('name','like','%'.$key.'%')->pluck('code')->toArray();
+            $res->whereIn('vpn_province',$area_list)->orWhereIn('vpn_city',$area_list);
         }
         $res = $res->get()->toArray();
 

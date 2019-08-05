@@ -25,7 +25,7 @@ $(function() {
 $(function () {
     function new_page() {
         var search_word = $('#search_word').val();
-        window.location.href='/ipList?key='+search_word;
+        window.location.href='/ipList?key='+encodeURI(search_word);
     }
 
     $(document).on('click','.search_btn',function () {
