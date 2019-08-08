@@ -155,15 +155,30 @@ class OrderController extends IndexController
 
     /**
      * TODO 假装付款成功
-     * @param $order_no
+     * @param $order_no 里面传递电话
      */
     public function test($order_no){
+        $u_id = UserModel::where('account',$order_no)->value('u_id');
+        if(!$u_id){
+            echo "user empty";
+            return;
+        }
+
+        $order_no = OrderModel::where('charge_u_id',$u_id)->where('pay_status',0)->limit(1)->orderby('o_id','desc')->value('order_no');
+        if(!$order_no){
+            echo "order empty";
+            return;
+        }
+
         $res = OrderModel::setOrder($order_no);
+
         if($res == 1){
-            echo "<br />success";
+            echo "success";
+            return;
         }
         else{
-            echo "fail".$res;
+            echo "fail ".$res;
+            return;
         }
     }
 }

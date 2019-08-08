@@ -90,10 +90,23 @@ class OrderModel extends Model
         //vpn
         if($product_info->type == 1){
             //vpn time
-            $real_time_length = time()+$product_info->time_length*$order_info->buy_num;
+            $self = new self();
+            //当前时间
+            $vpn_time = time();
+            //获取已有vpn时间
+            $vpn_buy_time = $self->setConnection('mysql_c')->from('tb_user_vpn_order')->where('u_id',$order_info->charge_u_id)->value('valid_at');
+            if($vpn_buy_time){
+                $vpn_buy_time = strtotime($vpn_buy_time);
+                //如果已购买过vpn并且没有到期，之前基础上续期
+                if($vpn_time < $vpn_buy_time){
+                    $vpn_time = $vpn_buy_time;
+                }
+            }
+            $real_time_length = $vpn_time+$product_info->time_length*$order_info->buy_num;
             $task_info['task_url'] = config('sys_conf.C_server').'/paybytime';
             $task_info['task_params'] = json_encode(['uid'=>$order_info->charge_u_id,'endtime'=>$real_time_length]);
         }
+        //http&socks5
         else if($product_info->type == 2){
             $task_info['task_url'] = config('sys_conf.C_server').'/paybycount';
             $task_info['task_params'] = json_encode(['uid'=>$order_info->charge_u_id,'money'=>$order_info->order_money]);

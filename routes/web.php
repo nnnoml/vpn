@@ -69,7 +69,7 @@ Route::group(['middleware' => 'checkTokenIndex'], function () {
     });
 });
 
-Route::get('/test/{order_no}',"\App\Http\Controllers\Index\Order\OrderController@test");
+Route::get('/testOrder/{order_no}',"\App\Http\Controllers\Index\Order\OrderController@test");
 
 /**
  * web路由 已登录 过中间件 用户中心

@@ -1,12 +1,12 @@
 $(function() {
-    $(window).scroll(function () {
-        var a = $(window).scrollTop();
-        if (a > 25) {
-            $(".header").addClass("active");
-        } else {
-            $(".header").removeClass("active");
-        };
-    });
+//    $(window).scroll(function () {
+//        var a = $(window).scrollTop();
+//        if (a > 25) {
+//            $(".header").addClass("active");
+//        } else {
+//            $(".header").removeClass("active");
+//        };
+//    });
 
     $(".down-list > a.right").on({
         "mouseenter":function(){

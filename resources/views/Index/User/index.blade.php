@@ -20,9 +20,22 @@
             <div class="user-info" style="display: block">
                 <img src="{{asset('index_src/img')}}/no_pic.png" class="ava">
                 <a class="user-name" >{{$info['account']}}</a>
+                @if($info['level'])
                 <span class="user-label vip">
                     <img src="{{asset('index_src/img')}}/basics-vip.png" alt="">基础vip
                 </span>
+                @endif
+            </div>
+            <div class="user-account" style="">
+                @if(!isset($info['vpn_deadline']))
+                    <div class="uc-ac-block no_record">
+                        <p>尚未开通，购买立享会员服务</p>
+                        <a href="/setMenu/vpn">购买套餐</a>
+                    </div>
+                @else
+                    <h4>VPN到期时间</h4>
+                    <h4>{{$info['vpn_deadline']}}</h4>
+                @endif
             </div>
         </div>
 

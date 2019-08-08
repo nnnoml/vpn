@@ -15,6 +15,7 @@ class UserModel extends Model
         $res = $self->where('u_id',$u_id)->first();
         if($res){
             $res['money'] = $self->setConnection('mysql_c')->from('tb_user_direct_order')->where('u_id',$res['u_id'])->sum('money');
+            $res['vpn_deadline'] = $self->setConnection('mysql_c')->from('tb_user_vpn_order')->where('u_id',$res['u_id'])->value('valid_at');
         }
         return $res;
     }

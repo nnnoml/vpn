@@ -175,7 +175,7 @@ a:hover { color: #999; }
 .float-moduleIm-uc > a.moduleIm-open:after { width: 36px; height: 36px; display: block; content: ""; position: absolute; left: 0; top: 0; background: center no-repeat url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAMAAABhEH5lAAAAhFBMVEUAAABOtv9Otf1Otv5Otf1Otf1Otf1Ot/5Ntv5Ouf9OuP5Otv5Ntf5Ntf5Ntf5OuP5Ouv9Otf1Otf1Otf1Otf5Ot/5Otv5Ot/5Ot/5Otv1Ot/5Nt/5Ntf5Otv5Otf1Otf1Otv1Otf1Ot/5Ot/5Ntv1Ntf5Otv1Otf1Otf1Otv5Ntv5Otf3cFW+NAAAAK3RSTlMABM2p4tPFXi4nEpuRPTg1G/Dr14lVRxUL5nxQTCH527myo25jRLy6cWcmvpse5AAAAMVJREFUGNNVjlduwzAQRGfZRBUW9e4WO033v1/M0JDt9zOLxWDwcCf7/hJVzVvszEI2bZfko0oRSbaPeGSXMv7SQ7L3L5JC5J/YGcolxPGK3oJMhlTjXGgHVDdMW/97H2Q1Ct6NPeoEfiFaPJwFL0g2KE4vW1WHa421fCrmiqAFMJcJRa9ceMAKAO2B1s7MzfHcA5hUkB0nqZjKzX+1CuZ643pAJGM8hL8hVdwNIIBxwoO1YZKxkxMWT0gb+yM3A7zjCwf8AcIPCsZ54Gg1AAAAAElFTkSuQmCC"); }
 
 /*头部*/
-.header { position: fixed; top: 0; height: 96px; width: 100%; min-width: 1200px; z-index: 1000; }
+.header { position: absolute; top: 0; height: 96px; width: 100%; min-width: 1200px; z-index: 1000; }
 .header.wt { position: absolute; -webkit-transition: 0.5s; -ms-transition: 0.5s; -moz-transition: 0.5s; transition: 0.5s; padding-bottom: 20px; }
 .header.wt:after { position: absolute; left: 0; bottom: 0; content: ""; width: 100%; height: 1px; -webkit-transition: 0.5s; -ms-transition: 0.5s; -moz-transition: 0.5s; transition: 0.5s; }
 .header.wt .nav .nav-active { border-color: #fff; }
