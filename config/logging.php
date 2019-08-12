@@ -48,26 +48,29 @@ return [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),
             'level' => 'debug',
-            'days' => 30,
+            'days' => 365,
         ],
 
         //短信日志
         'smsLog' => [
-            'driver' => 'single',
-            'path' => storage_path('logs/smsLog'.date('Ymd').'.log'),
+            'driver' => 'daily',
+            'path' => storage_path('logs/smsLog.log'),
             'level' => 'debug',
+            'days' => 365,
         ],
         //核心通信日志
         'CReqLog' => [
-            'driver' => 'single',
-            'path' => storage_path('logs/CReqLog'.date('Ymd').'.log'),
+            'driver' => 'daily',
+            'path' => storage_path('logs/CReqLog.log'),
             'level' => 'debug',
+            'days' => 365,
         ],
         //任务执行日志
         'taskLog' => [
-            'driver' => 'single',
-            'path' => storage_path('logs/taskLog'.date('Ymd').'.log'),
+            'driver' => 'daily',
+            'path' => storage_path('logs/taskLog.log'),
             'level' => 'debug',
+            'days' => 365,
         ],
 
         'slack' => [

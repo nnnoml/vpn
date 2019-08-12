@@ -1605,6 +1605,8 @@ section {
 }
 #slideTest1{
   margin-top:40px;
+  margin-left:10px;
+  margin-right:6px;
 }
 .layui-form-select dl dd.layui-this{
   background-color:#2696ff !important;

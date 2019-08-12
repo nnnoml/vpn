@@ -54,7 +54,7 @@
             </div>
         </div>
 
-        <div class="layui-form-item" id="h_type" @if($info['type']==1)style="display:none;" @endif>
+        <div class="layui-form-item" id="h_type" @if(isset($info['type']) && $info['type']==2) style="display:block;"@else style="display:none;" @endif>
             <label class="layui-form-label">按次产品类型</label>
             <div class="layui-input-block">
                 <input type="radio" name="h_type" value="1" title="按次扣次" checked="">

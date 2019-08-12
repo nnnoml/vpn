@@ -135,7 +135,7 @@ layui.use(['form','laydate','laypage'], function(){
     //日期时间范围
     laydate.render({
         elem: '#date_between'
-        ,type: 'datetime'
+        ,type: 'date'
         ,range: true
     });
 

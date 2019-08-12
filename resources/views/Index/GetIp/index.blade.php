@@ -43,8 +43,8 @@
                             @if(isset($user_info))
                             <span class="left balance_money">
                                   <a>当前账户余额</a>
-                                  <a id="balance">{{$user_info['money']}}</a>
-                                  <input type="hidden" id="balance_money" value="{{$user_info['money']}}">
+                                  <a id="balance">{{$user_info['money']/100}}</a>
+                                  <input type="hidden" id="balance_money" value="{{$user_info['money']/100}}">
                               </span>
                             <a class="actPay" href="/setMenu/http" target="_blank">立即充值</a>
                                 @if($user_info['money']<=0)

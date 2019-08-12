@@ -18,7 +18,7 @@ class WhiteListController extends IndexController
         $res = json_decode($this->httpGet($url),true);
 //        $res = '{"result":1, "ips":"192.168.1.5,192.168.1.8"}';
 //        $res = json_decode($res,true);
-        if($res['result']==1){
+        if($res['result']==1 && $res['ips']){
             return explode(',',$res['ips']);
         }
         else{

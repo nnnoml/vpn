@@ -29,7 +29,8 @@ class ProductController extends Controller
 
     public function create(){
         $id=0;
-        return view('Admin.Product.product_handle',array_merge($this->ret_data,compact('id')));
+        $info = ProductModel::getList();
+        return view('Admin.Product.product_handle',array_merge($this->ret_data,compact('info','id')));
     }
 
     public function store(Request $request){
@@ -39,6 +40,7 @@ class ProductController extends Controller
         $time_length = $request->input('time_length',0);
         $type = $request->input('type',0);
         $h_type = $request->input('h_type',0);
+        $h_type_id = '1,2,3,4,5';
         $on_show = $request->input('on_show',0);
         $desc = $request->input('desc','');
 
@@ -67,7 +69,7 @@ class ProductController extends Controller
             return $this->returnJson(0, $v_res['msg']);
         }
         else{
-            $res = ProductModel::add(compact('money','money_sub','money_add','time_length','type','h_type','on_show','desc'));
+            $res = ProductModel::add(compact('money','money_sub','money_add','time_length','type','h_type','h_type_id','on_show','desc'));
             if($res){
                 return $this->returnJson(1,'新增成功');
             }

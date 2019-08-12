@@ -37,7 +37,7 @@ class LogCenterController extends Controller
         if($isPage){
             if($date!='' && isset(explode(' - ',$date)[0]) && isset(explode(' - ',$date)[1]) ) {
                 $data['st'] = strtotime(explode(' - ', $date)[0]);
-                $data['et'] = strtotime(explode(' - ', $date)[1]);
+                $data['et'] = strtotime(explode(' - ', $date)[1])+86399;
             }
             else{
                 $data['st'] = 0;
@@ -54,7 +54,7 @@ class LogCenterController extends Controller
 
             //开始结束时间戳 不修改
             $start = strtotime(date('Y-m-d H:i:s',$data['st']));
-            $end = strtotime(date('Y-m-d H:i:s',$data['et']));
+            $end = strtotime(date('Y-m-d H:i:s',$data['et']))+86399;
 
             //分片时间戳
             $start_cache = $start;

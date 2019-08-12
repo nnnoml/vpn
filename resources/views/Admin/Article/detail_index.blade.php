@@ -35,6 +35,7 @@
                     <th>分类</th>
                     <th>发布时间</th>
                     <th>浏览量</th>
+                    <th>排序</th>
                     <th>是否展示</th>
                     <th>操作</th>
                 </tr>
@@ -47,6 +48,7 @@
                     <td>{{$vo['ac_name']}}</td>
                     <td>{{$vo['created_at']}}</td>
                     <td>{{$vo['view_count']}}</td>
+                    <td>{{$vo['order']}}</td>
                     <td>@if($vo['on_show'])展示 @else 不展示 @endif</td>
                     <td>
                         <a href="/{{config('sys_conf.admin')}}/ArticleDetail/{{$vo['id']}}/edit"><button type="button" class="edit layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon layui-icon-edit"></i>编辑</button></a>
