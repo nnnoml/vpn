@@ -43,11 +43,10 @@ class ProductController extends Controller
         $h_type_id = '1,2,3,4,5';
         $on_show = $request->input('on_show',0);
         $desc = $request->input('desc','');
-
         $rules = [
-            'money'=>'integer',
-            'money_sub'=>'integer',
-            'money_add'=>'integer',
+            'money'=>'numeric',
+            'money_sub'=>'numeric',
+            'money_add'=>'numeric',
             'time_length'=>'integer',
             'type'=>'integer',
             'h_type'=>'integer',
@@ -55,9 +54,9 @@ class ProductController extends Controller
         ];
 
         $messages = [
-            'money.integer' => '金额异常',
-            'money_sub.integer' => '充值满减异常',
-            'money_add.integer' => '充值赠送异常',
+            'money.numeric' => '金额异常',
+            'money_sub.numeric' => '充值满减异常',
+            'money_add.numeric' => '充值赠送异常',
             'time_length.integer' => '时长异常',
             'type.integer' => '类型异常',
             'h_type.integer' => '按次类型异常',
@@ -95,9 +94,9 @@ class ProductController extends Controller
         $desc = $request->input('desc','');
 
         $rules = [
-            'money'=>'integer',
-            'money_sub'=>'integer',
-            'money_add'=>'integer',
+            'money'=>'numeric',
+            'money_sub'=>'numeric',
+            'money_add'=>'numeric',
             'time_length'=>'integer',
             'type'=>'integer',
             'h_type'=>'integer',
@@ -105,9 +104,9 @@ class ProductController extends Controller
         ];
 
         $messages = [
-            'money.integer' => '金额异常',
-            'money_sub.integer' => '充值满减异常',
-            'money_add.integer' => '充值赠送异常',
+            'money.numeric' => '金额异常',
+            'money_sub.numeric' => '充值满减异常',
+            'money_add.numeric' => '充值赠送异常',
             'time_length.integer' => '时长异常',
             'type.integer' => '类型异常',
             'h_type.integer' => '按次类型异常',

@@ -12,7 +12,5 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-//Route::middleware('auth:api')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
+//api获取vpn配置项，预留
+Route::get('/vpnConf/{vpn_id?}', "\App\Http\Controllers\Api\ConfController@GetVpnConf");

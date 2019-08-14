@@ -10,6 +10,7 @@ use App\Http\Model\SysModel;
 use App\Http\Model\UserModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
+use phpDocumentor\Reflection\DocBlock\Tags\Var_;
 
 class UserController extends IndexController
 {
@@ -28,7 +29,8 @@ class UserController extends IndexController
         $info = UserModel::userInfo($u_id);
         $order_list = OrderModel::getOrderList($u_id);
         $white_list = (new WhiteListController())->showList($u_id);
-        return view('Index.User.index',array_merge($this->ret_data,compact('info','order_list','white_list')));
+        $use_money_list = (new UseMoneyController())->getList($request,$u_id);
+        return view('Index.User.index',array_merge($this->ret_data,compact('info','order_list','white_list','use_money_list')));
     }
 
     public function regDo(Request $request){

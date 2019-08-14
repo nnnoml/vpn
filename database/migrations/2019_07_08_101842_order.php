@@ -28,6 +28,7 @@ class Order extends Migration
             $table->unsignedInteger('coupon_money')->default(0)->comment('优惠券金额');//-10
             $table->unsignedInteger('pay_status')->default(0)->comment('支付状态，0未支付，1已支付，2已取消');
             $table->timestamp('payed_at')->nullable()->comment('支付时间');
+            $table->timestamp('vpn_deadline')->nullable()->comment('vpn到期时间');
             $table->timestamps();
         });
     }

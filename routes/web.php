@@ -81,4 +81,5 @@ Route::group(['prefix' => 'user','middleware' => 'login.index'], function () {
     Route::post('/changePWDLogin',"\App\Http\Controllers\Index\User\UserController@changePWDLogin");
     //白名单
     Route::resource('/whiteList',"\App\Http\Controllers\Index\User\WhiteListController");
+    Route::get('/useMoneyList',"\App\Http\Controllers\Index\User\UseMoneyController@getList");
 });

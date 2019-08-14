@@ -13,9 +13,10 @@
 <div class="layui-body">
     <!-- 内容主体区域 -->
     <div style="padding: 15px;">
-        <blockquote class="layui-elem-quote">
-            <a href="/{{config('sys_conf.admin')}}/ProductHType/create"><button type="button" class="layui-btn"><i class="layui-icon layui-icon-add-1"></i> 添加产品类型</button></a>
-        </blockquote>
+        {{-- 2019-8-14 暂时屏蔽新增 产品类型目前不可编辑--}}
+        {{--<blockquote class="layui-elem-quote">--}}
+            {{--<a href="/{{config('sys_conf.admin')}}/ProductHType/create"><button type="button" class="layui-btn"><i class="layui-icon layui-icon-add-1"></i> 添加产品类型</button></a>--}}
+        {{--</blockquote>--}}
 
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
             <legend>{{$title}}</legend>
@@ -46,7 +47,9 @@
                     <td>{{$vo['price']}}</td>
                     <td>
                         <a href="/{{config('sys_conf.admin')}}/ProductHType/{{$vo['h_type_id']}}/edit"><button type="button" class="edit layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon layui-icon-edit"></i>编辑</button></a>
-                        <button type="button" class="del layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon layui-icon-delete"></i>删除</button>
+
+                        {{-- 2019-8-14 暂时屏蔽删除 产品类型目前不可编辑--}}
+                        {{--<button type="button" class="del layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon layui-icon-delete"></i>删除</button>--}}
                     </td>
                 </tr>
                 @endforeach

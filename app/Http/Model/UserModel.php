@@ -14,8 +14,14 @@ class UserModel extends Model
         $self = new self();
         $res = $self->where('u_id',$u_id)->first();
         if($res){
+            //C库查余额
             $res['money'] = $self->setConnection('mysql_c')->from('tb_user_direct_order')->where('u_id',$res['u_id'])->sum('money');
+            //C库查vpn到期时间
             $res['vpn_deadline'] = $self->setConnection('mysql_c')->from('tb_user_vpn_order')->where('u_id',$res['u_id'])->value('valid_at');
+            //vpn已到期 给友好提示
+            if($res['vpn_deadline']<date('Y-m-d H:i:s')){
+                unset($res['vpn_deadline']);
+            }
         }
         return $res;
     }

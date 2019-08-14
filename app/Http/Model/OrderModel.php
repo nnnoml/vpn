@@ -21,7 +21,7 @@ class OrderModel extends Model
         $res = $self->from("$self_table as o")
             ->leftJoin("$product_table as p",'p.p_id','o.p_id')
             ->where('o.u_id',$u_id)
-            ->select('o.*','p.desc')
+            ->select('o.*','p.desc','p.type')
             ->orderby('o.o_id','desc')
             ->get()->toArray();
         return $res;
@@ -81,12 +81,11 @@ class OrderModel extends Model
         }
 
         DB::beginTransaction();
-        self::where('order_no',$order_no)->where('pay_status',0)->update([
+        $update_data = [
             'pay_status'=>1,
             'payed_at'=>date('Y-m-d H:i:s'),
             'updated_at'=>date('Y-m-d H:i:s'),
-        ]);
-
+        ];
         //vpn
         if($product_info->type == 1){
             //vpn time
@@ -105,6 +104,7 @@ class OrderModel extends Model
             $real_time_length = $vpn_time+$product_info->time_length*$order_info->buy_num;
             $task_info['task_url'] = config('sys_conf.C_server').'/paybytime';
             $task_info['task_params'] = json_encode(['uid'=>$order_info->charge_u_id,'endtime'=>$real_time_length]);
+            $update_data['vpn_deadline'] = date('Y-m-d H:i:s',$real_time_length);
         }
         //http&socks5
         else if($product_info->type == 2){
@@ -114,6 +114,8 @@ class OrderModel extends Model
         else{
             return 'product type error';
         }
+
+        self::where('order_no',$order_no)->where('pay_status',0)->update($update_data);
 
         $ret = TaskController::create($task_info);
 

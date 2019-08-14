@@ -1,6 +1,5 @@
 @extends('Index.app')
 
-
 @extends('Index.Common.nav_index')
 @extends('Index.Common.right_index')
 @extends('Index.Common.alert_index')
@@ -13,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('index_src/css')}}/user/ucenter.css" />
     <link rel="stylesheet" type="text/css" href="{{asset('index_src/css')}}/user/jquery.lineProgressbar.min.css" />
     <link rel="stylesheet" type="text/css" href="{{asset('index_src/css')}}/user/hucenter.css" />
+    <link rel="stylesheet" type="text/css" href="{{asset('plug/layui/css')}}/layui.css" />
 
 <section class="uc-main" style="margin-top:100px;">
     <aside class="uc-aside">
@@ -95,7 +95,13 @@
                             </ul>
                             @foreach($order_list as $key=>$vo)
                                 <div class="tr">
-                                    <span class="td td-1">{{$vo['desc']}}</span>
+                                    <span class="td td-1">
+                                        @if($vo['type']==1)
+                                            [VPN]
+                                        @elseif($vo['type']==2)
+                                            [HTTP]
+                                        @endif
+                                        {{$vo['desc']}}</span>
                                     <span class="td td-2">{{$vo['order_no']}}</span>
                                     <span class="td td-3">{{$vo['pay_money']/100}}</span>
                                     <span class="td td-4">
@@ -111,7 +117,11 @@
                                         @else --
                                         @endif
                                     </span>
-                                    <span class="td td-6">{{$vo['created_at']}}</span>
+                                    <span class="td td-6"
+                                        @if($vo['type']==1 && $vo['vpn_deadline'])
+                                          onmouseenter="layer.tips('本订单vpn到期时间：<br /> {{$vo['vpn_deadline']}}', this)"
+                                        @endif
+                                    >{{$vo['created_at']}}</span>
                                 </div>
                             @endforeach
                             {{--<div class="page" id="page"></div>--}}
@@ -193,47 +203,51 @@
                             {{--</div>--}}
                         {{--</div>--}}
 
-                        {{--<form id="form_condition" class="form-search" method="get">--}}
-                            {{--<div class="screen">--}}
-                                {{--<!-- 后端直接引入 layer date 插件 -->--}}
-                                {{--记录筛选--}}
-                                {{--<!--           <label for="">--}}
-                                               {{--<input type="text" id="'start_time" name="start_time" value="" style="width: 200px" class="start_time laydate-icon" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" placeholder="起始时间" readonly>--}}
-                                               {{--<a class="arrow"><i class="iconfont">&#xea09;</i></a>--}}
-                                           {{--</label>--}}
-                                           {{--<label for="">--}}
-                                               {{--<input type="text" id="end_time" name="end_time" value="" class="finish_time" style="width: 200px" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" placeholder="终止时间" readonly>--}}
-                                               {{--<a class="arrow"><i class="iconfont">&#xea09;</i></a>--}}
-                                           {{--</label>--}}
-                                           {{--<label for="">--}}
-                                               {{--<input type="text" name="" class="act_search" readonlyunselectable="on" value="立即搜索" readonly>--}}
-                                           {{--</label>-->--}}
-                                {{--<!--<div class="selet">-->--}}
-                                {{--<!--<i class="iconfont">&#xea09;</i>-->--}}
-                                {{--<!--</div>-->--}}
+                        <form id="form_condition" class="form-search" method="get">
+                            <div class="screen">
+                                <!-- 后端直接引入 layer date 插件 -->
+                               {{--<label for="">--}}
+                                   {{--<input type="text" id="'start_time" name="start_time" value="" style="width: 200px" class="start_time laydate-icon" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" placeholder="起始时间" readonly>--}}
+                                   {{--<a class="arrow"><i class="iconfont">&#xea09;</i></a>--}}
+                               {{--</label>--}}
+                               <label for="">
+                                   {{--<input type="text" id="end_time" name="end_time" value="" class="finish_time" style="width: 200px" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" placeholder="终止时间" readonly>--}}
+                                   {{--<a class="arrow"><i class="iconfont">&#xea09;</i></a>--}}
+                                   <input type="text" class="layui-input" id="usemoney_input" placeholder="请选择日期">
+                               </label>
+                               <label for="">
+                                   <input type="text" name="" class="act_search" readonlyunselectable="on" value="立即搜索" readonly>
+                               </label>
+                            </div>
 
-                                {{--<label for="">--}}
-                                    {{--<input type="text" id="lang" class="selet lang" value="请选择" readonly="readonly">--}}
-                                    {{--<div class="opt mCustomScrollbar _mCS_1 mCS_no_scrollbar" id="huangbiao" style="display: none;"><div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" style="max-height: none;" tabindex="0"><div id="mCSB_1_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">--}}
-                                                {{--<ul id="lang-list">--}}
-                                                    {{--<!-- <li><a href="#">2018-10-25</a></li>--}}
-                                                     {{--<li><a href="#">2018-10-24</a></li>--}}
-                                                     {{--<li><a href="#">2018-10-23</a></li>--}}
-                                                     {{--<li><a href="#">2018-10-22</a></li>--}}
-                                                     {{--<li><a href="#">2018-10-21</a></li>--}}
-                                                     {{--<li><a href="#">2018-10-20</a></li>-->--}}
-                                                    {{--<li><a href="#">2019-07-05</a></li><li><a href="#">2019-07-04</a></li><li><a href="#">2019-07-03</a></li><li><a href="#">2019-07-02</a></li><li><a href="#">2019-07-01</a></li><li><a href="#">2019-06-30</a></li><li><a href="#">2019-06-29</a></li><li><a href="#">2019-06-28</a></li><li><a href="#">2019-06-27</a></li><li><a href="#">2019-06-26</a></li><li><a href="#">2019-06-25</a></li><li><a href="#">2019-06-24</a></li><li><a href="#">2019-06-23</a></li><li><a href="#">2019-06-22</a></li><li><a href="#">2019-06-21</a></li><li><a href="#">2019-07-05</a></li><li><a href="#">2019-07-04</a></li><li><a href="#">2019-07-03</a></li><li><a href="#">2019-07-02</a></li><li><a href="#">2019-07-01</a></li><li><a href="#">2019-06-30</a></li><li><a href="#">2019-06-29</a></li><li><a href="#">2019-06-28</a></li><li><a href="#">2019-06-27</a></li><li><a href="#">2019-06-26</a></li><li><a href="#">2019-06-25</a></li><li><a href="#">2019-06-24</a></li><li><a href="#">2019-06-23</a></li><li><a href="#">2019-06-22</a></li><li><a href="#">2019-06-21</a></li></ul>--}}
-                                            {{--</div><div id="mCSB_1_scrollbar_vertical" class="mCSB_scrollTools mCSB_1_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_1_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; top: 0px;" oncontextmenu="return false;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div></div><div class="mCSB_draggerRail"></div></div></div></div></div>--}}
-                                    {{--<a class="arrows"><i class="iconfont lang" id=""></i></a>--}}
-                                {{--</label>--}}
-                                {{--<label for="">--}}
-                                    {{--<input type="text" name="" class="act_search" readonlyunselectable="on" value="立即搜索" readonly="">--}}
-                                {{--</label>--}}
-                            {{--</div>--}}
-
-                        {{--</form>--}}
-                        <div class="none will_input"></div><div class="record-none input_use_history">暂未开放</div>
-                    </div>
+                        </form>
+                            @if($use_money_list)
+                                <ul class="th input_list">
+                                    <li class="td td-5"><span></span>计费类型</li>
+                                    <li class="td td-7"></span>计费金额</li>
+                                    <li class="td td-7"></span>计费时间</li>
+                                </ul>
+                                <div id="useMoneyList">
+                                @foreach($use_money_list['list'] as $key=>$vo)
+                                    <div class="tr">
+                                        <span class="td td-6">{{$vo['iptype_format']}}
+                                        @if($vo['log_ty']==1)
+                                            按次余额
+                                        @else
+                                            按次扣次
+                                        @endif
+                                        </span>
+                                        <span class="td td-6">{{$vo['money']/100}}</span>
+                                        <span class="td td-6">{{$vo['create_time']}}</span>
+                                    </div>
+                                @endforeach
+                                </div>
+                            @else
+                                <div class="record-none input_list">暂无记录</div>
+                            @endif
+                            <div id="usemoney_page"></div>
+                        </div>
+                        {{--<div class="none will_input"></div><div class="record-none input_use_history">暂未开放</div>--}}
             </div>
 
         </div>
@@ -326,7 +340,14 @@
     <script type="text/javascript" src="{{asset('index_src/js/user')}}/ucenter_order.js"></script>
     <script type="text/javascript" src="{{asset('index_src/js/user')}}/jquery.lineProgressbar.js"></script>
 
-</body>
+    <script type="text/javascript" src="{{asset('plug/layui')}}/layui.js"></script>
+    <script>
+        $("#usemoney_input").val("{{$use_money_list['date']}}")
+        var use_money_list_count = {{$use_money_list['count']}};
+    </script>
+    <script type="text/javascript" src="{{asset('index_src/js/user')}}/useMoney.js"></script>
+
+    </body>
 </html>
 
 @endsection
