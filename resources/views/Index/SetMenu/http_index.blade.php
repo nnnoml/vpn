@@ -40,12 +40,15 @@
             <ul style="display:block">
                 @foreach($list as $key=>$vo)
                     <li style="display:block">
-                      <span class="line">
-                        <i></i>
-                        预充值金额
-                      </span>
+                        {{--大于5没图片了暂时隐藏掉头--}}
+                      @if($loop->index<5)
+                          <span class="line">
+                            <i></i>
+                            预充值金额
+                          </span>
+                      @endif
                         <span class="line2">
-                        <a class="price">{{$vo['money']/100}}</a>
+                        <a class="price">{{($vo['money']-$vo['money_sub'])/100}}</a>
                             @if($vo['money_add'])
                             <a class="send">
                                 {{--<i>赠送<br>10%</i>--}}

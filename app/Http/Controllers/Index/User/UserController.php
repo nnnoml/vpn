@@ -10,7 +10,6 @@ use App\Http\Model\SysModel;
 use App\Http\Model\UserModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
-use phpDocumentor\Reflection\DocBlock\Tags\Var_;
 
 class UserController extends IndexController
 {
@@ -85,7 +84,7 @@ class UserController extends IndexController
         $remember = $request->input('remember',0);
         $keep = 1; //token时间，1默认长度
         if($remember){
-            $keep = 10;
+            $keep = 24*10;//10天有效期
         }
         $rules = [
             'username'=>'required',
@@ -107,11 +106,18 @@ class UserController extends IndexController
                 $jwt_payload = array('u_id'=>$login_res['info']['u_id']);
 
                 $jwt_token = JWT::getToken($jwt_payload,$keep);
+                //原始返回值
+//                return response()->json([
+//                    'code'=>1,
+//                    'account'=>$login_res['info']['account'],
+//                    'nickname'=>$login_res['info']['nickname']
+//                ])->cookie('tokenIndex',$jwt_token);
+               Cookie::queue('tokenIndex', $jwt_token, $keep*60);
                 return response()->json([
                     'code'=>1,
                     'account'=>$login_res['info']['account'],
                     'nickname'=>$login_res['info']['nickname']
-                ])->cookie('tokenIndex',$jwt_token);
+                ]);
             }
             else{
                 return $this->returnJson(0,$login_res['info']);
@@ -198,14 +204,16 @@ class UserController extends IndexController
             $pwd = $this->rc4($pwd);
             $res = userModel::changePWD(compact('account','pwd','sms_code'));
             if($res['code'] == 1){
-                $jwt_payload = array('u_id'=>$res['u_id']);
+                //修改密码后不给新token 之前的继续有效
+//                $jwt_payload = array('u_id'=>$res['u_id']);
+//                $jwt_token = JWT::getToken($jwt_payload);
+//                return response()->json([
+//                    'code'=>1,
+//                    'account'=>$account,
+//                    'nickname'=>''
+//                ])->cookie('tokenIndex',$jwt_token);
 
-                $jwt_token = JWT::getToken($jwt_payload);
-                return response()->json([
-                    'code'=>1,
-                    'account'=>$account,
-                    'nickname'=>''
-                ])->cookie('tokenIndex',$jwt_token);
+                return $this->returnJson(1,'修改成功');
             }
             else{
                 return $this->returnJson(0,$res['msg']);
@@ -253,7 +261,7 @@ class UserController extends IndexController
 
             $res = userModel::changePWDLogin(compact('u_id','old_pwd','new_pwd'));
             if($res['code'] == 1){
-                return $this->returnJson(1);
+                return $this->returnJson(1,'修改成功');
             }
             else{
                 return $this->returnJson(0,$res['msg']);

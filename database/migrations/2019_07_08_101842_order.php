@@ -23,7 +23,8 @@ class Order extends Migration
             $table->unsignedTinyInteger('pay_type')->default(0)->comment('支付类型 0未知 1微信 2支付宝');
             $table->unsignedInteger('order_money')->default(0)->comment('订单金额'); //100
             $table->unsignedInteger('pay_money')->default(0)->comment('实际支付金额'); //70
-            $table->integer('order_money_change')->default(0)->comment('满减或者赠送金额'); //-20
+            $table->unsignedInteger('order_money_sub')->default(0)->comment('满减金额'); //20
+            $table->unsignedInteger('order_money_add')->default(0)->comment('赠送金额'); //20
             $table->string('coupon_nos',255)->default('')->comment('优惠券编号 多个优惠券用,分割');
             $table->unsignedInteger('coupon_money')->default(0)->comment('优惠券金额');//-10
             $table->unsignedInteger('pay_status')->default(0)->comment('支付状态，0未支付，1已支付，2已取消');

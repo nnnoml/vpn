@@ -173,19 +173,19 @@
                     <h1 class="left">选择属性</h1>
                     <div class="right agent nature">
                         <label>
-                            <input type="checkbox" name="st-con" disabled checked="checked" id="st-one1">
+                            <input type="checkbox" disabled checked="checked" id="st-one1">
                             <i class="radios"></i>
                             IP：Port
                         </label>
 
                         <label>
-                            <input type="checkbox" name="st-con" id="st-one2">
+                            <input type="checkbox" id="st-one2">
                             <i class="radios"></i>
                             过期时间
                         </label>
 
                         <label>
-                            <input type="checkbox" name="st-con" id="st-one3">
+                            <input type="checkbox" id="st-one3">
                             <i class="radios"></i>
                             显示位置
                         </label>
@@ -195,7 +195,7 @@
                 <div class="region_list no_long_pack" id="regin_check_div">
                     <h1 class="left">地区选择</h1>
                     <div class="right">
-                        <div class="appointe">
+                        <div class="appointe" >
                             <label class="label1">
                                 <input type="radio" name="st-con" checked="checked" value="0">
                                 <i class="radios"></i>
@@ -214,7 +214,7 @@
                             {{--</label>--}}
                         </div>
 
-                        <form class="layui-form" action="">
+                        <form id="province_city_form" class="layui-form" action="" style="display:none;">
                             <div class="layui-form-item">
                                 <div class="layui-input-inline">
                                     <select name="pro" lay-filter="province">
@@ -580,6 +580,15 @@
       data.value
     });
 
+    $("input[name='st-con']").click(function(){
+        if($("input[name='st-con']:checked").val()==1){
+            $("#province_city_form").show();
+        }
+        else{
+            $("#province_city_form").hide();
+        }
+    })
+
 $(".open").click(function(){
 
     var post = {};
@@ -613,7 +622,7 @@ $(".open").click(function(){
     }
 
 
-    if($("input[name='st-con']").val()){
+    if($("input[name='st-con']:checked").val()){
         post['pro'] = $("select[name='pro']").val();
         post['city'] = $("select[name='city']").val();
     }

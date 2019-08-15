@@ -23,28 +23,6 @@
             </div>
             <div class="layui-form-mid layui-word-aux">单位 元</div>
         </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">充值满减</label>
-            <div class="layui-input-inline">
-                <input type="text" name="money_sub" lay-verify="number" autocomplete="off" class="layui-input" value="0">
-            </div>
-            <div class="layui-form-mid layui-word-aux">单位 元</div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">充值赠送</label>
-            <div class="layui-input-inline">
-                <input type="text" name="money_add" lay-verify="number" autocomplete="off" class="layui-input" value="0">
-            </div>
-            <div class="layui-form-mid layui-word-aux">单位 元</div>
-        </div>
-
-        <div class="layui-form-item">
-            <label class="layui-form-label">时长</label>
-            <div class="layui-input-inline">
-                <input type="text" name="time_length" lay-verify="number" autocomplete="off" class="layui-input" value="0">
-            </div>
-            <div class="layui-form-mid layui-word-aux">单位 秒</div>
-        </div>
 
         <div class="layui-form-item">
             <label class="layui-form-label">产品类型</label>
@@ -62,6 +40,30 @@
                 <input type="radio" name="h_type" value="3" title="按次包月">
                 <input type="radio" name="h_type" value="4" title="按次长效可匿">
             </div>
+        </div>
+
+        <div class="layui-form-item" id="time_length" @if(isset($info['type']) && $info['type']==2) style="display:none;"@else style="display:block;" @endif>
+            <label class="layui-form-label">时长</label>
+            <div class="layui-input-inline">
+                <input type="text" name="time_length" lay-verify="number" autocomplete="off" class="layui-input" value="0">
+            </div>
+            <div class="layui-form-mid layui-word-aux">单位 秒</div>
+        </div>
+
+        <div class="layui-form-item" id="money_add" @if(isset($info['type']) && $info['type']==2) style="display:block;"@else style="display:none;" @endif>
+            <label class="layui-form-label">充值赠送</label>
+            <div class="layui-input-inline">
+                <input type="text" name="money_add" lay-verify="number" autocomplete="off" class="layui-input" value="0">
+            </div>
+            <div class="layui-form-mid layui-word-aux">单位 元</div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">充值满减</label>
+            <div class="layui-input-inline">
+                <input type="text" name="money_sub" lay-verify="number" autocomplete="off" class="layui-input" value="0">
+            </div>
+            <div class="layui-form-mid layui-word-aux">单位 元</div>
         </div>
 
         <div class="layui-form-item">
@@ -103,13 +105,17 @@ layui.use(['form'], function(){
       ,"desc": '{{$info['desc']}}'
     })
   @endif
-
+    //根据类型 隐藏相对应的input
     form.on('radio(h_type)', function(data){
         if(data.value==1){
             $("#h_type").hide();
+            $("#money_add").hide();
+            $("#time_length").show();
         }
         else{
             $("#h_type").show();
+            $("#money_add").show();
+            $("#time_length").hide();
         }
     });
 

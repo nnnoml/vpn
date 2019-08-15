@@ -35,7 +35,7 @@ class JWT extends Controller
         {
             $payload['iat'] = time();
             $payload['exp'] = time()+self::$exp*$keep_login;
-            $payload['ref'] = time()+self::$ref*$keep_login;
+            $payload['ref'] = $payload['exp']+self::$ref;
             $payload['jti'] = md5(uniqid('JWT').time());
 
             $base64header=self::base64UrlEncode(json_encode(self::$header,JSON_UNESCAPED_UNICODE));

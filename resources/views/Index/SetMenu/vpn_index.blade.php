@@ -56,35 +56,49 @@
                 @foreach($list as $key=>$vo)
                 <div data-id="{{$vo['p_id']}}" class="package_list">
                     <h1>{{$vo['desc']}}</h1>
-                    <h2>{{$vo['money']/100}}</h2>
-                    <h3>原价：{{($vo['money']/100)}}元</h3>
-                    @if($loop->index == 0)
-                    <span class="feedback-red">¥{{$vo['money']/100}}/<a>月</a></span>
-                    @elseif($loop->index == 1)
-                        <span class="feedback-red">¥{{ceil($vo['money']/100/2)}}/<a>月</a></span>
-                    @elseif($loop->index == 2)
-                        <span class="feedback-red">¥{{ceil($vo['money']/100/6)}}/<a>月</a></span>
-                    @elseif($loop->index == 3)
-                        <span class="feedback-red">¥{{ceil($vo['money']/100/12)}}/<a>月</a></span>
+                    <h2>{{($vo['money']-$vo['money_sub'])/100}}</h2>
+                    <h3>原价：{{$vo['money']/100}}元</h3>
+                        {{--一个月--}}
+                    @if($vo['time_length'] == '2592000')
+                        <span class="feedback-red">¥{{($vo['money']-$vo['money_sub'])/100}}/<a>月</a></span>
+                        {{--两个月--}}
+                    @elseif($vo['time_length'] == '5184000')
+                        <span class="feedback-red">¥{{ceil(($vo['money']-$vo['money_sub'])/100/2)}}/<a>月</a></span>
+                        {{--六个月--}}
+                    @elseif($vo['time_length'] == '15552000')
+                        <span class="feedback-red">¥{{ceil(($vo['money']-$vo['money_sub'])/100/6)}}/<a>月</a></span>
+                        {{--十二个月--}}
+                    @elseif($vo['time_length'] == '31536000')
+                        <span class="feedback-red">¥{{ceil(($vo['money']-$vo['money_sub'])/100/12)}}/<a>月</a></span>
+                        {{--非标准单位--}}
+                    @else
+                        <span class="feedback-red">¥{{($vo['money']-$vo['money_sub'])/100}}/<a>{{$vo['unit']}}</a></span>
                     @endif
                     <div class="choice">
-                        @if($loop->index == 0)
+                        {{--一个月--}}
+                        @if($vo['time_length'] == '2592000')
                         <label for="" class="Bt_val">
                             <button type="button" name="button" class="reduce"><i class="iconfont"></i></button>
                         </label>
                         <label for="" class="lab_val">
-                            <input type="text" price="{{$vo['money']/100}}" readonly value="1" class="buy_num">
+                            <input type="text" price="{{($vo['money']-$vo['money_sub'])/100}}" readonly value="1" class="buy_num">
                             <span>个月</span>
                         </label>
                         <label for="" class="Bt_val">
                             <button type="button" name="button" class="add"><i class="iconfont"></i></button>
                         </label>
-                        @elseif($loop->index==1)
+                        {{--两个月--}}
+                        @elseif($vo['time_length'] == '5184000')
                             <label for="" class="lab_val lable_only">2个月</label>
+                        {{--六个月--}}
                         @elseif($loop->index==2)
                             <label for="" class="lab_val lable_only ">6个月</label>
+                        {{--十二个月--}}
                         @elseif($loop->index==3)
                             <label for="" class="lab_val lable_only">12个月</label>
+                        {{--非标准单位--}}
+                        @else
+                            <label for="" class="lab_val lable_only">{{$vo['unit']}}</label>
                         @endif
                     </div>
                 </div>

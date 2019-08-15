@@ -349,11 +349,12 @@ html, body {
 
 .content > .pay_list > ul > li {
     position: relative;
-    margin-right: 23px;
+    margin-right: 17px;
     float: left;
     width: 285px;
     min-height: 400px;
     padding-bottom: 50px;
+    margin-bottom:60px;
     background-color: #fff;
     box-shadow: 0 0 32px rgba(60, 127, 208, 0.2);
     -webkit-transition: all 0.3s ease;
@@ -390,7 +391,7 @@ html, body {
 }
 
 .content > .pay_list > ul > li:nth-child(5) > .line:after {
-    background: #4b98f7 url("../img/pay/five.png") no-repeat center;
+    background: #4b98f7 url("../img/five.png") no-repeat center;
 }
 
 .content > .pay_list > ul > li .discount {

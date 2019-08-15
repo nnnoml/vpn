@@ -34,11 +34,6 @@ class ProductHTypeModel extends Model
         return $res;
     }
 
-    public static function getIndexList(){
-        $res = self::where('on_show',1)->where('is_del',0)->get();
-        return $res;
-    }
-
     public static function getProductHTypeList($ids){
         return self::whereIn('h_type_id',explode(',',$ids))->get()->toArray();
     }

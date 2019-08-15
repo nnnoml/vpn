@@ -30,7 +30,7 @@ class UseMoneyModel extends Model
         //组装到用户余额列表里
         foreach ($ret['list'] as $key => $vo) {
             $ret['list'][$key]['iptype_format'] = isset($list[$vo['iptype']])
-                ? $list[$vo['iptype']]['start_second_format'].' - '.$list[$vo['iptype']]['start_second_format']:[];
+                ? $list[$vo['iptype']]['start_second_format'].' - '.$list[$vo['iptype']]['end_second_format']:[];
         }
         return $ret;
     }

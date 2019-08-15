@@ -59,7 +59,8 @@
                     </td>
                     <td>{{$vo['money']/100}}
                         @if($vo['money_sub'])（ 充值满减 {{$vo['money_sub']/100}}）
-                        @elseif($vo['money_add'])（ 充值赠送 {{$vo['money_add']/100}}）
+                        @endif
+                        @if($vo['money_add'])（ 充值赠送 {{$vo['money_add']/100}}）
                         @endif
                     </td>
                     <td>{{$vo['time_len_format']}}</td>

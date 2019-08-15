@@ -39,7 +39,10 @@ class OrderModel extends Model
             $insert_data['pay_type'] = isset($pay_type[$data['type']]) ? $pay_type[$data['type']]:0;
             $insert_data['order_money'] = ($product_info['money'] + $product_info['money_add'])*$data['num'];
             $insert_data['pay_money'] = ($product_info['money'] - $product_info['money_sub'])*$data['num'];
-            $insert_data['order_money_change'] = $product_info['money_add'] != 0 ? $product_info['money_add'] : -$product_info['money_sub'];
+//            $insert_data['order_money_change'] = $product_info['money_add'] != 0 ? $product_info['money_add'] : -$product_info['money_sub'];
+            $insert_data['order_money_add'] = $product_info['money_add']*$data['num'];
+            $insert_data['order_money_sub'] = $product_info['money_sub']*$data['num'];
+
             $insert_data['created_at'] = date('Y-m-d H:i:s');
 
             DB::beginTransaction();

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Product;
 
 use App\Http\Controllers\Common\Common;
+use App\Http\Model\ProductHTypeModel;
 use App\Http\Model\ProductModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -40,7 +41,6 @@ class ProductController extends Controller
         $time_length = $request->input('time_length',0);
         $type = $request->input('type',0);
         $h_type = $request->input('h_type',0);
-        $h_type_id = '1,2,3,4,5';
         $on_show = $request->input('on_show',0);
         $desc = $request->input('desc','');
         $rules = [
@@ -68,6 +68,18 @@ class ProductController extends Controller
             return $this->returnJson(0, $v_res['msg']);
         }
         else{
+            //1vpn包时 2按次
+            if($type==1){
+                $h_type = 0;
+                $money_add = 0;//vpn充值没办法赠送
+                $h_type_id = '';
+            }
+            elseif($type==2){
+                $time_length = 0;
+                $h_type_list = ProductHTypeModel::getList()->pluck('h_type_id')->toArray();
+                $h_type_id = implode(',',$h_type_list);
+            }
+
             $res = ProductModel::add(compact('money','money_sub','money_add','time_length','type','h_type','h_type_id','on_show','desc'));
             if($res){
                 return $this->returnJson(1,'新增成功');
@@ -118,7 +130,19 @@ class ProductController extends Controller
             return $this->returnJson(0, $v_res['msg']);
         }
         else{
-            $res = ProductModel::edit($id,compact('money','money_sub','money_add','time_length','type','h_type','on_show','desc'));
+            //1vpn包时 2按次
+            if($type==1){
+                $h_type = 0;
+                $money_add = 0;//vpn充值没办法赠送
+                $h_type_id = '';
+            }
+            elseif($type==2){
+                $time_length = 0;
+                $h_type_list = ProductHTypeModel::getList()->pluck('h_type_id')->toArray();
+                $h_type_id = implode(',',$h_type_list);
+            }
+
+            $res = ProductModel::edit($id,compact('money','money_sub','money_add','time_length','type','h_type','h_type_id','on_show','desc'));
             if($res){
                 return $this->returnJson(1,'成功');
             }

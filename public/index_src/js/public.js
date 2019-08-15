@@ -579,6 +579,7 @@ function modal_login_submit() {
         }
         var param = $("#modal_footer_login_form").serialize();
         ajaxDo('/user/login','post',param,function(data){
+        console.log(data);
             if(data.code == 1){
                 location.reload();
             }

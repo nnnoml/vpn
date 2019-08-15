@@ -165,9 +165,9 @@
                     <div class="news-top">
                         <a  class="left">最新资讯</a>
                         @foreach($article as $key=>$vo)
-                            <a class="info_a @if($loop->index+1 == 1) active @endif"  data-val="{{$loop->index+1}}" _href="/article/{{$vo['ac_id']}}"><h2>{{$vo['ac_name']}}</h2></a>
+                            <a class="info_a @if($loop->index+1 == 1) active @endif" data-val="{{$loop->index+1}}" _href="/article/{{$vo['ac_id']}}"><h2>{{$vo['ac_name']}}</h2></a>
                         @endforeach
-                        <a class="school" href="/school/" target="_blank"><h2>使用帮助</h2></a>
+                        <a class="school" href="/help/school/" target="_blank"><h2>使用帮助</h2></a>
                         <a class="more-info">查看更多></a>
                     </div>
                     <div class="news-contain">

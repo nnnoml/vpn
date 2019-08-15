@@ -21,8 +21,8 @@ class ProductModel extends Model
     public static function getDetail($id){
         $res = self::where('on_show',1)->where('is_del',0)->where('p_id',$id)->first();
         $res['money'] /=100;
-        $res['money_desc'] /=100;
-        $res['money_asc'] /=100;
+        $res['money_sub'] /=100;
+        $res['money_add'] /=100;
         return $res;
     }
 

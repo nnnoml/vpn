@@ -109,6 +109,7 @@ class LogCenterController extends Controller
         //总数
         $url = config('sys_conf.C_Log_server').'/getlogcount'.$parame;
         $res['count'] = json_decode($this->httpGet($url),true)['logcnt'];
+        if($res['count']=='') $res['count']=0;
         //列表
         $url = config('sys_conf.C_Log_server').'/getuserlog'.$parame.'&pc='.$pc.'&pn='.$pn;
         $res['list'] = json_decode($this->httpGet($url),true)['logs'];
