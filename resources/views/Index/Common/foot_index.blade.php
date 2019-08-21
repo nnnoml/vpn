@@ -46,9 +46,9 @@
             {{--</div>--}}
             <div class="bottom">
                 <p class="state foot_old">
-                    11vpn仅提供IP服务，用户使用11vpn从事的任何行为均不代表11vpn的意志和观点，与11vpn的立场无关。严禁用户使用11vpn从事任何违法犯罪行为，
-                    <br>产生的相关责任用户自负，对此11vpn不承担任何法律责任。
-                    <br><span>版权所有 {{$sys_conf['comp_name']}}&nbsp;&nbsp;Powered by 11VPN</span>
+                    11IP仅提供IP服务，用户使用11IP从事的任何行为均不代表11IP的意志和观点，与11IP的立场无关。严禁用户使用11IP从事任何违法犯罪行为，
+                    <br>产生的相关责任用户自负，对此11IP不承担任何法律责任。
+                    <br><span>版权所有 {{$sys_conf['comp_name']}}&nbsp;&nbsp;Powered by 11IP</span>
                     <img src="{{asset('index_src/img')}}/beian.png" style="position:relative;top:-2px;margin:0 3px;">
                     <a href="http://www.miitbeian.gov.cn" target="_blank" style="color: #777;">
                         &nbsp;&nbsp;{{$sys_conf['icp']}}

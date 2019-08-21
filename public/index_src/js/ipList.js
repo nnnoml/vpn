@@ -33,7 +33,7 @@ $(function () {
     })
     $(document).on('click','#export',function () {
         var search_word = $('#search_word').val();
-        window.open('/ipList?key='+search_word+'&export=1')
+        window.open('/ipList?key='+encodeURI(search_word)+'&export=1')
     })
 });
 //搜索框清空输入值

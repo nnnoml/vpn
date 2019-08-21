@@ -69,6 +69,7 @@ html, body {
     background: -o-linear-gradient(#00c4ff, #0070fc);
     background: -moz-linear-gradient(#00c4ff, #0070fc);
     background: linear-gradient(#00c4ff, #0070fc);
+    background: #00adfe;
 }
 
 .banner.reg {

@@ -12,26 +12,27 @@ class OrderModel extends Model
     use Common;
     protected $table = 'order_flow';
 
-    public static function getOrderList($u_id){
-        $self = new self();
-        $self_table = $self->getTable();
-        $product = new ProductModel();
-        $product_table = $product->getTable();
+    public static function getOrderList($u_id,$page,$limit,$pay_status){
+        $res = self::where('u_id',$u_id);
 
-        $res = $self->from("$self_table as o")
-            ->leftJoin("$product_table as p",'p.p_id','o.p_id')
-            ->where('o.u_id',$u_id)
-            ->select('o.*','p.desc','p.type')
-            ->orderby('o.o_id','desc')
-            ->get()->toArray();
-        return $res;
+        if($pay_status!=''){
+            $res=$res->where('pay_status',$pay_status);
+        }
+
+        $ret['count'] = $res->count();
+        $ret['list'] = $res->orderby('o_id','desc')->skip(($page-1)*$limit)->take($limit)->get()->toArray();
+
+        return $ret;
     }
 
 
     public static function addOrder($data){
         $product_info = ProductModel::checkOrderProductInfo($data['p_id']);
         if($product_info){
+            $insert_data['order_title'] = ($product_info['type']==1?'[VPN]':'' .$product_info['type']==2?'[HTTP]':'').$product_info['desc'] ;
             $insert_data['p_id'] = $data['p_id'];
+            $insert_data['p_type'] = $product_info['type'];
+            $insert_data['p_h_type'] = $product_info['h_type'];
             $insert_data['u_id'] = $data['u_id'];
             $insert_data['buy_num'] = $data['num'];
             $insert_data['charge_u_id'] = $data['charge_u_id'];
@@ -44,7 +45,6 @@ class OrderModel extends Model
             $insert_data['order_money_sub'] = $product_info['money_sub']*$data['num'];
 
             $insert_data['created_at'] = date('Y-m-d H:i:s');
-
             DB::beginTransaction();
             $o_id = self::insertGetId($insert_data);
             if($o_id){

@@ -105,14 +105,18 @@ class LogCenterController extends Controller
                 $parame.= $key.'='.$vo;
             }
         }
-
         //总数
         $url = config('sys_conf.C_Log_server').'/getlogcount'.$parame;
         $res['count'] = json_decode($this->httpGet($url),true)['logcnt'];
         if($res['count']=='') $res['count']=0;
         //列表
         $url = config('sys_conf.C_Log_server').'/getuserlog'.$parame.'&pc='.$pc.'&pn='.$pn;
-        $res['list'] = json_decode($this->httpGet($url),true)['logs'];
+        //19.8.20修复乱码可能导致的问题
+        $json_data = $this->httpGet($url);
+        $json_data = mb_convert_encoding($json_data, "UTF-8", "GBK");
+        $json_data = preg_replace('/[\x00-\x1F\x80-\x9F]/u', '', trim($json_data));
+
+        $res['list'] = json_decode($json_data,true)['logs'];
 
         return $res;
     }

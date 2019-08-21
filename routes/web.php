@@ -82,4 +82,5 @@ Route::group(['prefix' => 'user','middleware' => 'login.index'], function () {
     //白名单
     Route::resource('/whiteList',"\App\Http\Controllers\Index\User\WhiteListController");
     Route::get('/useMoneyList',"\App\Http\Controllers\Index\User\UseMoneyController@getList");
+    Route::get('/orderList',"\App\Http\Controllers\Index\User\OrderListController@getList");
 });

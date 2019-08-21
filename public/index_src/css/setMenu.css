@@ -34,7 +34,7 @@
 .active-word { width: 156px; height: 33px; line-height: 33px; margin: 10px auto 10px; color: #fff; border-radius: 4px; /* padding-top: 10px; */ box-sizing: border-box; font-size: 14px; font-weight: normal; /* background: url(../img/active/list-cont.png) no-repeat center; */ background: #ff5a58; }
 .active-word span { font-size: 14px; }
 
-.section { margin-top: -103px; color: #fff; width: 100%; height: 400px; position: relative; z-index: 1; background: url("../img/zmdlpay_bg.png") no-repeat center; /*新春隐藏*/ background-image: -webkit-linear-gradient(left, #4C9EF6, #00DCF3); background-image: -o-linear-gradient(left, #4C9EF6, #00DCF3); background-image: linear-gradient(to right, #4C9EF6, #00DCF3); }
+.section { margin-top: -103px; color: #fff; width: 100%; height: 400px; position: relative; z-index: 1; /*新春隐藏*/ background-image: -webkit-linear-gradient(left, #4C9EF6, #00DCF3); background-image: -o-linear-gradient(left, #4C9EF6, #00DCF3); background-image: linear-gradient(to right, #4C9EF6, #00DCF3); background-color:#00A1F7}
 .section .container { width: 1200px; margin: 0 auto; padding-top: 115px; }
 .section .container .left { float: left; text-align: left; margin-top: -30px; }
 .section .container .left h1 { font-size: 30px; margin: 0 0 15px 20px; }

@@ -27,8 +27,8 @@
             <div class="product-introduce">
                 <div class="part-up" style="height: 333px;">
                     <div class="left-title">
-                        <h3>11VPN</h3>
-                        <p>IP行业领导者，支持PC 、iOS、&nbsp;安卓平台，全局代理，保证高质量流量出口。拥有数量超1000万的海量IP池，全国线路，不限带宽，连接切换速度小于100ms，支持pptp/L2tp/open/ikev2协议。每日切换不限次数，自动过滤重复IP，自动清理cookie，保证用户独享带宽。11VPN提供高速的全国线路，可保护您的数据安全和上网隐私。用户通过下载软件、注册付费后即时开通使用，是网络推广人员的神兵利器，让您畅享飞一般的感觉。</p>
+                        <h3>11IP</h3>
+                        <p>IP行业领导者，支持PC 、iOS、&nbsp;安卓平台，全局代理，保证高质量流量出口。拥有数量超1000万的海量IP池，全国线路，不限带宽，连接切换速度小于100ms，支持pptp/L2tp/open/ikev2协议。每日切换不限次数，自动过滤重复IP，自动清理cookie，保证用户独享带宽。11IP，可保护您的数据安全和上网隐私。用户通过下载软件、注册付费后即时开通使用，是网络推广人员的神兵利器，让您畅享飞一般的感觉。</p>
                         {{--<div class="btn-box">--}}
                             {{--<a class="active reg_modal">免费注册</a>--}}
                             {{--<a href="javascript:void(0)" class="consult sur_link">立即咨询</a>--}}

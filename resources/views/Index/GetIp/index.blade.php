@@ -439,9 +439,9 @@
                 <h1>使用方法</h1>
                 <p class="example">
                     <span>* 生成API链接，调用HTTP GET请求即可返回所需的IP结果</span>
-                    <span>* 可以直接按照以下格式组装所需的API链接:<a class="link">https.com/getip/num/10/type/2/pro/0/city/0/port/1/time/1/yys/0</a></span>
-                    <span>* 获取余额接口:</span>
-                    <span class="balance_api">web.http.11vpn.com/api/getMoney?appkey=xxx</span>
+                    <span>* 可以直接按照以下格式组装所需的API链接:<a class="link">11vpn.com/getip/num/10/type/2/pro/0/city/0/port/1/time/1/yys/0</a></span>
+                    {{--<span>* 获取余额接口:</span>--}}
+                    {{--<span class="balance_api">web.http.11IP.com/api/getMoney?appkey=xxx</span>--}}
                 </p>
             </div>
 
@@ -496,22 +496,23 @@
                 {{--</div>--}}
             {{--</div>--}}
         </div>
-        <a class="detection-down fadeInRight ipchecktool" href="/agent" target="_blank">
-            IP检测工具入口
-        </a>
-        <a href="http://h.zhimaruanjian.com/help/245.html" class="demo" target="_blank">代码接入DEMO</a>
-        <div class="dial_right fadeInRight">
-            <h1>平台保证</h1>
-            <p><i class="iconfont"></i><span>永久去重，永远不会用到重复的IP</span> </p>
-            <p><i class="iconfont"></i><span>单次提取数量400，请求时间&lt;1秒</span> </p>
-            <p><i class="iconfont"></i><span>每日提取数量及使用数量不限制</span> </p>
-            <p><i class="iconfont"></i><span>延迟≤10毫秒</span> </p>
-            <p><i class="iconfont"></i><span>可用性≥99.99%</span> </p>
-            <p><i class="iconfont"></i><span>每日30万稳定12小时-24小时IP</span> </p>
-            <p><i class="iconfont"></i><span>全部IP皆机房资产，非扫描</span> </p>
-            <p><i class="iconfont"></i><span>并发请求数量不限制</span> </p>
-            <p><i class="iconfont"></i><span>单IP单白名单仅扣费一次</span> </p>
-        </div>
+        {{--暂时屏蔽 可能后期要开--}}
+        {{--<a class="detection-down fadeInRight ipchecktool" href="/agent" target="_blank">--}}
+            {{--IP检测工具入口--}}
+        {{--</a>--}}
+        {{--<a href="http://h.zhimaruanjian.com/help/245.html" class="demo" target="_blank">代码接入DEMO</a>--}}
+        {{--<div class="dial_right fadeInRight">--}}
+            {{--<h1>平台保证</h1>--}}
+            {{--<p><i class="iconfont"></i><span>永久去重，永远不会用到重复的IP</span> </p>--}}
+            {{--<p><i class="iconfont"></i><span>单次提取数量400，请求时间&lt;1秒</span> </p>--}}
+            {{--<p><i class="iconfont"></i><span>每日提取数量及使用数量不限制</span> </p>--}}
+            {{--<p><i class="iconfont"></i><span>延迟≤10毫秒</span> </p>--}}
+            {{--<p><i class="iconfont"></i><span>可用性≥99.99%</span> </p>--}}
+            {{--<p><i class="iconfont"></i><span>每日30万稳定12小时-24小时IP</span> </p>--}}
+            {{--<p><i class="iconfont"></i><span>全部IP皆机房资产，非扫描</span> </p>--}}
+            {{--<p><i class="iconfont"></i><span>并发请求数量不限制</span> </p>--}}
+            {{--<p><i class="iconfont"></i><span>单IP单白名单仅扣费一次</span> </p>--}}
+        {{--</div>--}}
         <div class="quick_entry fadeInRight">
             <!--<a class="go"></a>-->
             <h1><span>快速帮助入口</span></h1>

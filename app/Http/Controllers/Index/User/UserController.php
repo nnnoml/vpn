@@ -26,7 +26,7 @@ class UserController extends IndexController
         $token = $request->cookie('tokenIndex');
         $u_id = JWT::getTokenUID($token);
         $info = UserModel::userInfo($u_id);
-        $order_list = OrderModel::getOrderList($u_id);
+        $order_list = (new OrderListController())->getList($request,$u_id);
         $white_list = (new WhiteListController())->showList($u_id);
         $use_money_list = (new UseMoneyController())->getList($request,$u_id);
         return view('Index.User.index',array_merge($this->ret_data,compact('info','order_list','white_list','use_money_list')));
@@ -180,7 +180,7 @@ class UserController extends IndexController
             'account' => ['required','regex:/^1[3|4|5|7|8|9]\d{9}$/'],
             'password'=>'required|min:6|max:12',
             're_password'=>'same:password',
-            'verify' => 'required|captcha',
+//            'verify' => 'required|captcha',
             'sms_code' => 'required',
         ];
 
@@ -191,8 +191,8 @@ class UserController extends IndexController
             'password.min' => '密码最小6位 最长12位',
             'password.max' => '密码最小6位 最长12位',
             're_password.same' => '两次密码不一致',
-            'verify.required' => '请填写验证码',
-            'verify.captcha' => '验证码错误',
+//            'verify.required' => '请填写验证码',
+//            'verify.captcha' => '验证码错误',
             'sms_code.required' => '短信验证码错误'
         ];
 
@@ -205,15 +205,14 @@ class UserController extends IndexController
             $res = userModel::changePWD(compact('account','pwd','sms_code'));
             if($res['code'] == 1){
                 //修改密码后不给新token 之前的继续有效
-//                $jwt_payload = array('u_id'=>$res['u_id']);
-//                $jwt_token = JWT::getToken($jwt_payload);
-//                return response()->json([
-//                    'code'=>1,
-//                    'account'=>$account,
-//                    'nickname'=>''
-//                ])->cookie('tokenIndex',$jwt_token);
+                $jwt_payload = array('u_id'=>$res['u_id']);
+                $jwt_token = JWT::getToken($jwt_payload);
 
-                return $this->returnJson(1,'修改成功');
+                Cookie::queue('tokenIndex', $jwt_token, 60);
+                return response()->json([
+                    'code'=>1,
+                    'account'=>$account
+                ]);
             }
             else{
                 return $this->returnJson(0,$res['msg']);

@@ -244,8 +244,8 @@ trait Common{
         // 短信模板ID，需要在短信应用中申请
         $content = '【聚联科技】';
         switch($type){
-            case(1) : $content.=' 11VPN 您的注册验证码：'.$code.'，有效期10分钟。如非本人操作，请忽略。';break;
-            case(2) : $content.=' 11VPN 您正在找回密码，验证码：'.$code.'，有效期10分钟。如非本人操作，请忽略。';break;
+            case(1) : $content.=' 11IP 您的注册验证码：'.$code.'，有效期10分钟。如非本人操作，请忽略。';break;
+            case(2) : $content.=' 11IP 您正在找回密码，验证码：'.$code.'，有效期10分钟。如非本人操作，请忽略。';break;
         }
         try {
             $ssender = new SmsSingleSender($appid, $appkey);

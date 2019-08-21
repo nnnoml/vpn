@@ -73,18 +73,18 @@
 
             {{--充值记录--}}
             <div class="module record ">
-                {{--<div class="record-sel">--}}
-                    {{--<h4><span>充值记录</span><i class="iconfont">&#xe617;</i></h4>--}}
-                    {{--<ul class="download-sel">--}}
-                        {{--<li data-tab="all" data-type="" id="all">全部记录</li>--}}
-                        {{--<li data-tab="charge" data-type="open" id="charge_online">在线充值</li>--}}
-                        {{--<li data-tab="card" data-type="convert" id="charge_card">卡密充值</li>--}}
-                    {{--</ul>--}}
-                {{--</div>--}}
+                <div class="record-sel" data-tab="">
+                    <h4><span>充值记录</span><i class="iconfont">&#xe617;</i></h4>
+                    <ul class="download-sel">
+                        <li data-tab="">全部记录</li>
+                        <li data-tab="1">已支付订单</li>
+                        <li data-tab="0">未支付订单</li>
+                    </ul>
+                </div>
                 <h4>充值记录</h4>
                 <div class="rec-list">
                     <div class="uc-tables">
-                        @if($order_list)
+                        @if($order_list['list'])
                             <ul class="th">
                                 <li class="td td-1"><span><i class="iconfont"></i></span>订单名称</li>
                                 <li class="td td-2"><span><i class="iconfont"></i></span>订单号</li>
@@ -93,15 +93,10 @@
                                 <li class="td td-5"><span><i class="iconfont"></i></span>充值状态</li>
                                 <li class="td td-6"><span><i class="iconfont"></i></span>时间</li>
                             </ul>
-                            @foreach($order_list as $key=>$vo)
+                            <div id="orderList">
+                            @foreach($order_list['list'] as $key=>$vo)
                                 <div class="tr">
-                                    <span class="td td-1">
-                                        @if($vo['type']==1)
-                                            [VPN]
-                                        @elseif($vo['type']==2)
-                                            [HTTP]
-                                        @endif
-                                        {{$vo['desc']}}</span>
+                                    <span class="td td-1" style="text-align: left;">{{$vo['order_title']}}</span>
                                     <span class="td td-2">{{$vo['order_no']}}</span>
                                     <span class="td td-3">{{$vo['pay_money']/100}}</span>
                                     <span class="td td-4">
@@ -118,13 +113,14 @@
                                         @endif
                                     </span>
                                     <span class="td td-6"
-                                        @if($vo['type']==1 && $vo['vpn_deadline'])
+                                        @if($vo['p_type']==1 && $vo['vpn_deadline'])
                                           onmouseenter="layer.tips('本订单vpn到期时间：<br /> {{$vo['vpn_deadline']}}', this)"
                                         @endif
                                     >{{$vo['created_at']}}</span>
                                 </div>
                             @endforeach
-                            {{--<div class="page" id="page"></div>--}}
+                            </div>
+                            <div id="order_list_page"></div>
                         @else
                             <div class="record-none">暂无记录</div>
                         @endif
@@ -342,10 +338,13 @@
 
     <script type="text/javascript" src="{{asset('plug/layui')}}/layui.js"></script>
     <script>
+        var order_list_count = {{$order_list['count']}};
+
         $("#usemoney_input").val("{{$use_money_list['date']}}")
         var use_money_list_count = {{$use_money_list['count']}};
     </script>
     <script type="text/javascript" src="{{asset('index_src/js/user')}}/useMoney.js"></script>
+    <script type="text/javascript" src="{{asset('index_src/js/user')}}/OrderList.js"></script>
 
     </body>
 </html>

@@ -25,7 +25,7 @@
             <div class="product-list">
                 <div class="product-title">
                     <span></span>
-                    <p>了解11VPN软件及产品</p>
+                    <p>了解11IP软件及产品</p>
                     <!-- <a href="/help">了解更多</a> -->
                 </div>
                 <div class="product-content">

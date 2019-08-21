@@ -88,7 +88,7 @@
         <div class="page-common page-tech">
             <div class="page-area-body page-com-body">
                 <h4>值得信赖的技术服务</h4>
-                <p>11VPN提供的高级模式，以专用私有技术，带给您从未有过的极速畅快体验</p>
+                <p>11IP提供的高级模式，以专用私有技术，带给您从未有过的极速畅快体验</p>
                 <div class="page-tech-contain">
                     <div class="item">
                         <h4><span>用户独享宽带</span><i class="iconfont">&#xe656;</i></h4>
@@ -97,7 +97,7 @@
                     </div>
                     <div class="item">
                         <h4><span>高质量出口</span><i class="iconfont">&#xe657;</i></h4>
-                        <p>11VPN大数据IP下达系统均为自有机房<br/>
+                        <p>11IP大数据IP下达系统均为自有机房<br/>
                             数万独拨线路，7*24小时不间断供应IP</p>
                     </div>
                     <div class="item">
@@ -159,9 +159,6 @@
         <div class="page-common page-news">
             <div class="page-com-body ">
                 <div class="news-block">
-                    <a class="news-img-link" target="_blank" href="https://www.baidu.com">
-                        <img src="{{asset('index_src/img')}}/fd980fcf738103ff0a60e88a703a052f.png">
-                    </a>
                     <div class="news-top">
                         <a  class="left">最新资讯</a>
                         @foreach($article as $key=>$vo)

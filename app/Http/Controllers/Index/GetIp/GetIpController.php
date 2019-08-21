@@ -44,8 +44,20 @@ class GetIpController extends IndexController
         if($u_id == 0){
             return $this->returnJson(0,'请您登陆');
         }
-        $userAppKey = UserModel::userAppKey($u_id);
+        //leee 19.8.16修改 新增判断 金钱不够的情况下 不给链接
+            //用户现在有多少钱
+        $user_info = UserModel::userInfo($u_id);
+            //用户选的是哪个时长
+        $product_h_type = $request->input('time',0);
+        $product_h_type_info = ProductHTypeModel::getDetail($product_h_type);
+            //用户选的是多少量
+        $num = $request->input('num',0);
+            //钱够不够
+        if($user_info['money'] < $product_h_type_info['price']*100*$num){
+            return $this->returnJson(0,'余额不足，请先充值');
+        }
 
+        $userAppKey = UserModel::userAppKey($u_id);
         $data = $request->all();
         $url = config('sys_conf.C_IP_server').'?appkey='.$userAppKey;
         foreach ($data as $key => $vo) {

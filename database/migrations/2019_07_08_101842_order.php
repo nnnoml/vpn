@@ -16,7 +16,10 @@ class Order extends Migration
         Schema::create('order_flow', function (Blueprint $table) {
             $table->increments('o_id')->comment('订单id 自增');
             $table->string('order_no',255)->default('')->comment('订单id 编号');
+            $table->string('order_title',255)->default('')->comment('订单名称');
             $table->unsignedInteger('p_id')->default(0)->comment('产品id');
+            $table->unsignedInteger('p_type')->default(0)->comment('1vpn包时 2按次');
+            $table->unsignedInteger('p_h_type')->default(0)->comment('按次类型 1按次 2包周 3包月 4长效可匿');
             $table->unsignedInteger('u_id')->default(0)->comment('用户id 购买者');
             $table->unsignedInteger('buy_num')->default(0)->comment('购买数量');
             $table->string('charge_u_id',255)->default('')->comment('充值用户id 多个用,分开');
