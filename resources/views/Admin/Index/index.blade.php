@@ -124,7 +124,7 @@ layui.use(['form', 'layedit', 'laydate','upload'], function(){
   form.on('submit(demo1)', function(data){
     ajaxDo('/{{config('sys_conf.admin')}}/api/sysConf','post',data.field,function(data){
         if(data.code == 1){
-            location.reload()
+            window.location.reload()
         }
         else{
             layer.msg(data.msg);

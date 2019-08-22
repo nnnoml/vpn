@@ -35,7 +35,7 @@
             var url = '/{{config('sys_conf.admin')}}/api/loginDo';
             ajaxDo(url,'post',data.field,function(data){
                 if (data['code'] == '1'){
-                   location.href = "/{{config('sys_conf.admin')}}";
+                   window.location.href = "/{{config('sys_conf.admin')}}";
                 }else{
                     layer.msg(data['msg']);
                 }

@@ -27,6 +27,7 @@ class UseMoneyController extends IndexController
             $u_id = JWT::getTokenUID($token);
         }
         $res = UseMoneyModel::lists($u_id,$this,$page,$limit,$st,$et);
+
         $res['date'] = $date;
         if($request->ajax()){
             return $this->returnJson(1,$res);

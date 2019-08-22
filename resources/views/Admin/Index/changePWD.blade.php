@@ -53,7 +53,7 @@
 
         ajaxDo('/{{config('sys_conf.admin')}}/api/changePWD','post',data.field,function(data){
             if(data.code == 1){
-                location.reload()
+                window.location.reload()
             }
             else{
                 layer.msg(data.msg);

@@ -7,7 +7,7 @@ layui.use('laypage', function(){
             ,count: order_list_count //数据总数，从服务端得到
             ,jump: function(obj, first){
                 if(!first){
-                  getUseMoneyList(obj.curr,obj.limit)
+                  getOrderList(obj.curr,obj.limit)
                 }
             }
           });

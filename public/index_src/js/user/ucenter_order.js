@@ -97,7 +97,7 @@ $(function () {
                         layer.closeAll();
                         func.stop_scan();
                             if(obj.code==1){
-                                location.href='/ucenter/';
+                                window.location.href='/ucenter/';
                             }
 
                     }, function () {

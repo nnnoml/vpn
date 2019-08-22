@@ -79,7 +79,7 @@ $(function () {
                         layer.closeAll();
                         func.stop_scan();
                         layer.confirm("支付成功!",{title:'支付状态',skin:'layui-layer-lan',fixed:true,icon:1,btn:['确定']},function(){
-                            location.href='/user';//填个人信息
+                            window.location.href='/user';//填个人信息
                         });
                     }
                 })

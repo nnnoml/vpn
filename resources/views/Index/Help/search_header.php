@@ -30,7 +30,7 @@
         $(document).on('click','.search-btn',function () {
             var keyword=$("input[name='keyword']").val();
             if(!keyword){
-                location.href='/help/school/';
+                window.location.href='/help/school/';
                 return false;
             }
             $('#search_form').attr('action','/help/search');

@@ -28,7 +28,7 @@ em { font-style: normal; color: #FDBC2B; }
 
 /*使用帮助的通用头部*/
 .help-common-header { position: relative; /*上部*/ /*下部*/ }
-.help-common-header .up-part { height: 240px; min-width: 1200px; background-image: -webkit-linear-gradient(90deg, #4ea3fd 0%, #00e2fa 100%, #42ec81 100%, #00f2fe 100%); background-image: -o-linear-gradient(90deg, #4ea3fd 0%, #00e2fa 100%, #42ec81 100%, #00f2fe 100%); background-image: linear-gradient(90deg, #4ea3fd 0%, #00e2fa 100%, #42ec81 100%, #00f2fe 100%); }
+.help-common-header .up-part { height: 240px; min-width: 1200px;background-color: #00a6fe;background-image: -webkit-linear-gradient(90deg, #4ea3fd 0%, #00e2fa 100%, #42ec81 100%, #00f2fe 100%); background-image: -o-linear-gradient(90deg, #4ea3fd 0%, #00e2fa 100%, #42ec81 100%, #00f2fe 100%); background-image: linear-gradient(90deg, #4ea3fd 0%, #00e2fa 100%, #42ec81 100%, #00f2fe 100%); }
 .help-common-header .up-part .search-box { position: relative; width: 1200px; height: 240px; margin: 0 auto; }
 .help-common-header .up-part .search-box .search-frame { position: absolute; top: 98px; left: 0; height: 142px; width: 1200px; }
 .help-common-header .up-part .search-box .search-frame .search-title { position: absolute; top: 0; left: 0; width: 340px; height: 142px; }

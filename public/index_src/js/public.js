@@ -14,9 +14,6 @@ $(function(){
             nav=$(".menu");
             control();
             links();
-            $(".collection").click(function(){
-                addFavorite();
-            });
             $(".uc-b-tip").on("click",".close",function(){
                 $(this).parents(".uc-b-tip").hide();
             });
@@ -51,10 +48,6 @@ $(function(){
         }
         /*link*/
         function links(){
-
-            $(document).on("click",".logout-link",function(){
-                log_out();
-            });
             $(document).on("click",".sur_link,.link-swt,.link-swt",function(){
                 window.open(qqlink[0]);
             });
@@ -86,20 +79,6 @@ $(function(){
                 });
             }
 
-
-
-            function log_out(){
-                if($("#quit_url").length<=0){
-                    return;
-                }
-                var url = $("#quit_url").val();
-                common.ajax_jsonp(url, false, function (rt) {
-                    var obj = JSON.parse(rt);
-                    if (obj.code == 1) {
-                       location.href='/';
-                    }
-                });
-            }
         }
         /*cookie*/
         function cookie() {
@@ -233,33 +212,6 @@ $(function(){
             }
         }
 
-        /*添加到收藏夹*/
-        function addFavorite() {
-            var url = window.location;
-            var title = document.title;
-            var ua = navigator.userAgent.toLowerCase();
-            if (ua.indexOf("360se") > -1) {
-                alert("您的浏览器不支持,请按 Ctrl+D 手动收藏！");
-            }
-            else if (ua.indexOf("msie 8") > -1) {
-                window.external.AddToFavoritesBar(url, title); //IE8
-            }
-            else if (document.all) {
-                try{
-                    window.external.addFavorite(url, title);
-                }catch(e){
-                    alert('您的浏览器不支持,请按 Ctrl+D 手动收藏!');
-                }
-            }
-            else if (window.sidebar) {
-                window.sidebar.addPanel(title, url, "");
-            }
-            else {
-                alert('您的浏览器不支持,请按 Ctrl+D 手动收藏!');
-            }
-        }
-
-
         /*弹层*/
         function modal_init(dom){
             dom.find(".close").on("click",function(){
@@ -327,7 +279,6 @@ $(function(){
         maddress.close();
         $('.footer_modal_reg').find(".modal_verify_reg").trigger('click');
         mreg.open();
-        //get_qr_image();
         //leee 19.7.4 刷新登陆验证码
         $("#modal_footer_reg_form").find('img').trigger('click');
     })
@@ -338,7 +289,6 @@ $(function(){
         mreg.close();
         mforget.close();
         mlogin.open();
-        //get_qr_image();
         var username=$('#modal_footer_login_form input[name="username"]').val();
         if(username){
             common.ajax_jsonp($('#modal_account_cache_url').val(),{username:username,type:'web'},function (data) {
@@ -449,44 +399,6 @@ function modal_get_phone_code(verify,obj_1) {
 //    }, true, [0.1, "#eee"]);
 }
 
-function get_qr_image()
-{
-    var sence = $("#qr_sence_id").val();
-    scan_qr = true;
-    if(!sence){
-        if($("#jsonp_get_qr_image").length>0){
-            common.ajax_jsonp($("#jsonp_get_qr_image").val(),'', function(rt){
-                var rt = JSON.parse(rt);
-                if(rt.ret_data){
-                    $(".qr_image").attr('src', rt.ret_data.image);
-                    $("#qr_sence_id").val(rt.ret_data.sence_id);
-                    get_user_openid();
-                        common.delay(function(){
-                            get_user_openid();
-                        },3000,1,true);
-
-                }
-            })
-        }
-    }
-}
-
-function get_user_openid()
-{
-    if(!scan_qr) return false ;
-    var sence_id = $("#qr_sence_id").val();
-    var url = $("#get_user_openid_url").val();
-    common.ajax_jsonp(url, {sence_id:sence_id}, function(rt){
-        console.log(rt);
-        var rt = JSON.parse(rt);
-        if(rt.code == 1){
-            location.href = '/ucenter/';
-        }else{
-            layer.msg(rt.msg);
-        }
-    });
-}
-
 function modal_get_code(verify) {
         //检查手机号是否符合规范
         var regx = /^[1][3-9][0-9]{9}$|^\w{1,30}\@\w{1,20}\.[a-zA-Z]{2,10}$/;
@@ -550,7 +462,7 @@ function modal_reg_submit() {
         var url = '/user/reg';
         ajaxDo(url,'POST',param,function(data){
             if(data['code'] == 1){
-                location.href="/user/";
+                window.location.href="/user/";
             }
             else{
                 layer.msg(data.msg, {icon: 2});
@@ -579,9 +491,8 @@ function modal_login_submit() {
         }
         var param = $("#modal_footer_login_form").serialize();
         ajaxDo('/user/login','post',param,function(data){
-        console.log(data);
             if(data.code == 1){
-                location.reload();
+                window.location.reload();
             }
             else{
                 layer.msg(data.msg,{icon:2});
@@ -625,7 +536,7 @@ function modal_forget_submit() {
         var url = '/user/changePWD';
         ajaxDo(url,'POST',{account: account, verify: verify,sms_code:sms_code,password:password,re_password:re_password},function(data){
             if(data['code'] == 1){
-                location.href='/'
+                window.location.href='/'
             }
             else{
                 layer.msg(data.msg,{icon:2});

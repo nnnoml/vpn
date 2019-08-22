@@ -95,12 +95,12 @@ var pub = {
     },
     //翻页
     turn_page: function(obj){
-        var url = location.href;
+        var url = window.location.href;
         var arr = url.split('?');
         if(arr.length>1){
-            location.href = url+"&page="+obj.data("page");
+            window.location.href = url+"&page="+obj.data("page");
         }else{
-            location.href = arr[0]+"?page="+obj.data("page");
+            window.location.href = arr[0]+"?page="+obj.data("page");
         }
     }
 };
@@ -181,7 +181,7 @@ $(document).on("click", ".del_by_id", function () {
     }, function () {
         pub.del_by_id(obj, function () {
             layer.msg('删除成功', {icon: 1});
-            location.reload()
+            window.location.reload()
         }, null, 1);
     });
 
@@ -198,7 +198,7 @@ $(document).on("click", ".check_by_id", function () {
     }, function () {
         pub.check_by_id(obj, function () {
             layer.msg(msg+'成功', {icon: 1});
-            location.reload()
+            window.location.reload()
         }, null, 1);
     });
 

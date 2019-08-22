@@ -29,7 +29,9 @@ class OrderModel extends Model
     public static function addOrder($data){
         $product_info = ProductModel::checkOrderProductInfo($data['p_id']);
         if($product_info){
-            $insert_data['order_title'] = ($product_info['type']==1?'[VPN]':'' .$product_info['type']==2?'[HTTP]':'').$product_info['desc'] ;
+            $insert_data['order_title'] = $product_info['type']==1?'[VPN]'.$product_info['desc']:'';
+            $insert_data['order_title'] = $product_info['type']==2?'[HTTP]'.$product_info['desc']:$insert_data['order_title'];
+
             $insert_data['p_id'] = $data['p_id'];
             $insert_data['p_type'] = $product_info['type'];
             $insert_data['p_h_type'] = $product_info['h_type'];

@@ -19,7 +19,7 @@ class UseMoneyModel extends Model
             $res = $res->where('create_time','<=',$end_at);
         }
         $ret['count'] = $res->count();
-        $ret['list'] = $res->skip(($page-1)*$limit)->take($limit)->get()->toArray();
+        $ret['list'] = $res->orderby('create_time','desc')->skip(($page-1)*$limit)->take($limit)->get()->toArray();
 
         //遍历扣费产品列表 获得产品id
         $list = ProductHTypeModel::getList()->keyBy('h_type_id')->toArray();
