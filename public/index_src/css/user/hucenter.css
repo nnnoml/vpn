@@ -148,7 +148,7 @@ body, html { background: #fff !important; min-width: 1200px; }
 .module.info .uca-block .uca-block-item > p { line-height: 30px; color: #71788f; font-size: 12px; font-weight: normal; margin: 12px auto; }
 .module.info .uca-block .uca-block-item .uc-btn { width: 96px; height: 30px; line-height: 30px; color: #fff; background: #3899ff; cursor: pointer; display: block; margin: 12px auto; text-align: center; border-radius: 4px; -webkit-transition: all 0.3s ease; -ms-transition: all 0.3s ease; -moz-transition: all 0.3s ease; transition: all 0.3s ease; }
 .module.info .uca-block .uca-block-item .uc-btn:hover { background: #057fff; }
-.module.info .uca-block .uca-block-item.uca-info { margin-top: 20px; }
+.module.info .uca-block .uca-block-item.uca-info { margin-top: 30px; }
 .module.record { padding-bottom: 80px; }
 .module .record-sel { position: absolute; width: 110px; height: 32px; top: 68px; right: calc(50% - 960px / 2); display: block; box-sizing: border-box; cursor: pointer; z-index: 10; }
 .module .record-sel.active { box-shadow: 0 0 10px rgba(23, 172, 252, 0.3); }
@@ -685,7 +685,7 @@ body, html { background: #fff !important; min-width: 1200px; }
     .module.info .uca-block .uca-block-item > p { line-height: 30px; color: #71788f; font-size: 12px; font-weight: normal; margin: 12px auto; }
     .module.info .uca-block .uca-block-item .uc-btn { width: 96px; height: 30px; line-height: 30px; color: #fff; background: #3899ff; cursor: pointer; display: block; margin: 12px auto; text-align: center; border-radius: 4px; -webkit-transition: all 0.3s ease; -ms-transition: all 0.3s ease; -moz-transition: all 0.3s ease; transition: all 0.3s ease; }
     .module.info .uca-block .uca-block-item .uc-btn:hover { background: #057fff; }
-    .module.info .uca-block .uca-block-item.uca-info { margin-top: 20px; }
+    .module.info .uca-block .uca-block-item.uca-info { margin-top: 30px; }
     .module.record { padding-bottom: 80px; }
     .module .record-sel { position: absolute; width: 110px; height: 32px; top: 68px; right: calc(50% - 900px / 2); display: block; box-sizing: border-box; cursor: pointer; z-index: 10; }
     .module .record-sel.active { box-shadow: 0 0 10px rgba(23, 172, 252, 0.3); }

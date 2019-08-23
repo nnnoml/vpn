@@ -122,7 +122,7 @@ body { top: 0; -webkit-transition: 0.5s; -ms-transition: 0.5s; -moz-transition: 
 
 .page-tech { position: relative; height: 500px; background: #f2f8fd url("../img/index-b-img-2.png") center no-repeat; }
 .page-tech .page-tech-contain { width: 1300px; margin: 80px auto; }
-.page-tech .page-tech-contain .item { position: relative; float: left; width: 260px; margin: 0 calc((1300px / 3  - 260px) / 2 ); text-align: left; }
+.page-tech .page-tech-contain .item { position: relative; float: left; width: 259px; margin: 0 calc((1300px / 3  - 260px) / 2 ); text-align: left; }
 .page-tech .page-tech-contain .item h4 { display: block; height: 64px; line-height: 64px; position: relative; color: #333; font-weight: normal; font-size: 30px; padding-left: 26px; letter-spacing: 1px; white-space: nowrap; }
 .page-tech .page-tech-contain .item h4 > span { z-index: 1; }
 .page-tech .page-tech-contain .item h4 > i { font-size: 30px; color: #4ea3fd; margin-left: 5px; }

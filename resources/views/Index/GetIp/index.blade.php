@@ -162,6 +162,7 @@
                         </label>
 
                         <label class="choose_other">
+                            <input type="radio" name="line_break" value="6">
                             <i class="radios"></i>
                             其他符号:
                         </label>
@@ -381,8 +382,7 @@
                    "ip":"",
                    "port":"",
                    "expire_time":"",
-                   "city":"",
-                   "isp":""
+                   "addr":""
                 }
               ]
           }
@@ -599,11 +599,8 @@ $(".open").click(function(){
     post['type'] = $("input[name='data_type']:checked").val();
     //txt
     if(post['type'] == 1){
-        if($("input[name='special']").val() == '' || $("input[name='special']").val() == undefined){
-            post['lb'] = $("input[name='line_break']:checked").val();
-        }
-        else{
-            post['lb'] = 6;
+        post['lb'] = $("input[name='line_break']:checked").val();
+        if($("input[name='line_break']:checked").val()==6){
             post['sb'] = $("input[name='special']").val();
         }
     }

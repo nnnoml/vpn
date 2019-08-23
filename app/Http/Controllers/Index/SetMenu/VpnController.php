@@ -14,13 +14,13 @@ class VpnController extends IndexController
     use Common;
     public function __construct()
     {
-        parent::__construct();
-        $this->ret_data['sys_conf']['title'] = 'vpn套餐购买 '.$this->ret_data['sys_conf']['title'];
+        $this->ret_data['title'] = 'vpn套餐购买';
         $this->ret_data['nav'] = 'setMenu_vpn';
         $this->ret_data['logo2'] = true;
     }
 
     public function Index(Request $request){
+        $this->Init();
         $list = ProductModel::getIndexList(1);
         $token = $request->cookie('tokenIndex');
         $u_id = JWT::getTokenUID($token);

@@ -8,30 +8,28 @@
 
     <link rel="stylesheet" type="text/css" href="{{asset('index_src/css')}}/setMenu.css" />
     <section class="section">
-        <!--五月隐藏-->
         <div class="container">
             <div class="left">
                 <h1>基础套餐</h1>
-                <ul>
-                    <li><img src="http://zmdl-static.upupfile.com/static/ip_new/img/dui1.png" alt="">支持Windows客户端</li>
-                    <li><img src="http://zmdl-static.upupfile.com/static/ip_new/img/dui1.png" alt="">线路延迟：80~100ms</li>
-                    <li><img src="http://zmdl-static.upupfile.com/static/ip_new/img/error.png" alt="">支持静态线路</li>
-                    <li><img src="http://zmdl-static.upupfile.com/static/ip_new/img/error.png" alt="">支持浏览器插件</li>
-                </ul>
-                <ul>
-                    <li><img src="http://zmdl-static.upupfile.com/static/ip_new/img/dui1.png" alt="">支持Android客户端</li>
-                    <li><img src="http://zmdl-static.upupfile.com/static/ip_new/img/dui1.png" alt="">每日20万IP</li>
-                    <li><img src="http://zmdl-static.upupfile.com/static/ip_new/img/error.png" alt="">支持极速线路</li>
-                    <li><img src="http://zmdl-static.upupfile.com/static/ip_new/img/error.png" alt="">支持MAC客户端</li>
-                </ul>
-                <ul>
-                    <li><img src="http://zmdl-static.upupfile.com/static/ip_new/img/dui1.png" alt="">支持iOS客户端</li>
-                    <li><img src="http://zmdl-static.upupfile.com/static/ip_new/img/dui1.png" alt="">售后服务：普通客服</li>
-                    <li><img src="http://zmdl-static.upupfile.com/static/ip_new/img/error.png" alt="">支持直连线路</li>
-                    <li><img src="http://zmdl-static.upupfile.com/static/ip_new/img/error.png" alt="">长效动态</li>
-                </ul>
+                {{--<ul>--}}
+                    {{--<li><img src="http://zmdl-static.upupfile.com/static/ip_new/img/dui1.png" alt="">支持Windows客户端</li>--}}
+                    {{--<li><img src="http://zmdl-static.upupfile.com/static/ip_new/img/dui1.png" alt="">线路延迟：80~100ms</li>--}}
+                    {{--<li><img src="http://zmdl-static.upupfile.com/static/ip_new/img/error.png" alt="">支持静态线路</li>--}}
+                    {{--<li><img src="http://zmdl-static.upupfile.com/static/ip_new/img/error.png" alt="">支持浏览器插件</li>--}}
+                {{--</ul>--}}
+                {{--<ul>--}}
+                    {{--<li><img src="http://zmdl-static.upupfile.com/static/ip_new/img/dui1.png" alt="">支持Android客户端</li>--}}
+                    {{--<li><img src="http://zmdl-static.upupfile.com/static/ip_new/img/dui1.png" alt="">每日20万IP</li>--}}
+                    {{--<li><img src="http://zmdl-static.upupfile.com/static/ip_new/img/error.png" alt="">支持极速线路</li>--}}
+                    {{--<li><img src="http://zmdl-static.upupfile.com/static/ip_new/img/error.png" alt="">支持MAC客户端</li>--}}
+                {{--</ul>--}}
+                {{--<ul>--}}
+                    {{--<li><img src="http://zmdl-static.upupfile.com/static/ip_new/img/dui1.png" alt="">支持iOS客户端</li>--}}
+                    {{--<li><img src="http://zmdl-static.upupfile.com/static/ip_new/img/dui1.png" alt="">售后服务：普通客服</li>--}}
+                    {{--<li><img src="http://zmdl-static.upupfile.com/static/ip_new/img/error.png" alt="">支持直连线路</li>--}}
+                    {{--<li><img src="http://zmdl-static.upupfile.com/static/ip_new/img/error.png" alt="">长效动态</li>--}}
+                {{--</ul>--}}
             </div>
-            <!--双十二活动隐藏-->
             <div class="right-img"></div>
         </div>
 
@@ -39,18 +37,18 @@
     <form id="order_form" method="post" action="" target="_blank">
         <div class="content_inner fadeInUp">
 
-            <div class="pack-tips get-red-packet">
-                <span></span>
-                <h4>定制路线</h4>
-                <div class="inner-text">
-                    <p><i class="iconfont"></i>定制全国任意省会城市路线</p>
-                    <p><i class="iconfont"></i>独享一手纯净IP</p>
-                    <p><i class="iconfont"></i>高速上下行,不限速</p>
-                    <p><i class="iconfont"></i>提供api或者客户端</p>
-                    <p><i class="iconfont"></i>更多权利,等你咨询</p>
-                    <a class="sur_link">立即联系客服</a>
-                </div>
-            </div>
+            {{--<div class="pack-tips get-red-packet">--}}
+                {{--<span></span>--}}
+                {{--<h4>定制路线</h4>--}}
+                {{--<div class="inner-text">--}}
+                    {{--<p><i class="iconfont"></i>定制全国任意省会城市路线</p>--}}
+                    {{--<p><i class="iconfont"></i>独享一手纯净IP</p>--}}
+                    {{--<p><i class="iconfont"></i>高速上下行,不限速</p>--}}
+                    {{--<p><i class="iconfont"></i>提供api或者客户端</p>--}}
+                    {{--<p><i class="iconfont"></i>更多权利,等你咨询</p>--}}
+                    {{--<a class="sur_link">立即联系客服</a>--}}
+                {{--</div>--}}
+            {{--</div>--}}
 
             <div class="package_content package_content_open">
                 @foreach($list as $key=>$vo)
@@ -109,7 +107,7 @@
 
                 <div for="" class="entry_list">
                     <span class="h1_span">账户名称</span>
-                    <p class="line-tip package_account_reg">没有账号?<a class="reg_modal">立即注册</a></p>
+                    {{--<p class="line-tip package_account_reg">没有账号?<a class="reg_modal">立即注册</a></p>--}}
                     <input type="text" name="username" value="{{$account}}" placeholder="请输入账户名称" class="entry_input pay_p login-username">
                     <span class="close"></span>
                 </div>

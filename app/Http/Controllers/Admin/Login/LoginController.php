@@ -61,7 +61,7 @@ class LoginController extends Controller
     {
         //删除cookie
         Cookie::queue(Cookie::forget('token'));
-        return redirect()->action('\App\Http\Controllers\Admin\Login\IndexController@login');
+        return redirect()->action('\App\Http\Controllers\Admin\Login\LoginController@login');
     }
 
 }

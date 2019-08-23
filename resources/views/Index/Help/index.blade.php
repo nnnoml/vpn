@@ -12,7 +12,7 @@
         <div class="down-part">
             <div class="down-part-box">
                 <ul class="title-list">
-                    <li><a href="/help/school">新手学堂</a></li>
+                    {{--<li><a href="/help/school">新手学堂</a></li>--}}
                     <li class="active"><a href="/help">文档中心</a></li>
                     <!--<li><a href="/contact">联系客服</a></li>-->
                 </ul>

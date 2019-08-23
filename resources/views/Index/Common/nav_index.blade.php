@@ -20,7 +20,7 @@
 
         <li @if($nav == 'getIp') class="index_citylist nav-active" @else class="index_index" @endif ><a href="/getIP">获取API</a></li>
 
-        <li @if($nav == 'help') class="index_join nav-active" @else class="index_join" @endif><a href="/help/school" >使用帮助</a></li>
+        <li @if($nav == 'help') class="index_join nav-active" @else class="index_join" @endif><a href="/help" >使用帮助</a></li>
 
         <!--处理登录以后-->
 

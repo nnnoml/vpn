@@ -77,7 +77,7 @@
         <ul class="list">
             <li>
                 <span class="td1"></span>
-                <a>每个IP低至0.02元<br>获取不扣费，使用才扣费</a>
+                <a>每个IP低至0.04元<br>获取不扣费，使用才扣费</a>
             </li>
             <li>
                 <span class="td2"></span>
@@ -95,10 +95,10 @@
                 <span class="td5"></span>
                 <a>延迟≤10毫秒<br>可用性≥99.99% </a>
             </li>
-            <li>
-                <span class="td6"></span>
-                <a>每日30万高匿名且稳定达24小时IP<br>全部IP皆运营商官方授权产生</a>
-            </li>
+            {{--<li>--}}
+                {{--<span class="td6"></span>--}}
+                {{--<a>每日30万高匿名且稳定达24小时IP<br>全部IP皆运营商官方授权产生</a>--}}
+            {{--</li>--}}
         </ul>
     </div>
 
@@ -155,7 +155,10 @@
 
                 <a class="pay go_to_pay">立即支付</a>
             </div>
-            <span class="close"><i class="iconfont">&#xE627;</i></span>
+            {{--<span class="close"><i class="iconfont">&#xE627;</i></span>--}}
+            <button class="close">
+                <span></span>
+            </button>
         </div>
     </div>
     <script type="text/javascript" src="{{asset('index_src/js')}}/setMenuHttp.js"></script>

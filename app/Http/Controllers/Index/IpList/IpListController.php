@@ -13,14 +13,14 @@ class IpListController extends IndexController
 
     public function __construct()
     {
-        parent::__construct();
-        $this->ret_data['sys_conf']['title'] = 'ip列表 '.$this->ret_data['sys_conf']['title'];
+        $this->ret_data['title'] = 'ip列表';
         $this->ret_data['nav'] = 'ipList';
         $this->ret_data['logo2'] = true;
     }
 
     public function Index(Request $request)
     {
+        $this->Init();
         $key = $request->input('key','');
         $export = $request->input('export','');
         $list = IpListModel::lists($key);

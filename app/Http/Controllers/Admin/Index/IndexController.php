@@ -2,25 +2,31 @@
 
 namespace App\Http\Controllers\Admin\Index;
 
-use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Common\Common;
 use App\Http\Controllers\Common\Plug\JWT;
+use App\Http\Controllers\Controller;
 use App\Http\Model\SysModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 
-class IndexController extends AdminController
+class IndexController extends Controller
 {
     use Common;
+    private $ret_data;
 
     public function __construct()
     {
-        parent::__construct();
         $this->ret_data['title'] = Config::get('sys_conf.web_title');
         $this->ret_data['nav'] = 'conf';
         $this->ret_data['nav2'] = 'conf';
     }
+
+    public function Init(){
+        $this->ret_data['sys_conf'] = SysModel::getSysConf();
+    }
+
     public function Index(){
+        $this->Init();
         return view('Admin.Index.index',array_merge($this->ret_data));
     }
 
@@ -46,6 +52,7 @@ class IndexController extends AdminController
     }
 
     public function changePWD(){
+        $this->Init();
         return view('Admin.Index.changePWD',array_merge($this->ret_data));
     }
     public function changePWDDo(Request $request){

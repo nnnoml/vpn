@@ -186,7 +186,7 @@
 .entry > .entry_list .price { font-size: 26px; margin: 0 10px 0 10px; }
 .entry > .entry_list .entry_input1 { width: 195px; padding: 0px 50px 0 25px; }
 .entry > .entry_list > .h1_span { margin-bottom: 5px; letter-spacing: 1px; display: block; color: #444444; font-size: 14px; }
-.entry > .entry_list .close { cursor: pointer; position: absolute; display: block; top: 42px; left: 475px; width: 18px; height: 18px; line-height: 18px; text-align: center; border-radius: 50%; color: #888; -webkit-transform: rotate(45deg); -ms-transform: rotate(45deg); -moz-transform: rotate(45deg); transform: rotate(45deg); }
+.entry > .entry_list .close { cursor: pointer; position: absolute; display: block; top: 42px; left: 357px; width: 18px; height: 18px; line-height: 18px; text-align: center; border-radius: 50%; color: #888; -webkit-transform: rotate(45deg); -ms-transform: rotate(45deg); -moz-transform: rotate(45deg); transform: rotate(45deg); }
 .entry > .entry_list .close:before { content: "\e608"; font-size: 16px; }
 .entry > .entry_list .close:hover { color: #000; }
 .entry > .entry_list .close1 { left: 240px; }

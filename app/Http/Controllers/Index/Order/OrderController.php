@@ -33,7 +33,7 @@ class OrderController extends IndexController
                 }
             }
             $res = OrderModel::addOrder($v_res['data']);
-            return;
+
             if (is_numeric($res)) {
                 //微信直接下单
                 if($v_res['data']['type'] == 'wechat'){

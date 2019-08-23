@@ -30,6 +30,7 @@ Route::group(['middleware' => 'checkTokenIndex'], function () {
     });
 //ip列表
     Route::get('/ipList',"\App\Http\Controllers\Index\IpList\IpListController@Index");
+    Route::get('/ipList.csv',"\App\Http\Controllers\Index\IpList\IpListController@Index");
 
     //使用帮助
     Route::group(['prefix' => 'help'], function () {

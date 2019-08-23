@@ -17,12 +17,12 @@ class UserController extends IndexController
 
     public function __construct()
     {
-        parent::__construct();
-        $this->ret_data['sys_conf']['title'] = '用户中心 '.$this->ret_data['sys_conf']['title'];
+        $this->ret_data['title'] = '用户中心';
         $this->ret_data['nav'] = 'user';
     }
 
     public function Index(Request $request){
+        $this->Init();
         $token = $request->cookie('tokenIndex');
         $u_id = JWT::getTokenUID($token);
         $info = UserModel::userInfo($u_id);
@@ -155,6 +155,7 @@ class UserController extends IndexController
         }
         else{
             $code = rand(1000,9999);
+            //TODO 发送验证码要做额外IP验证 要做每天每人总数验证
             $send_res = $this->sendSms($tel,$code,$type);
             if($send_res){
                 $res = SysModel::saveSmsCode($tel,$code,$type);

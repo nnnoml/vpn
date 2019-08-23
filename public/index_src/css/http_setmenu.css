@@ -1534,3 +1534,10 @@ footer.new-footer {
 }
 
 /*# sourceMappingURL=newRecharge.css.map */
+
+/*leee 190823 close*/
+.close { position: absolute; top: calc(100% + 20px); cursor: pointer; width: 44px; height: 44px; display: block; left: calc(50% - 22px); border-radius: 100%; border: 2px solid #fff; background: none; outline: none; }
+.close:hover { background: rgba(255, 255, 255, 0.3); }
+.close:after { width: 2px; height: 22px; position: absolute; left: calc(50% - 1px); top: -22px; background: #fff; display: block; content: ""; }
+.close > span:before { width: 2px; height: 25px; display: block; content: ""; background: #fff; position: absolute; top: 50%; left: 50%; -webkit-transform: translate(-50%, -50%) rotate(45deg); -ms-transform: translate(-50%, -50%) rotate(45deg); -moz-transform: translate(-50%, -50%) rotate(45deg); transform: translate(-50%, -50%) rotate(45deg); }
+.close > span:after { width: 2px; height: 25px; display: block; content: ""; background: #fff; position: absolute; top: 50%; left: 50%; -webkit-transform: translate(-50%, -50%) rotate(-45deg); -ms-transform: translate(-50%, -50%) rotate(-45deg); -moz-transform: translate(-50%, -50%) rotate(-45deg); transform: translate(-50%, -50%) rotate(-45deg); }

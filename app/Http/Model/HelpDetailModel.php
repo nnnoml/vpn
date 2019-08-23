@@ -56,6 +56,7 @@ class HelpDetailModel extends Model
             ->leftJoin("$help_class_table as c",'c.hc_id','d.hc_id')
             ->select("d.*",'c.hc_name')
             ->where('d.title','like',"%$kw%")
+            ->orderBy('d.order','desc')
             ->get()->toArray();
 
         $ret['list']=[];

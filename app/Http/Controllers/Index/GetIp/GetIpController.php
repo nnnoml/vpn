@@ -16,12 +16,12 @@ class GetIpController extends IndexController
 
     public function __construct()
     {
-        parent::__construct();
-        $this->ret_data['sys_conf']['title'] = '获取IP '.$this->ret_data['sys_conf']['title'];
+        $this->ret_data['title'] = '获取IP';
         $this->ret_data['nav'] = 'getIp';
     }
 
     public function Index(Request $request){
+        $this->Init();
         $h_type_list = ProductHTypeModel::getList();
         foreach ($h_type_list as $k2 => $v2) {
             $h_type_list[$k2]['start_second_format'] = $this->formatSecond($v2['start_second'],'h');

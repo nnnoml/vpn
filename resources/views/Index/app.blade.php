@@ -9,7 +9,7 @@
     <meta name="keywords" content="{{$sys_conf['keywords']}}">
     <meta name="description" content="{{$sys_conf['description']}}">
 
-    <link rel="stylesheet" type="text/css" href="{{asset('index_src/css')}}/common.css" />
+    <link rel="stylesheet" type="text/css" href="{{asset('index_src/css')}}/common.css?v=222" />
     <link rel="stylesheet" type="text/css" href="{{asset('index_src/css')}}/public.css" />
 
 

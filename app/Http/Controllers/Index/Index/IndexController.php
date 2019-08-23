@@ -11,10 +11,11 @@ class IndexController extends \App\Http\Controllers\Index\IndexController
 
     public function __construct()
     {
-        parent::__construct();
+        $this->ret_data['title'] = '';
         $this->ret_data['nav'] = '';
     }
     public function Index(){
+        $this->Init();
         $article = ArticleClassModel::getListIndex();
         foreach ($article as $key => $vo) {
             $article[$key]['list'] = ArticleDetailModel::getDetailIndex($vo['ac_id']);

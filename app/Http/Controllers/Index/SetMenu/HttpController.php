@@ -14,12 +14,12 @@ class HttpController extends IndexController
 
     public function __construct()
     {
-        parent::__construct();
-        $this->ret_data['sys_conf']['title'] = 'http套餐购买 '.$this->ret_data['sys_conf']['title'];
+        $this->ret_data['title'] = 'http套餐购买';
         $this->ret_data['nav'] = 'setMenu_http';
     }
 
     public function Index(){
+        $this->Init();
         $list = ProductModel::getIndexList(2);
         foreach ($list as $key => $vo) {
             $list[$key]['h_type_list'] = ProductHTypeModel::getProductHTypeList($vo['h_type_id']);
