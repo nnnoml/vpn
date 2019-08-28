@@ -423,14 +423,9 @@
                             <div class="td td-1 td-left">过期时间</div>
                         </div>
                         <div class="tr">
-                            <div class="td td-1">city</div>
+                            <div class="td td-1">addr</div>
                             <div class="td td-1">string</div>
-                            <div class="td td-1 td-left">城市</div>
-                        </div>
-                        <div class="tr">
-                            <div class="td td-1">isp</div>
-                            <div class="td td-1">string</div>
-                            <div class="td td-1 td-left">运营商（电信、联通）</div>
+                            <div class="td td-1 td-left">位置</div>
                         </div>
                     </div>
                 </div>

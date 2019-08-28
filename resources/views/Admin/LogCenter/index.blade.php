@@ -146,6 +146,7 @@ layui.use(['form','laydate','laypage'], function(){
         ,"dpt": '{{$data['dpt']}}'
         ,"mip": '{{$data['mip']}}'
         ,"mpt": '{{$data['mpt']}}'
+        ,"uname":'{{$data['uname']}}'
         ,"date": '{{$date}}'
     })
 
