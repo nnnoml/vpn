@@ -7,6 +7,7 @@
 /.idea
 /.vscode
 /.vagrant
+/部署文档说明
 Homestead.json
 Homestead.yaml
 npm-debug.log

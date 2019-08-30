@@ -64,7 +64,7 @@ Route::group(['middleware' => 'checkTokenIndex'], function () {
         Route::get('/alipay/return',"\App\Http\Controllers\Index\Order\AlipayController@return");//支付宝成功回调
 
         Route::get('/qrCode',"\App\Http\Controllers\Index\Order\OrderController@qrCode"); //生成二维码
-        Route::get('/wechat/notify',"\App\Http\Controllers\Index\Order\WechatController@notify");//微信异步回调
+        Route::post('/wechat/notify',"\App\Http\Controllers\Index\Order\WechatController@notify");//微信异步回调
 
         Route::get('/scan/{o_id}',"\App\Http\Controllers\Index\Order\OrderController@scanOrder");
     });
