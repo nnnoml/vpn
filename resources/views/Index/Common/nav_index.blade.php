@@ -34,7 +34,7 @@
         <li class=" nav-combtn nav-combtn-active has-icon user_li_base">
             <a class="" href="/user">&nbsp;</a>
         </li>
-        <li class="log-in nav-combtn user_li_base"><a href="/user/loginOut" class="logout-link">退出登陆</a></li>
+        <li class="log-in nav-combtn user_li_base"><a href="/user/loginOut" class="logout-link">退出登录</a></li>
         @endif
 
     </ul>

@@ -1,5 +1,5 @@
 @section('alert')
-    {{--登陆弹窗--}}
+    {{--登录弹窗--}}
     <div  class="modal-login login footer_modal_login ">
         <!-- <div class="modal-main wx_code"> -->
         <div class="modal-main ">

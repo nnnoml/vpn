@@ -279,7 +279,7 @@ $(function(){
         maddress.close();
         $('.footer_modal_reg').find(".modal_verify_reg").trigger('click');
         mreg.open();
-        //leee 19.7.4 刷新登陆验证码
+        //leee 19.7.4 刷新登录验证码
         $("#modal_footer_reg_form").find('img').trigger('click');
     })
     $(document).on('click','.login_modal',function () {

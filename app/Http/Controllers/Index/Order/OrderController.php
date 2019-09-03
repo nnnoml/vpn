@@ -104,7 +104,7 @@ class OrderController extends IndexController
         $data['u_id'] = JWT::getTokenUID($token);
         if($data['u_id']==0){
             $ret['res']['code']=0;
-            $ret['res']['msg']='请您登陆';
+            $ret['res']['msg']='请您登录';
         }
         else{
             $data['p_id'] = $request->input('p_id',0);

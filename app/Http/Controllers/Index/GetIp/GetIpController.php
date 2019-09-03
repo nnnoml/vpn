@@ -42,7 +42,7 @@ class GetIpController extends IndexController
         $token = $request->cookie('tokenIndex','');
         $u_id = JWT::getTokenUID($token);
         if($u_id == 0){
-            return $this->returnJson(0,'请您登陆');
+            return $this->returnJson(0,'请您登录');
         }
         //leee 19.8.16修改 新增判断 金钱不够的情况下 不给链接
             //用户现在有多少钱

@@ -37,7 +37,7 @@ class UserModel extends Model
     }
 
     /**
-     * 登陆验证
+     * 登录验证
      * @param $account
      * @param $pwd
      * @return array 1成功 0失败 密码错误 -1失败 账号不存在
@@ -50,11 +50,11 @@ class UserModel extends Model
                 return ['code'=>1,'info'=>$user_info];
             }
             else{
-                return ['code'=>0,'info'=>'登陆失败 账号或密码错误'];
+                return ['code'=>0,'info'=>'登录失败 账号或密码错误'];
             }
         }
         else{
-            return ['code'=>-1,'info'=>'登陆失败 账号不存在'];
+            return ['code'=>-1,'info'=>'登录失败 账号不存在'];
         }
 
     }
@@ -106,7 +106,7 @@ class UserModel extends Model
     }
 
     /**
-     * 未登陆找回密码
+     * 未登录找回密码
      * @param $data
      * @return mixed
      */
@@ -159,7 +159,7 @@ class UserModel extends Model
     }
 
     /**
-     * 登陆后修改密码
+     * 登录后修改密码
      * @param $data
      * @return mixed
      */

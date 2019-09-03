@@ -14,7 +14,7 @@ class LoginController extends Controller
     use Common;
 
     public function login(){
-        $title = '登陆';
+        $title = '登录';
         return view('Admin.Login.index',compact('title'));
     }
 

@@ -8,7 +8,7 @@ class SysModel extends Model
 {
     public $timestamps = false;
     /**
-     * 登陆验证
+     * 登录验证
      * @param $account
      * @param $pwd
      * @return array 1成功 0失败 密码错误 -1失败 账号不存在
@@ -23,11 +23,11 @@ class SysModel extends Model
                 return ['code'=>1,'info'=>$admin_info];
             }
             else{
-                return ['code'=>0,'info'=>'登陆失败 账号或密码错误'];
+                return ['code'=>0,'info'=>'登录失败 账号或密码错误'];
             }
         }
         else{
-            return ['code'=>-1,'info'=>'登陆失败 账号不存在'];
+            return ['code'=>-1,'info'=>'登录失败 账号不存在'];
         }
     }
 

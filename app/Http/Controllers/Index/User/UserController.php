@@ -169,7 +169,7 @@ class UserController extends IndexController
     }
 
     /**
-     * 用户未登陆 修改密码
+     * 用户未登录 修改密码
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse|string
      */
@@ -222,7 +222,7 @@ class UserController extends IndexController
     }
 
     /**
-     * 用户已登陆 修改密码
+     * 用户已登录 修改密码
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse|string
      */
