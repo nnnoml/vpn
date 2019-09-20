@@ -615,7 +615,7 @@ $(".open").click(function(){
     }
 
 
-    if($("input[name='st-con']:checked").val()){
+    if(parseInt($("input[name='st-con']:checked").val())){
         post['pro'] = $("select[name='pro']").val();
         post['city'] = $("select[name='city']").val();
     }
